@@ -37,11 +37,12 @@ public class QuizQuestionForm extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         wrongChoiceTextField2 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        wrongChoiceTextField3 = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
+        wrongChoiceTextField4 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(51, 51, 51));
+        setPreferredSize(new java.awt.Dimension(475, 258));
 
         jLabel1.setFont(new java.awt.Font("JetBrains Mono", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 242, 248));
@@ -67,12 +68,6 @@ public class QuizQuestionForm extends javax.swing.JPanel {
         jLabel6.setForeground(new java.awt.Color(255, 242, 248));
         jLabel6.setText("Choice #1");
 
-        wrongChoiceTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                wrongChoiceTextField3ActionPerformed(evt);
-            }
-        });
-
         jSeparator2.setBackground(new java.awt.Color(0, 51, 153));
 
         jButton1.setText("Delete");
@@ -93,9 +88,6 @@ public class QuizQuestionForm extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(jSeparator1))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(questionTextField))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -103,21 +95,26 @@ public class QuizQuestionForm extends javax.swing.JPanel {
                             .addComponent(jLabel5)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(wrongChoiceTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
-                            .addComponent(wrongChoiceTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(wrongChoiceTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(correctAnswer, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(wrongChoiceTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                            .addComponent(correctAnswer)
+                            .addComponent(wrongChoiceTextField2)
+                            .addComponent(wrongChoiceTextField4))
+                        .addGap(11, 11, 11))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(questionTextField)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,18 +142,15 @@ public class QuizQuestionForm extends javax.swing.JPanel {
                     .addComponent(wrongChoiceTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(wrongChoiceTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(wrongChoiceTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void wrongChoiceTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wrongChoiceTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_wrongChoiceTextField3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -177,6 +171,6 @@ public class QuizQuestionForm extends javax.swing.JPanel {
     protected javax.swing.JTextField questionTextField;
     protected javax.swing.JTextField wrongChoiceTextField1;
     protected javax.swing.JTextField wrongChoiceTextField2;
-    protected javax.swing.JTextField wrongChoiceTextField3;
+    protected javax.swing.JTextField wrongChoiceTextField4;
     // End of variables declaration//GEN-END:variables
 }
