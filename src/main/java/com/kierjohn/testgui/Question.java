@@ -10,38 +10,36 @@ package com.kierjohn.testgui;
  */
 public class Question {
 
-    private int choicesCount = 4;
-    private String question;
-    private String answer;
+    private final String type;
+    private final String question;
+    private final String answer;
     private String[] wrongChoices;
     private String category;
     private String difficulty;
-    private String questionType;
     
-    public Question(String question, String answer) {
-        this.questionType = "identification";
+    public Question(String question, boolean answer, String category, String difficulty) {
+        this.type = "boolean";
+        this.question = question;
+        this.answer = (answer) ? "true" : "false";
+    }
+    
+    public Question(String question, String answer, String category, String difficulty) {
+        this.type = "identification";
         this.question = question;
         this.answer = answer;
     }
 
     public Question(String question, String answer, String[] wrongChoices, String category, String difficulty) {
-        this.questionType = "multiple choice";
+        this.type = "multiple";
         this.question = question;
         this.answer = answer;
-        if (wrongChoices.length != this.choicesCount - 1) {
-            throw new IllegalArgumentException("Number of wrong choices must be 1 less than choice count (currently " + choicesCount + ").");
-        }
         this.wrongChoices = wrongChoices;
         this.category = category;
         this.difficulty = difficulty;
     }
-
-    protected void setChoiceCount(int newCount) {
-        choicesCount = newCount;
-    }
-
-    protected int getChoicesCount() {
-        return choicesCount;
+    
+    protected boolean isCorrect(String answer) {
+        return this.answer.equals(answer);
     }
 
     protected String getQuestion() {
@@ -66,6 +64,10 @@ public class Question {
 
     protected String getDifficulty() {
         return difficulty;
+    }
+    
+    protected String getType() {
+        return type;
     }
 
 }

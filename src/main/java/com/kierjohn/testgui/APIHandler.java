@@ -24,23 +24,25 @@ public class APIHandler {
     private JSONArray resultsJsonArray;
     private int callAttempts;
     protected static int maxCallAttempts = 25;
+    String qType;
 
     public APIHandler() {
         callAttempts = 0;
     }
-    
-    protected void callAPI(int qCount, int qCatID, String qDiff) throws IOException, MaxAPICallAttemptException {
+
+    protected void callAPI(int qCount, int qCatID, String qDiff, String qType) throws IOException, MaxAPICallAttemptException {
         // qCatID is an number in range from 9 to 32, inclusive
         // qDiff can be {"easy", "medium", or "hard"}
         // qType can be {"any", "multiple", or "boolean"}
         //      if "any", the url tag is ommitted
-
+        this.qType = qType;
         StringBuilder response = new StringBuilder();
         String urlString = "https://opentdb.com/api.php?"
                 + "amount=" + qCount
                 + "&category=" + qCatID
                 + "&difficulty=" + qDiff
-                + "&type=multiple&encode=url3986";
+                + "&type=" + (qType.equals("identification") ? "multiple" : qType)
+                + "&encode=url3986";
         System.out.println("Calling API URL: " + urlString);
         try {
             URL url = new URL(urlString);
@@ -56,7 +58,7 @@ public class APIHandler {
             }
             resultsJsonArray = new JSONObject(response.toString()).getJSONArray("results");
             this.qCount = qCount;
-            System.out.println("Successful API call. Saving result...");
+            System.out.println("Successful API call. Result:" + resultsJsonArray.toString(1));
         } catch (IOException e) {
             System.out.println(callAttempts + " / " + maxCallAttempts);
             if (callAttempts++ == maxCallAttempts) {
@@ -69,24 +71,31 @@ public class APIHandler {
     protected void setAPIResultsToQuiz(Quiz quiz) {
         JSONObject qJsonObj;
         JSONArray providedIncorrectAnswers;
-        String[] incorrectAnswers;
+        String question, answer, category, difficulty;
 
         System.out.println("Initializing quiz...");
         for (int i = 0; i < qCount; i++) {
             qJsonObj = resultsJsonArray.getJSONObject(i);
-            providedIncorrectAnswers = qJsonObj.getJSONArray("incorrect_answers");
-            incorrectAnswers = new String[3];
-            for (int j = 0; j < 3; j++) {
-                incorrectAnswers[j] = decodeURL3986((String) providedIncorrectAnswers.get(j));
+            question = decodeURL3986(qJsonObj.getString("question"));
+            answer = decodeURL3986(qJsonObj.getString("correct_answer"));
+            category = decodeURL3986(qJsonObj.getString("category"));
+            difficulty = qJsonObj.getString("difficulty");
+
+            switch (qType) {
+                case "identification" ->
+                    quiz.addQuestion(new Question(question, answer, category, difficulty));
+                case "multiple" -> {
+                    String[] incorrectAnswers;
+                    providedIncorrectAnswers = qJsonObj.getJSONArray("incorrect_answers");
+                    incorrectAnswers = new String[3];
+                    for (int j = 0; j < 3; j++) {
+                        incorrectAnswers[j] = decodeURL3986((String) providedIncorrectAnswers.get(j));
+                    }
+                    quiz.addQuestion(new Question(question, answer, incorrectAnswers, category, difficulty));
+                }
+                case "boolean" -> quiz.addQuestion(new Question(question, answer.equals("True"), category, difficulty));
             }
-            quiz.addQuestion(
-                    decodeURL3986(qJsonObj.getString("question")),
-                    decodeURL3986(qJsonObj.getString("correct_answer")),
-                    incorrectAnswers,
-                    decodeURL3986(qJsonObj.getString("category")),
-                    qJsonObj.getString("difficulty")
-            );
-            System.out.println("Successfully added question: \"" + decodeURL3986(qJsonObj.getString("question")) + "\".");
+            System.out.println("Successfully added " + qType +" question: \"" + decodeURL3986(qJsonObj.getString("question")) + "\".");
         }
     }
 
@@ -105,7 +114,7 @@ public class APIHandler {
     }
 
     public class MaxAPICallAttemptException extends Exception {
-        
+
         public MaxAPICallAttemptException() {
             super("Maximum tries to call API exceeded.");
         }

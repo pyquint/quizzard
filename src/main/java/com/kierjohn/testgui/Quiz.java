@@ -39,13 +39,6 @@ public class Quiz {
         }
     }
 
-    protected void addQuestion(String question, String correctAnswer, String[] wrongChoices, String category, String difficulty) {
-        if (!categories.contains(category)) {
-            System.out.println("Invalid category.");
-        }
-        addQuestion(new Question(question, correctAnswer, wrongChoices, category, difficulty));
-    }
-
     protected void addQuestion(Question q) {
         questions.add(q);
     }

@@ -4,11 +4,19 @@
  */
 package com.kierjohn.testgui;
 
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.util.Random;
+import javax.swing.JButton;
+
 /**
  *
  * @author LENOVO
  */
 public class QuestionPanel extends javax.swing.JPanel {
+
+    Question currentQuestion;
+    String currentChoice;
 
     /**
      * Creates new form QuestionPanel
@@ -26,6 +34,7 @@ public class QuestionPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
         questionLabel = new javax.swing.JLabel();
         inputPanel = new javax.swing.JPanel();
         multipleChoicePanel = new javax.swing.JPanel();
@@ -34,55 +43,79 @@ public class QuestionPanel extends javax.swing.JPanel {
         choiceBtn3 = new javax.swing.JButton();
         choiceBtn4 = new javax.swing.JButton();
         identificationPanel = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton12 = new javax.swing.JButton();
+        identificationInputTxtFld = new javax.swing.JTextField();
+        identificationSubmitBtn = new javax.swing.JButton();
         trueOrFalsePanel = new javax.swing.JPanel();
         trueBtn = new javax.swing.JButton();
         falseBtn = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(51, 51, 51));
+        setPreferredSize(new java.awt.Dimension(976, 667));
+
+        questionLabel.setBackground(new java.awt.Color(51, 51, 51));
+        questionLabel.setFont(new java.awt.Font("JetBrains Mono", 1, 25)); // NOI18N
+        questionLabel.setForeground(new java.awt.Color(255, 255, 255));
         questionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         questionLabel.setFocusable(false);
         questionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        inputPanel.setBackground(new java.awt.Color(51, 51, 51));
+        inputPanel.setForeground(new java.awt.Color(255, 255, 255));
         inputPanel.setLayout(new java.awt.CardLayout());
 
+        multipleChoicePanel.setBackground(new java.awt.Color(51, 51, 51));
+        multipleChoicePanel.setForeground(new java.awt.Color(255, 255, 255));
+        multipleChoicePanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        multipleChoicePanel.setPreferredSize(new java.awt.Dimension(964, 300));
         multipleChoicePanel.setLayout(new java.awt.GridLayout(2, 2));
 
+        choiceBtn1.setBackground(new java.awt.Color(204, 255, 204));
+        choiceBtn1.setFont(new java.awt.Font("JetBrains Mono", 1, 25)); // NOI18N
+        choiceBtn1.setForeground(new java.awt.Color(0, 102, 204));
+        choiceBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         choiceBtn1.setPreferredSize(new java.awt.Dimension(200, 125));
-        choiceBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                choiceBtn1ActionPerformed(evt);
-            }
-        });
         multipleChoicePanel.add(choiceBtn1);
 
+        choiceBtn2.setBackground(new java.awt.Color(204, 255, 204));
+        choiceBtn2.setFont(new java.awt.Font("JetBrains Mono", 1, 25)); // NOI18N
+        choiceBtn2.setForeground(new java.awt.Color(0, 102, 204));
+        choiceBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         choiceBtn2.setPreferredSize(new java.awt.Dimension(200, 125));
-        choiceBtn2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                choiceBtn2ActionPerformed(evt);
-            }
-        });
         multipleChoicePanel.add(choiceBtn2);
 
+        choiceBtn3.setBackground(new java.awt.Color(204, 255, 204));
+        choiceBtn3.setFont(new java.awt.Font("JetBrains Mono", 1, 25)); // NOI18N
+        choiceBtn3.setForeground(new java.awt.Color(0, 102, 204));
+        choiceBtn3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         choiceBtn3.setPreferredSize(new java.awt.Dimension(200, 125));
-        choiceBtn3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                choiceBtn3ActionPerformed(evt);
-            }
-        });
         multipleChoicePanel.add(choiceBtn3);
 
+        choiceBtn4.setBackground(new java.awt.Color(204, 255, 204));
+        choiceBtn4.setFont(new java.awt.Font("JetBrains Mono", 1, 25)); // NOI18N
+        choiceBtn4.setForeground(new java.awt.Color(0, 102, 204));
+        choiceBtn4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         choiceBtn4.setPreferredSize(new java.awt.Dimension(200, 125));
-        choiceBtn4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                choiceBtn4ActionPerformed(evt);
-            }
-        });
         multipleChoicePanel.add(choiceBtn4);
 
-        inputPanel.add(multipleChoicePanel, "multiple choice");
+        choiceBtns = new JButton[] {choiceBtn1, choiceBtn2, choiceBtn3, choiceBtn4};
 
-        jButton12.setText("Enter");
+        inputPanel.add(multipleChoicePanel, "multiple");
+
+        identificationPanel.setBackground(new java.awt.Color(51, 51, 51));
+        identificationPanel.setForeground(new java.awt.Color(255, 255, 255));
+        identificationPanel.setPreferredSize(new java.awt.Dimension(964, 230));
+
+        identificationInputTxtFld.setBackground(new java.awt.Color(51, 51, 51));
+        identificationInputTxtFld.setFont(new java.awt.Font("JetBrains Mono", 1, 32)); // NOI18N
+        identificationInputTxtFld.setForeground(new java.awt.Color(255, 255, 255));
+        identificationInputTxtFld.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        identificationSubmitBtn.setBackground(new java.awt.Color(204, 255, 204));
+        identificationSubmitBtn.setFont(new java.awt.Font("JetBrains Mono", 0, 16)); // NOI18N
+        identificationSubmitBtn.setForeground(new java.awt.Color(0, 102, 204));
+        identificationSubmitBtn.setText("Enter");
+        identificationSubmitBtn.setBorder(null);
+        identificationSubmitBtn.setBorderPainted(false);
 
         javax.swing.GroupLayout identificationPanelLayout = new javax.swing.GroupLayout(identificationPanel);
         identificationPanel.setLayout(identificationPanelLayout);
@@ -91,42 +124,44 @@ public class QuestionPanel extends javax.swing.JPanel {
             .addGroup(identificationPanelLayout.createSequentialGroup()
                 .addGroup(identificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(identificationPanelLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(391, 391, 391)
+                        .addComponent(identificationSubmitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(identificationPanelLayout.createSequentialGroup()
-                        .addGap(178, 178, 178)
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                        .addGap(251, 251, 251)
+                        .addComponent(identificationInputTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         identificationPanelLayout.setVerticalGroup(
             identificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(identificationPanelLayout.createSequentialGroup()
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(identificationInputTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(identificationSubmitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         inputPanel.add(identificationPanel, "identification");
 
+        trueOrFalsePanel.setBackground(new java.awt.Color(51, 51, 51));
+        trueOrFalsePanel.setForeground(new java.awt.Color(255, 255, 255));
+        trueOrFalsePanel.setPreferredSize(new java.awt.Dimension(964, 125));
         trueOrFalsePanel.setLayout(new java.awt.GridLayout(0, 2));
 
-        trueBtn.setText("True");
+        trueBtn.setBackground(new java.awt.Color(204, 255, 204));
+        trueBtn.setFont(new java.awt.Font("JetBrains Mono", 1, 32)); // NOI18N
+        trueBtn.setForeground(new java.awt.Color(0, 102, 204));
+        trueBtn.setText("true");
+        trueBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         trueBtn.setPreferredSize(new java.awt.Dimension(200, 125));
-        trueBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                trueBtnActionPerformed(evt);
-            }
-        });
         trueOrFalsePanel.add(trueBtn);
 
-        falseBtn.setText("False");
+        falseBtn.setBackground(new java.awt.Color(204, 255, 204));
+        falseBtn.setFont(new java.awt.Font("JetBrains Mono", 1, 32)); // NOI18N
+        falseBtn.setForeground(new java.awt.Color(0, 102, 204));
+        falseBtn.setText("false");
+        falseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         falseBtn.setPreferredSize(new java.awt.Dimension(200, 125));
-        falseBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                falseBtnActionPerformed(evt);
-            }
-        });
         trueOrFalsePanel.add(falseBtn);
 
         inputPanel.add(trueOrFalsePanel, "boolean");
@@ -137,8 +172,8 @@ public class QuestionPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(questionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addComponent(questionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 934, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -149,39 +184,104 @@ public class QuestionPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(questionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(308, Short.MAX_VALUE))
+                .addComponent(questionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(361, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(218, Short.MAX_VALUE)
-                    .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+                    .addContainerGap(320, Short.MAX_VALUE)
+                    .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(27, 27, 27)))
         );
+
     }// </editor-fold>//GEN-END:initComponents
 
-    private void choiceBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choiceBtn1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_choiceBtn1ActionPerformed
+    // adding custom button event handler should be ran BEFORE adding own event handlers
+    protected void addActionListenerToButtons(java.awt.event.ActionListener evtl) {
+        for (JButton inputBtn : getAllButtons()) {
+            inputBtn.addActionListener(evtl);
+        }
+    }
 
-    private void choiceBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choiceBtn2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_choiceBtn2ActionPerformed
+    // should be ran AFTER adding custom event handlers
+    protected void addQPanelButtonActionPerformed() {
+        for (JButton inputBtn : getAllButtons()) {
+            inputBtn.addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    choiceButtonActionPerformed(evt);
+                }
+            });
+        };
+    }
 
-    private void choiceBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choiceBtn3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_choiceBtn3ActionPerformed
+    private void choiceButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        JButton btn = (JButton) evt.getSource();
+        if (currentQuestion.getType().equals("identification")) {
+            currentChoice = identificationInputTxtFld.getText();
+            identificationInputTxtFld.setText("");
+        } else {
+            currentChoice = unwrapStringWithHtmlTag(btn.getText());
+        }
 
-    private void choiceBtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choiceBtn4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_choiceBtn4ActionPerformed
+        if (currentQuestion.getType().equals("multiple")) {
+            try {
+                correctChoiceBtn.setBackground(btnColorCorrect);
+                if (!choiceIsCorrect()) {
+                    btn.setBackground(btnColorWrong);
+                }
+                correctChoiceBtn.repaint();
+                correctChoiceBtn.revalidate();
+                Thread.sleep(250);
+                correctChoiceBtn.setBackground(btnColorDefault);
+                btn.setBackground(btnColorDefault);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 
-    private void trueBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trueBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_trueBtnActionPerformed
+    public void setCurrentQuestion(Question q) {
+        currentQuestion = q;
+    }
 
-    private void falseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_falseBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_falseBtnActionPerformed
+    public boolean choiceIsCorrect() {
+        return currentQuestion.isCorrect(currentChoice);
+    }
+
+    protected void displayQuestion() {
+        questionLabel.setText(wrapStringWithHtmlTag(currentQuestion.getQuestion()));
+        if (currentQuestion.getType().equals("multiple")) {
+            correctChoiceBtn = choiceBtns[new Random().nextInt(4)];
+            int wrongChoiceIndex = 0;
+            for (JButton btn : choiceBtns) {
+                if (btn != correctChoiceBtn) {
+                    String wrongChoice = currentQuestion.getWrongChoiceAtIndex(wrongChoiceIndex);
+                    btn.setText(wrapStringWithHtmlTag(wrongChoice));
+                    wrongChoiceIndex++;
+                }
+            }
+            correctChoiceBtn.setText(currentQuestion.getAnswer());
+        }
+        display(currentQuestion.getType());
+    }
+
+    private void display(String cardName) {
+        CardLayout card = (CardLayout) inputPanel.getLayout();
+        card.show(inputPanel, cardName);
+    }
+
+    // 
+    private String wrapStringWithHtmlTag(String str) {
+        return "<html>" + str + "</html>";
+    }
+
+    private String unwrapStringWithHtmlTag(String str) {
+        return str.replace("<html>", "").replace("</html>", "");
+    }
+
+    public JButton[] getAllButtons() {
+        return new JButton[]{choiceBtn1, choiceBtn2, choiceBtn3, choiceBtn4, trueBtn, falseBtn, identificationSubmitBtn};
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -190,13 +290,20 @@ public class QuestionPanel extends javax.swing.JPanel {
     private javax.swing.JButton choiceBtn3;
     private javax.swing.JButton choiceBtn4;
     private javax.swing.JButton falseBtn;
+    private javax.swing.JTextField identificationInputTxtFld;
     private javax.swing.JPanel identificationPanel;
+    private javax.swing.JButton identificationSubmitBtn;
     private javax.swing.JPanel inputPanel;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel multipleChoicePanel;
     private javax.swing.JLabel questionLabel;
     private javax.swing.JButton trueBtn;
     private javax.swing.JPanel trueOrFalsePanel;
     // End of variables declaration//GEN-END:variables
+    private JButton correctChoiceBtn;
+    private JButton[] choiceBtns;
+    private static java.awt.Color btnColorDefault = new Color(204, 255, 204);
+    private static java.awt.Color btnColorCorrect = new Color(118, 254, 0);
+    private static java.awt.Color btnColorWrong = new Color(253, 26, 26);
+
 }
