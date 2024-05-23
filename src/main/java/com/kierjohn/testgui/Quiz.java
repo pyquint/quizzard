@@ -4,8 +4,10 @@
  */
 package com.kierjohn.testgui;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -15,7 +17,6 @@ public class Quiz {
 
     private ArrayList<Question> questions;
     private ArrayList<String> categories;
-    private int qCount;
 
     protected Quiz() {
         questions = new ArrayList<>();
@@ -49,6 +50,10 @@ public class Quiz {
 
     protected int getQCount() {
         return questions.size();
+    }
+    
+    protected boolean outputToFile(File file) {
+        return true;
     }
 
 }

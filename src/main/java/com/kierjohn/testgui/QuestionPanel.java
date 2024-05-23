@@ -8,6 +8,12 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.Random;
 import javax.swing.JButton;
+import javax.swing.Timer;
+import java.awt.event.ActionListener;
+import javax.swing.JComponent;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 /**
  *
@@ -17,12 +23,25 @@ public class QuestionPanel extends javax.swing.JPanel {
 
     Question currentQuestion;
     String currentChoice;
+    Timer timer;
 
     /**
      * Creates new form QuestionPanel
      */
     public QuestionPanel() {
         initComponents();
+        timer = new Timer(1500, new ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                displayQuestion();
+                resetInputComponents();
+            }
+        });
+        timer.setRepeats(false);
+    }
+
+    protected void startTimer() {
+        timer.start();
     }
 
     /**
@@ -34,229 +53,301 @@ public class QuestionPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        qPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        questionLabel = new javax.swing.JLabel();
+        questionText = new javax.swing.JTextPane();
         inputPanel = new javax.swing.JPanel();
         multipleChoicePanel = new javax.swing.JPanel();
         choiceBtn1 = new javax.swing.JButton();
         choiceBtn2 = new javax.swing.JButton();
         choiceBtn3 = new javax.swing.JButton();
         choiceBtn4 = new javax.swing.JButton();
-        identificationPanel = new javax.swing.JPanel();
-        identificationInputTxtFld = new javax.swing.JTextField();
-        identificationSubmitBtn = new javax.swing.JButton();
         trueOrFalsePanel = new javax.swing.JPanel();
         trueBtn = new javax.swing.JButton();
         falseBtn = new javax.swing.JButton();
+        identificationPanel = new javax.swing.JPanel();
+        identificationInputTxtFld = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(51, 51, 51));
-        setPreferredSize(new java.awt.Dimension(976, 667));
+        setBackground(new java.awt.Color(106, 49, 144));
+        setPreferredSize(new java.awt.Dimension(1280, 620));
 
-        questionLabel.setBackground(new java.awt.Color(51, 51, 51));
-        questionLabel.setFont(new java.awt.Font("JetBrains Mono", 1, 25)); // NOI18N
-        questionLabel.setForeground(new java.awt.Color(255, 255, 255));
-        questionLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        questionLabel.setFocusable(false);
-        questionLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        qPanel.setBackground(new java.awt.Color(29, 20, 101));
+
+        jScrollPane2.setBorder(null);
+        jScrollPane2.setFocusable(false);
+        jScrollPane2.setRequestFocusEnabled(false);
+        jScrollPane2.setVerifyInputWhenFocusTarget(false);
+
+        questionText.setEditable(false);
+        questionText.setBackground(new java.awt.Color(29, 20, 101));
+        questionText.setBorder(null);
+        questionText.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 50)); // NOI18N
+        questionText.setForeground(new java.awt.Color(249, 193, 5));
+        questionText.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        questionText.setFocusCycleRoot(false);
+        questionText.setFocusable(false);
+        questionText.setRequestFocusEnabled(false);
+        questionText.setVerifyInputWhenFocusTarget(false);
+        StyledDocument doc = questionText.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+        jScrollPane2.setViewportView(questionText);
+
+        javax.swing.GroupLayout qPanelLayout = new javax.swing.GroupLayout(qPanel);
+        qPanel.setLayout(qPanelLayout);
+        qPanelLayout.setHorizontalGroup(
+            qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(qPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        qPanelLayout.setVerticalGroup(
+            qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(qPanelLayout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
 
         inputPanel.setBackground(new java.awt.Color(51, 51, 51));
         inputPanel.setForeground(new java.awt.Color(255, 255, 255));
+        inputPanel.setOpaque(false);
+        inputPanel.setPreferredSize(new java.awt.Dimension(1280, 300));
+        inputPanel.setRequestFocusEnabled(false);
         inputPanel.setLayout(new java.awt.CardLayout());
 
-        multipleChoicePanel.setBackground(new java.awt.Color(51, 51, 51));
+        multipleChoicePanel.setBackground(new java.awt.Color(106, 49, 144));
         multipleChoicePanel.setForeground(new java.awt.Color(255, 255, 255));
+        multipleChoicePanel.setAutoscrolls(true);
         multipleChoicePanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         multipleChoicePanel.setPreferredSize(new java.awt.Dimension(964, 300));
-        multipleChoicePanel.setLayout(new java.awt.GridLayout(2, 2));
+        multipleChoicePanel.setLayout(new java.awt.GridLayout(2, 2, 10, 10));
 
-        choiceBtn1.setBackground(new java.awt.Color(204, 255, 204));
-        choiceBtn1.setFont(new java.awt.Font("JetBrains Mono", 1, 25)); // NOI18N
-        choiceBtn1.setForeground(new java.awt.Color(0, 102, 204));
-        choiceBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        choiceBtn1.setBackground(colorDefault);
+        choiceBtn1.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 25)); // NOI18N
+        choiceBtn1.setForeground(new java.awt.Color(29, 20, 101));
+        choiceBtn1.setBorder(null);
+        choiceBtn1.setBorderPainted(false);
+        choiceBtn1.setDefaultCapable(false);
+        choiceBtn1.setFocusPainted(false);
+        choiceBtn1.setFocusable(false);
+        choiceBtn1.setOpaque(true);
         choiceBtn1.setPreferredSize(new java.awt.Dimension(200, 125));
+        choiceBtn1.setRequestFocusEnabled(false);
+        choiceBtn1.setRolloverEnabled(false);
+        choiceBtn1.setVerifyInputWhenFocusTarget(false);
         multipleChoicePanel.add(choiceBtn1);
 
-        choiceBtn2.setBackground(new java.awt.Color(204, 255, 204));
-        choiceBtn2.setFont(new java.awt.Font("JetBrains Mono", 1, 25)); // NOI18N
-        choiceBtn2.setForeground(new java.awt.Color(0, 102, 204));
-        choiceBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        choiceBtn2.setBackground(colorDefault);
+        choiceBtn2.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 25)); // NOI18N
+        choiceBtn2.setForeground(new java.awt.Color(29, 20, 101));
+        choiceBtn2.setBorder(null);
+        choiceBtn2.setBorderPainted(false);
+        choiceBtn2.setDefaultCapable(false);
+        choiceBtn2.setFocusPainted(false);
+        choiceBtn2.setFocusable(false);
+        choiceBtn2.setOpaque(true);
         choiceBtn2.setPreferredSize(new java.awt.Dimension(200, 125));
+        choiceBtn2.setRequestFocusEnabled(false);
+        choiceBtn2.setRolloverEnabled(false);
+        choiceBtn2.setVerifyInputWhenFocusTarget(false);
         multipleChoicePanel.add(choiceBtn2);
 
-        choiceBtn3.setBackground(new java.awt.Color(204, 255, 204));
-        choiceBtn3.setFont(new java.awt.Font("JetBrains Mono", 1, 25)); // NOI18N
-        choiceBtn3.setForeground(new java.awt.Color(0, 102, 204));
-        choiceBtn3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        choiceBtn3.setBackground(colorDefault);
+        choiceBtn3.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 25)); // NOI18N
+        choiceBtn3.setForeground(new java.awt.Color(29, 20, 101));
+        choiceBtn3.setBorder(null);
+        choiceBtn3.setBorderPainted(false);
+        choiceBtn3.setDefaultCapable(false);
+        choiceBtn3.setFocusPainted(false);
+        choiceBtn3.setFocusable(false);
+        choiceBtn3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        choiceBtn3.setOpaque(true);
         choiceBtn3.setPreferredSize(new java.awt.Dimension(200, 125));
+        choiceBtn3.setRequestFocusEnabled(false);
+        choiceBtn3.setRolloverEnabled(false);
+        choiceBtn3.setVerifyInputWhenFocusTarget(false);
         multipleChoicePanel.add(choiceBtn3);
 
-        choiceBtn4.setBackground(new java.awt.Color(204, 255, 204));
-        choiceBtn4.setFont(new java.awt.Font("JetBrains Mono", 1, 25)); // NOI18N
-        choiceBtn4.setForeground(new java.awt.Color(0, 102, 204));
-        choiceBtn4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        choiceBtn4.setBackground(colorDefault);
+        choiceBtn4.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 25)); // NOI18N
+        choiceBtn4.setForeground(new java.awt.Color(29, 20, 101));
+        choiceBtn4.setBorder(null);
+        choiceBtn4.setBorderPainted(false);
+        choiceBtn4.setDefaultCapable(false);
+        choiceBtn4.setFocusPainted(false);
+        choiceBtn4.setFocusable(false);
+        choiceBtn4.setOpaque(true);
         choiceBtn4.setPreferredSize(new java.awt.Dimension(200, 125));
+        choiceBtn4.setRequestFocusEnabled(false);
+        choiceBtn4.setRolloverEnabled(false);
+        choiceBtn4.setVerifyInputWhenFocusTarget(false);
         multipleChoicePanel.add(choiceBtn4);
 
-        choiceBtns = new JButton[] {choiceBtn1, choiceBtn2, choiceBtn3, choiceBtn4};
+        inputBtns = new JButton[] {choiceBtn1, choiceBtn2, choiceBtn3, choiceBtn4};
 
         inputPanel.add(multipleChoicePanel, "multiple");
 
-        identificationPanel.setBackground(new java.awt.Color(51, 51, 51));
+        trueOrFalsePanel.setBackground(new java.awt.Color(106, 49, 144));
+        trueOrFalsePanel.setForeground(new java.awt.Color(255, 255, 255));
+        trueOrFalsePanel.setPreferredSize(new java.awt.Dimension(1280, 720));
+        trueOrFalsePanel.setLayout(new java.awt.GridLayout(0, 2, 5, 0));
+
+        trueBtn.setBackground(colorDefault);
+        trueBtn.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 50)); // NOI18N
+        trueBtn.setForeground(new java.awt.Color(29, 20, 101));
+        trueBtn.setText("true");
+        trueBtn.setBorder(null);
+        trueBtn.setBorderPainted(false);
+        trueBtn.setDefaultCapable(false);
+        trueBtn.setFocusPainted(false);
+        trueBtn.setFocusable(false);
+        trueBtn.setPreferredSize(new java.awt.Dimension(200, 125));
+        trueBtn.setRequestFocusEnabled(false);
+        trueBtn.setRolloverEnabled(false);
+        trueBtn.setVerifyInputWhenFocusTarget(false);
+        trueOrFalsePanel.add(trueBtn);
+
+        falseBtn.setBackground(colorDefault);
+        falseBtn.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 50)); // NOI18N
+        falseBtn.setForeground(new java.awt.Color(29, 20, 101));
+        falseBtn.setText("false");
+        falseBtn.setBorder(null);
+        falseBtn.setBorderPainted(false);
+        falseBtn.setDefaultCapable(false);
+        falseBtn.setFocusPainted(false);
+        falseBtn.setFocusable(false);
+        falseBtn.setPreferredSize(new java.awt.Dimension(200, 125));
+        falseBtn.setRequestFocusEnabled(false);
+        falseBtn.setRolloverEnabled(false);
+        falseBtn.setVerifyInputWhenFocusTarget(false);
+        trueOrFalsePanel.add(falseBtn);
+        falseBtn.getAccessibleContext().setAccessibleName("");
+
+        inputPanel.add(trueOrFalsePanel, "boolean");
+
+        identificationPanel.setBackground(new java.awt.Color(106, 49, 144));
         identificationPanel.setForeground(new java.awt.Color(255, 255, 255));
-        identificationPanel.setPreferredSize(new java.awt.Dimension(964, 230));
+        identificationPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        identificationInputTxtFld.setBackground(new java.awt.Color(51, 51, 51));
-        identificationInputTxtFld.setFont(new java.awt.Font("JetBrains Mono", 1, 32)); // NOI18N
-        identificationInputTxtFld.setForeground(new java.awt.Color(255, 255, 255));
+        identificationInputTxtFld.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 32)); // NOI18N
+        identificationInputTxtFld.setForeground(new java.awt.Color(29, 20, 101));
         identificationInputTxtFld.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
-        identificationSubmitBtn.setBackground(new java.awt.Color(204, 255, 204));
-        identificationSubmitBtn.setFont(new java.awt.Font("JetBrains Mono", 0, 16)); // NOI18N
-        identificationSubmitBtn.setForeground(new java.awt.Color(0, 102, 204));
-        identificationSubmitBtn.setText("Enter");
-        identificationSubmitBtn.setBorder(null);
-        identificationSubmitBtn.setBorderPainted(false);
 
         javax.swing.GroupLayout identificationPanelLayout = new javax.swing.GroupLayout(identificationPanel);
         identificationPanel.setLayout(identificationPanelLayout);
         identificationPanelLayout.setHorizontalGroup(
             identificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(identificationPanelLayout.createSequentialGroup()
-                .addGroup(identificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(identificationPanelLayout.createSequentialGroup()
-                        .addGap(391, 391, 391)
-                        .addComponent(identificationSubmitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(identificationPanelLayout.createSequentialGroup()
-                        .addGap(251, 251, 251)
-                        .addComponent(identificationInputTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(112, 112, 112)
+                .addComponent(identificationInputTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         identificationPanelLayout.setVerticalGroup(
             identificationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(identificationPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(identificationInputTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(identificationSubmitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(identificationInputTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         inputPanel.add(identificationPanel, "identification");
-
-        trueOrFalsePanel.setBackground(new java.awt.Color(51, 51, 51));
-        trueOrFalsePanel.setForeground(new java.awt.Color(255, 255, 255));
-        trueOrFalsePanel.setPreferredSize(new java.awt.Dimension(964, 125));
-        trueOrFalsePanel.setLayout(new java.awt.GridLayout(0, 2));
-
-        trueBtn.setBackground(new java.awt.Color(204, 255, 204));
-        trueBtn.setFont(new java.awt.Font("JetBrains Mono", 1, 32)); // NOI18N
-        trueBtn.setForeground(new java.awt.Color(0, 102, 204));
-        trueBtn.setText("true");
-        trueBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        trueBtn.setPreferredSize(new java.awt.Dimension(200, 125));
-        trueOrFalsePanel.add(trueBtn);
-
-        falseBtn.setBackground(new java.awt.Color(204, 255, 204));
-        falseBtn.setFont(new java.awt.Font("JetBrains Mono", 1, 32)); // NOI18N
-        falseBtn.setForeground(new java.awt.Color(0, 102, 204));
-        falseBtn.setText("false");
-        falseBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        falseBtn.setPreferredSize(new java.awt.Dimension(200, 125));
-        trueOrFalsePanel.add(falseBtn);
-
-        inputPanel.add(trueOrFalsePanel, "boolean");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(questionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 934, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(22, 22, 22)
+                .addComponent(qPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGap(86, 86, 86)
+                    .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1093, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(101, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(questionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(361, Short.MAX_VALUE))
+                .addComponent(qPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 338, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(320, Short.MAX_VALUE)
-                    .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(27, 27, 27)))
+                    .addContainerGap(303, Short.MAX_VALUE)
+                    .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(25, 25, 25)))
         );
 
     }// </editor-fold>//GEN-END:initComponents
 
     // adding custom button event handler should be ran BEFORE adding own event handlers
-    protected void addActionListenerToButtons(java.awt.event.ActionListener evtl) {
+    protected void addActionListenerToInput(java.awt.event.ActionListener evtl) {
         for (JButton inputBtn : getAllButtons()) {
             inputBtn.addActionListener(evtl);
         }
+        identificationInputTxtFld.addActionListener(evtl);
     }
 
     // should be ran AFTER adding custom event handlers
     protected void addQPanelButtonActionPerformed() {
         for (JButton inputBtn : getAllButtons()) {
-            inputBtn.addActionListener(new java.awt.event.ActionListener() {
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    choiceButtonActionPerformed(evt);
-                }
+            inputBtn.addActionListener((java.awt.event.ActionEvent evt) -> {
+                choiceButtonActionPerformed(evt);
             });
-        };
+        }
+        identificationInputTxtFld.addActionListener((java.awt.event.ActionEvent evt) -> {
+            choiceButtonActionPerformed(evt);
+        });
     }
 
     private void choiceButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        JButton btn = (JButton) evt.getSource();
+        inputComponent = (JComponent) evt.getSource();
         if (currentQuestion.getType().equals("identification")) {
             currentChoice = identificationInputTxtFld.getText();
-            identificationInputTxtFld.setText("");
+            identificationInputTxtFld.setEnabled(false);
         } else {
-            currentChoice = unwrapStringWithHtmlTag(btn.getText());
-        }
-
-        if (currentQuestion.getType().equals("multiple")) {
-            try {
-                correctChoiceBtn.setBackground(btnColorCorrect);
-                if (!choiceIsCorrect()) {
-                    btn.setBackground(btnColorWrong);
-                }
-                correctChoiceBtn.repaint();
-                correctChoiceBtn.revalidate();
-                Thread.sleep(250);
-                correctChoiceBtn.setBackground(btnColorDefault);
-                btn.setBackground(btnColorDefault);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
+            for (JButton btn : getAllButtons()) {
+                btn.setEnabled(false);
             }
+            if (currentQuestion.getType().equals("boolean")) {
+                correctChoiceBtn = (currentQuestion.isCorrect("true")) ? trueBtn : falseBtn;
+            }
+            currentChoice = ((JButton) inputComponent).getText();
+            correctChoiceBtn.setBackground(colorCorrect);
+        }
+        inputComponent.setBackground((choiceIsCorrect()) ? colorCorrect : colorWrong);
+    }
+
+    private void resetInputComponents() {
+        identificationInputTxtFld.setBackground(Color.WHITE);
+        identificationInputTxtFld.setEnabled(true);
+        for (JButton button : getAllButtons()) {
+            button.setEnabled(true);
+            button.setBackground(colorDefault);
         }
     }
 
-    public void setCurrentQuestion(Question q) {
+    protected void setCurrentQuestion(Question q) {
         currentQuestion = q;
     }
 
-    public boolean choiceIsCorrect() {
+    protected boolean choiceIsCorrect() {
         return currentQuestion.isCorrect(currentChoice);
     }
 
     protected void displayQuestion() {
-        questionLabel.setText(wrapStringWithHtmlTag(currentQuestion.getQuestion()));
+        questionText.setText(currentQuestion.getQuestion());
+        identificationInputTxtFld.setText("");
         if (currentQuestion.getType().equals("multiple")) {
-            correctChoiceBtn = choiceBtns[new Random().nextInt(4)];
+            correctChoiceBtn = inputBtns[new Random().nextInt(4)];
             int wrongChoiceIndex = 0;
-            for (JButton btn : choiceBtns) {
+            for (JButton btn : inputBtns) {
                 if (btn != correctChoiceBtn) {
                     String wrongChoice = currentQuestion.getWrongChoiceAtIndex(wrongChoiceIndex);
-                    btn.setText(wrapStringWithHtmlTag(wrongChoice));
+                    btn.setText(wrongChoice);
                     wrongChoiceIndex++;
                 }
             }
@@ -270,17 +361,8 @@ public class QuestionPanel extends javax.swing.JPanel {
         card.show(inputPanel, cardName);
     }
 
-    // 
-    private String wrapStringWithHtmlTag(String str) {
-        return "<html>" + str + "</html>";
-    }
-
-    private String unwrapStringWithHtmlTag(String str) {
-        return str.replace("<html>", "").replace("</html>", "");
-    }
-
     public JButton[] getAllButtons() {
-        return new JButton[]{choiceBtn1, choiceBtn2, choiceBtn3, choiceBtn4, trueBtn, falseBtn, identificationSubmitBtn};
+        return new JButton[]{choiceBtn1, choiceBtn2, choiceBtn3, choiceBtn4, trueBtn, falseBtn};
     }
 
 
@@ -292,18 +374,19 @@ public class QuestionPanel extends javax.swing.JPanel {
     private javax.swing.JButton falseBtn;
     private javax.swing.JTextField identificationInputTxtFld;
     private javax.swing.JPanel identificationPanel;
-    private javax.swing.JButton identificationSubmitBtn;
     private javax.swing.JPanel inputPanel;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel multipleChoicePanel;
-    private javax.swing.JLabel questionLabel;
+    private javax.swing.JPanel qPanel;
+    private javax.swing.JTextPane questionText;
     private javax.swing.JButton trueBtn;
     private javax.swing.JPanel trueOrFalsePanel;
     // End of variables declaration//GEN-END:variables
     private JButton correctChoiceBtn;
-    private JButton[] choiceBtns;
-    private static java.awt.Color btnColorDefault = new Color(204, 255, 204);
-    private static java.awt.Color btnColorCorrect = new Color(118, 254, 0);
-    private static java.awt.Color btnColorWrong = new Color(253, 26, 26);
+    private JButton[] inputBtns;
+    private static java.awt.Color colorDefault = new Color(255, 255, 255);
+    private static java.awt.Color colorCorrect = new Color(164, 252, 88);
+    private static java.awt.Color colorWrong = new Color(253, 26, 26);
+    private JComponent inputComponent;
 
 }
