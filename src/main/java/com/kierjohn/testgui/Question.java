@@ -14,28 +14,28 @@ public class Question {
     private final String question;
     private final String answer;
     private String[] wrongChoices;
-    private String category;
-    private String difficulty;
+//    private String category;
+//    private String difficulty;
     
-    public Question(String question, boolean answer, String category, String difficulty) {
+    public Question(String question, boolean answer) { //, String category, String difficulty) {
         this.type = "boolean";
         this.question = question;
         this.answer = (answer) ? "true" : "false";
     }
     
-    public Question(String question, String answer, String category, String difficulty) {
+    public Question(String question, String answer) { //, String category, String difficulty) {
         this.type = "identification";
         this.question = question;
         this.answer = answer;
     }
 
-    public Question(String question, String answer, String[] wrongChoices, String category, String difficulty) {
+    public Question(String question, String answer, String[] wrongChoices) { // , String category, String difficulty) {
         this.type = "multiple";
         this.question = question;
         this.answer = answer;
         this.wrongChoices = wrongChoices;
-        this.category = category;
-        this.difficulty = difficulty;
+//        this.category = category;
+//        this.difficulty = difficulty;
     }
     
     protected boolean isCorrect(String answer) {
@@ -58,13 +58,13 @@ public class Question {
         return wrongChoices[index];
     }
 
-    protected String getCategory() {
-        return category;
-    }
-
-    protected String getDifficulty() {
-        return difficulty;
-    }
+//    protected String getCategory() {
+//        return category;
+//    }
+//
+//    protected String getDifficulty() {
+//        return difficulty;
+//    }
     
     protected String getType() {
         return type;

@@ -7,7 +7,6 @@ package com.kierjohn.testgui;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
-import javax.swing.JFileChooser;
 
 /**
  *
@@ -17,19 +16,25 @@ public class Quiz {
 
     private ArrayList<Question> questions;
     private ArrayList<String> categories;
-
+    private String name;
+    
     protected Quiz() {
         questions = new ArrayList<>();
         categories = new ArrayList<>();
     }
 
-    protected Quiz(String category) {
+    protected Quiz(String name) {
         this();
+        this.name = name;
+    }
+
+    protected Quiz(String name, String category) {
+        this(name);
         categories.add(category);
     }
 
-    protected Quiz(Collection<String> categories) {
-        this();
+    protected Quiz(String name, Collection<String> categories) {
+        this(name);
         for (String cat : categories) {
             if (this.categories.contains(cat)) {
                 System.out.println("Removed duplicate category \"" + cat + "\".");
@@ -40,6 +45,14 @@ public class Quiz {
         }
     }
 
+    protected void setName(String name) {
+        this.name = name;
+    } 
+    
+    protected String getName() {
+        return name;
+    }
+    
     protected void addQuestion(Question q) {
         questions.add(q);
     }
@@ -51,9 +64,8 @@ public class Quiz {
     protected int getQCount() {
         return questions.size();
     }
-    
-    protected boolean outputToFile(File file) {
-        return true;
-    }
 
+    protected Question[] getQuestions() {
+        return questions.toArray(new Question[questions.size()]);
+    }
 }

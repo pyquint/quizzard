@@ -6,7 +6,6 @@ package com.kierjohn.testgui;
 
 import java.awt.CardLayout;
 import java.awt.Color;
-import javax.swing.JComboBox;
 
 /**
  *
@@ -33,26 +32,27 @@ public class QuizQuestionForm extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         formPanel = new javax.swing.JPanel();
         upperFormPanel = new javax.swing.JPanel();
         qTypeInput = new javax.swing.JComboBox<>();
-        questionTextField3 = new javax.swing.JTextField();
+        questionTextField = new javax.swing.JTextField();
         deleteBtn = new javax.swing.JButton();
         titleLabel = new javax.swing.JLabel();
         indexLabel = new javax.swing.JLabel();
         bottonFormPanelContainer = new javax.swing.JPanel();
         multipleChoiceFormPanel = new javax.swing.JPanel();
-        correctAnswer1 = new javax.swing.JTextField();
+        multipleCorrectAnswer = new javax.swing.JTextField();
+        wrongChoiceTextField1 = new javax.swing.JTextField();
+        wrongChoiceTextField2 = new javax.swing.JTextField();
         wrongChoiceTextField3 = new javax.swing.JTextField();
-        wrongChoiceTextField5 = new javax.swing.JTextField();
-        wrongChoiceTextField6 = new javax.swing.JTextField();
         trueOrFalseFormPanel = new javax.swing.JPanel();
-        jToggleButton3 = new javax.swing.JToggleButton();
         defaultBooleanLabel1 = new javax.swing.JPanel();
+        trueToggleBtn = new javax.swing.JToggleButton();
+        falseToggleBtn = new javax.swing.JToggleButton();
         correctAnswerLabe2 = new javax.swing.JLabel();
-        jToggleButton4 = new javax.swing.JToggleButton();
         identificationFormPanel = new javax.swing.JPanel();
-        identificationAnswer = new javax.swing.JTextField();
+        identificationAnswerTxtField = new javax.swing.JTextField();
         barrier = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(106, 49, 144));
@@ -66,7 +66,7 @@ public class QuizQuestionForm extends javax.swing.JPanel {
 
         qTypeInput.setBackground(new Color(255, 255, 255));
         qTypeInput.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
-        qTypeInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Multiple Choice", "Identification", "True or False" }));
+        qTypeInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Multiple Choice", "True or False", "Identification" }));
         qTypeInput.setToolTipText("");
         qTypeInput.setName("qDiff"); // NOI18N
         qTypeInput.addActionListener(new java.awt.event.ActionListener() {
@@ -75,10 +75,10 @@ public class QuizQuestionForm extends javax.swing.JPanel {
             }
         });
 
-        questionTextField3.setBackground(new java.awt.Color(204, 204, 204));
-        questionTextField3.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
-        questionTextField3.setForeground(new java.awt.Color(51, 51, 51));
-        questionTextField3.setText("Question");
+        questionTextField.setBackground(new java.awt.Color(204, 204, 204));
+        questionTextField.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        questionTextField.setForeground(new java.awt.Color(51, 51, 51));
+        questionTextField.setText("Question");
 
         deleteBtn.setBackground(new Color(255, 255, 255));
         deleteBtn.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
@@ -111,7 +111,7 @@ public class QuizQuestionForm extends javax.swing.JPanel {
                         .addComponent(indexLabel)
                         .addGap(95, 95, 95)
                         .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(questionTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(questionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         upperFormPanelLayout.setVerticalGroup(
@@ -124,7 +124,7 @@ public class QuizQuestionForm extends javax.swing.JPanel {
                     .addComponent(titleLabel)
                     .addComponent(indexLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(questionTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(questionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -143,21 +143,21 @@ public class QuizQuestionForm extends javax.swing.JPanel {
         multipleChoiceFormPanel.setBackground(new java.awt.Color(106, 49, 144));
         multipleChoiceFormPanel.setPreferredSize(new java.awt.Dimension(600, 218));
 
-        correctAnswer1.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
-        correctAnswer1.setText("Correct Answer");
-        correctAnswer1.setPreferredSize(new java.awt.Dimension(64, 32));
+        multipleCorrectAnswer.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        multipleCorrectAnswer.setText("Correct Answer");
+        multipleCorrectAnswer.setPreferredSize(new java.awt.Dimension(64, 32));
+
+        wrongChoiceTextField1.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        wrongChoiceTextField1.setText("Wrong Choice #1");
+        wrongChoiceTextField1.setPreferredSize(new java.awt.Dimension(64, 32));
+
+        wrongChoiceTextField2.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        wrongChoiceTextField2.setText("Wrong Choice #2");
+        wrongChoiceTextField2.setPreferredSize(new java.awt.Dimension(64, 32));
 
         wrongChoiceTextField3.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
-        wrongChoiceTextField3.setText("Wrong Choice #1");
+        wrongChoiceTextField3.setText("Wrong Choice #3");
         wrongChoiceTextField3.setPreferredSize(new java.awt.Dimension(64, 32));
-
-        wrongChoiceTextField5.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
-        wrongChoiceTextField5.setText("Wrong Choice #2");
-        wrongChoiceTextField5.setPreferredSize(new java.awt.Dimension(64, 32));
-
-        wrongChoiceTextField6.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
-        wrongChoiceTextField6.setText("Wrong Choice #3");
-        wrongChoiceTextField6.setPreferredSize(new java.awt.Dimension(64, 32));
 
         javax.swing.GroupLayout multipleChoiceFormPanelLayout = new javax.swing.GroupLayout(multipleChoiceFormPanel);
         multipleChoiceFormPanel.setLayout(multipleChoiceFormPanelLayout);
@@ -166,23 +166,23 @@ public class QuizQuestionForm extends javax.swing.JPanel {
             .addGroup(multipleChoiceFormPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(multipleChoiceFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(wrongChoiceTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(wrongChoiceTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(wrongChoiceTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(correctAnswer1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(wrongChoiceTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(wrongChoiceTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(multipleCorrectAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         multipleChoiceFormPanelLayout.setVerticalGroup(
             multipleChoiceFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(multipleChoiceFormPanelLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(correctAnswer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(multipleCorrectAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(wrongChoiceTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(wrongChoiceTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(wrongChoiceTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(wrongChoiceTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(wrongChoiceTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -191,40 +191,43 @@ public class QuizQuestionForm extends javax.swing.JPanel {
         trueOrFalseFormPanel.setBackground(new java.awt.Color(106, 49, 144));
         trueOrFalseFormPanel.setPreferredSize(new java.awt.Dimension(600, 218));
 
-        jToggleButton3.setBackground(new Color(255, 255, 255));
-        jToggleButton3.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
-        jToggleButton3.setText("Custom Labels");
-
         defaultBooleanLabel1.setBackground(new java.awt.Color(106, 49, 144));
 
-        correctAnswerLabe2.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
-        correctAnswerLabe2.setForeground(new java.awt.Color(255, 242, 248));
-        correctAnswerLabe2.setText("Correct Answer:");
+        trueToggleBtn.setBackground(new Color(255, 255, 255));
+        buttonGroup1.add(trueToggleBtn);
+        trueToggleBtn.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
+        trueToggleBtn.setSelected(true);
+        trueToggleBtn.setText("True");
 
-        jToggleButton4.setBackground(new Color(255, 255, 255));
-        jToggleButton4.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
-        jToggleButton4.setText("True");
+        falseToggleBtn.setBackground(new Color(255, 255, 255));
+        buttonGroup1.add(falseToggleBtn);
+        falseToggleBtn.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
+        falseToggleBtn.setText("False");
 
         javax.swing.GroupLayout defaultBooleanLabel1Layout = new javax.swing.GroupLayout(defaultBooleanLabel1);
         defaultBooleanLabel1.setLayout(defaultBooleanLabel1Layout);
         defaultBooleanLabel1Layout.setHorizontalGroup(
             defaultBooleanLabel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(defaultBooleanLabel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(correctAnswerLabe2)
-                .addGap(36, 36, 36)
-                .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(trueToggleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(falseToggleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         defaultBooleanLabel1Layout.setVerticalGroup(
             defaultBooleanLabel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(defaultBooleanLabel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(33, 33, 33)
                 .addGroup(defaultBooleanLabel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(correctAnswerLabe2)
-                    .addComponent(jToggleButton4))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(trueToggleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(falseToggleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
+
+        correctAnswerLabe2.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
+        correctAnswerLabe2.setForeground(new java.awt.Color(255, 242, 248));
+        correctAnswerLabe2.setText("Answer:");
 
         javax.swing.GroupLayout trueOrFalseFormPanelLayout = new javax.swing.GroupLayout(trueOrFalseFormPanel);
         trueOrFalseFormPanel.setLayout(trueOrFalseFormPanelLayout);
@@ -232,20 +235,20 @@ public class QuizQuestionForm extends javax.swing.JPanel {
             trueOrFalseFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(trueOrFalseFormPanelLayout.createSequentialGroup()
                 .addComponent(defaultBooleanLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 245, Short.MAX_VALUE))
             .addGroup(trueOrFalseFormPanelLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jToggleButton3)
+                .addGap(28, 28, 28)
+                .addComponent(correctAnswerLabe2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         trueOrFalseFormPanelLayout.setVerticalGroup(
             trueOrFalseFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(trueOrFalseFormPanelLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jToggleButton3)
+                .addGap(24, 24, 24)
+                .addComponent(correctAnswerLabe2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(defaultBooleanLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         bottonFormPanelContainer.add(trueOrFalseFormPanel, "boolean");
@@ -253,13 +256,13 @@ public class QuizQuestionForm extends javax.swing.JPanel {
         identificationFormPanel.setBackground(new java.awt.Color(106, 49, 144));
         identificationFormPanel.setPreferredSize(new java.awt.Dimension(600, 218));
 
-        identificationAnswer.setBackground(new java.awt.Color(153, 153, 153));
-        identificationAnswer.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 25)); // NOI18N
-        identificationAnswer.setForeground(new java.awt.Color(255, 255, 255));
-        identificationAnswer.setText("Correct Answer");
-        identificationAnswer.addActionListener(new java.awt.event.ActionListener() {
+        identificationAnswerTxtField.setBackground(new java.awt.Color(153, 153, 153));
+        identificationAnswerTxtField.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 25)); // NOI18N
+        identificationAnswerTxtField.setForeground(new java.awt.Color(255, 255, 255));
+        identificationAnswerTxtField.setText("Correct Answer");
+        identificationAnswerTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                identificationAnswerActionPerformed(evt);
+                identificationAnswerTxtFieldActionPerformed(evt);
             }
         });
 
@@ -268,15 +271,15 @@ public class QuizQuestionForm extends javax.swing.JPanel {
         identificationFormPanelLayout.setHorizontalGroup(
             identificationFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, identificationFormPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(identificationAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addComponent(identificationAnswerTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62))
         );
         identificationFormPanelLayout.setVerticalGroup(
             identificationFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(identificationFormPanelLayout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addComponent(identificationAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(identificationAnswerTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -334,20 +337,23 @@ public class QuizQuestionForm extends javax.swing.JPanel {
     }//GEN-LAST:event_deleteBtnActionPerformed
 
     private void qTypeInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qTypeInputActionPerformed
-        JComboBox btn = (JComboBox) evt.getSource();
         CardLayout card = (CardLayout) bottonFormPanelContainer.getLayout();
-        String qType = ((String) btn.getSelectedItem()).toLowerCase();
-        switch (qType) {
+        card.show(bottonFormPanelContainer, getType());
+    }//GEN-LAST:event_qTypeInputActionPerformed
+
+    private void identificationAnswerTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_identificationAnswerTxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_identificationAnswerTxtFieldActionPerformed
+
+    protected String getType() {
+        String qType = "identification";
+        switch (((String) qTypeInput.getSelectedItem()).toLowerCase()) {
             case "multiple choice" -> qType = "multiple";
             case "true or false" -> qType = "boolean";
         }
-        card.show(bottonFormPanelContainer, qType);
-    }//GEN-LAST:event_qTypeInputActionPerformed
-
-    private void identificationAnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_identificationAnswerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_identificationAnswerActionPerformed
-
+        return qType;
+    }
+    
     protected void setIndex(int i) {
         index = i;
         indexLabel.setText(i + 1 + "");
@@ -356,29 +362,49 @@ public class QuizQuestionForm extends javax.swing.JPanel {
     protected int getIndex() {
         return index;
     }
-
+    
+    protected Question getQuestion() {
+        String question = questionTextField.getText();
+        switch (getType()) {
+            case "multiple" -> {
+                String[] wrongChoices = {
+                    wrongChoiceTextField1.getText(),
+                    wrongChoiceTextField2.getText(),
+                    wrongChoiceTextField1.getText()
+                };
+                return new Question(question, multipleCorrectAnswer.getText(), wrongChoices);
+            } case "boolean" -> {
+                return new Question(question, trueToggleBtn.isSelected());
+            } default -> {
+                return new Question(question, identificationAnswerTxtField.getText());
+            }
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JPanel barrier;
     protected javax.swing.JPanel bottonFormPanelContainer;
-    protected javax.swing.JTextField correctAnswer1;
+    protected javax.swing.ButtonGroup buttonGroup1;
     protected javax.swing.JLabel correctAnswerLabe2;
     protected javax.swing.JPanel defaultBooleanLabel1;
     protected javax.swing.JButton deleteBtn;
+    protected javax.swing.JToggleButton falseToggleBtn;
     protected javax.swing.JPanel formPanel;
-    protected javax.swing.JTextField identificationAnswer;
+    protected javax.swing.JTextField identificationAnswerTxtField;
     protected javax.swing.JPanel identificationFormPanel;
     protected javax.swing.JLabel indexLabel;
-    protected javax.swing.JToggleButton jToggleButton3;
-    protected javax.swing.JToggleButton jToggleButton4;
     protected javax.swing.JPanel multipleChoiceFormPanel;
+    protected javax.swing.JTextField multipleCorrectAnswer;
     protected javax.swing.JComboBox<String> qTypeInput;
-    protected javax.swing.JTextField questionTextField3;
+    protected javax.swing.JTextField questionTextField;
     protected javax.swing.JLabel titleLabel;
     protected javax.swing.JPanel trueOrFalseFormPanel;
+    protected javax.swing.JToggleButton trueToggleBtn;
     protected javax.swing.JPanel upperFormPanel;
+    protected javax.swing.JTextField wrongChoiceTextField1;
+    protected javax.swing.JTextField wrongChoiceTextField2;
     protected javax.swing.JTextField wrongChoiceTextField3;
-    protected javax.swing.JTextField wrongChoiceTextField5;
-    protected javax.swing.JTextField wrongChoiceTextField6;
     // End of variables declaration//GEN-END:variables
     private int index;
+    protected String answer;
 }

@@ -4,13 +4,17 @@
  */
 package com.kierjohn.testgui;
 
-import java.awt.event.ActionListener;
+import java.awt.Component;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import org.json.JSONObject;
 
 /**
  *
@@ -23,6 +27,10 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
      */
     public ReviewerEditorPanel() {
         initComponents();
+        quizzes = new ArrayList<Quiz>();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("JSON file", "json"));
+        fileChooser.setDialogTitle("Save reviewer to JSON");
+        fileChooser.setAcceptAllFileFilterUsed(false);
     }
 
     /**
@@ -42,6 +50,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         qCountLiteralLabel = new javax.swing.JLabel();
         jScrollPane = new javax.swing.JScrollPane();
         questionFormContainerPanel = new javax.swing.JPanel();
+        reviewerTitleTextField = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(106, 49, 144));
         setPreferredSize(new java.awt.Dimension(1280, 645));
@@ -162,6 +171,13 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         questionFormContainerPanel.setLayout(new java.awt.GridLayout(0, 1, 8, 0));
         jScrollPane.setViewportView(questionFormContainerPanel);
 
+        reviewerTitleTextField.setBackground(new java.awt.Color(106, 49, 144));
+        reviewerTitleTextField.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 25)); // NOI18N
+        reviewerTitleTextField.setForeground(new java.awt.Color(204, 204, 204));
+        reviewerTitleTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        reviewerTitleTextField.setText("Reviewer Name");
+        reviewerTitleTextField.setBorder(null);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -170,6 +186,10 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
                 .addContainerGap(913, Short.MAX_VALUE)
                 .addComponent(controlsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(205, 205, 205))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(476, 476, 476)
+                .addComponent(reviewerTitleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(292, 292, 292)
@@ -179,11 +199,15 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(23, 23, 23)
+                .addComponent(reviewerTitleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(controlsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(356, Short.MAX_VALUE))
+                .addContainerGap(350, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGap(0, 50, Short.MAX_VALUE)
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -197,33 +221,45 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
     private void addQuestionForm1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addQuestionForm1ActionPerformed
         int index = formCount();
         QuizQuestionForm qForm = new QuizQuestionForm(questionFormContainerPanel);
-        
+
         qForm.deleteBtn.addActionListener((java.awt.event.ActionEvent evt1) -> {
             deletedFormActionPerformed(evt1);
         });
-        
+
         qForm.setIndex(index);
         questionFormContainerPanel.add(qForm);
         questionFormContainerPanel.revalidate();
         questionFormContainerPanel.repaint();
-        questionFormCount.setText(index + "");
+        questionFormCount.setText(index + 1 + "");
     }//GEN-LAST:event_addQuestionForm1ActionPerformed
 
     private int formCount() {
         return questionFormContainerPanel.getComponentCount();
     }
-    
+
     private void saveReviewerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveReviewerBtnActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
-            try {
-                file.createNewFile();
-            } catch (IOException ex) {
-                Logger.getLogger(ReviewerEditorPanel.class.getName()).log(Level.SEVERE, null, ex);
+        fileChooser.setCurrentDirectory(MainFrame.reviewerSavesDir);
+        if (questionFormContainerPanel.getComponentCount() != 0) {
+            Quiz quiz = new Quiz(reviewerTitleTextField.getText());
+            File file = new File(reviewerTitleTextField.getText() + ".json");
+            fileChooser.setSelectedFile(file);
+            for (Component comp : questionFormContainerPanel.getComponents()) {
+                QuizQuestionForm qForm = (QuizQuestionForm) comp;
+                quiz.addQuestion(qForm.getQuestion());
             }
+            if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+                try {
+                    file = fileChooser.getSelectedFile();
+                    file.createNewFile();
+                    FileWriter f = new FileWriter(file);
+                    f.write(APIHandler.quizToJson(quiz).toString());
+                    f.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(ReviewerEditorPanel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            quizzes.add(quiz);
         }
-        quiz.outputToFile(new java.io.File("output/a.json"));
     }//GEN-LAST:event_saveReviewerBtnActionPerformed
 
     protected void deletedFormActionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,9 +268,10 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         int delIndex = deletedForm.getIndex();
         for (int i = delIndex; i < formCount(); i++) {
             QuizQuestionForm qForm = (QuizQuestionForm) questionFormContainerPanel.getComponent(i);
-            qForm.setIndex(i-1);
+            qForm.setIndex(i - 1);
         }
     }
+
     private void questionFormContainerPanelComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_questionFormContainerPanelComponentRemoved
 
     }//GEN-LAST:event_questionFormContainerPanelComponentRemoved
@@ -248,8 +285,9 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
     private javax.swing.JLabel qCountLiteralLabel;
     private javax.swing.JPanel questionFormContainerPanel;
     private javax.swing.JLabel questionFormCount;
+    private javax.swing.JTextField reviewerTitleTextField;
     private javax.swing.JButton saveReviewerBtn;
     // End of variables declaration//GEN-END:variables
-    private Quiz quiz;
-    private int lastIndex;
+    protected ArrayList<Quiz> quizzes;
+    private JFileChooser fileChooser = new JFileChooser();
 }
