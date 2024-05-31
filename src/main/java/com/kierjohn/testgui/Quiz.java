@@ -4,7 +4,6 @@
  */
 package com.kierjohn.testgui;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -17,7 +16,7 @@ public class Quiz {
     private ArrayList<Question> questions;
     private ArrayList<String> categories;
     private String name;
-    
+
     protected Quiz() {
         questions = new ArrayList<>();
         categories = new ArrayList<>();
@@ -47,12 +46,12 @@ public class Quiz {
 
     protected void setName(String name) {
         this.name = name;
-    } 
-    
+    }
+
     protected String getName() {
         return name;
     }
-    
+
     protected void addQuestion(Question q) {
         questions.add(q);
     }
@@ -68,4 +67,5 @@ public class Quiz {
     protected Question[] getQuestions() {
         return questions.toArray(new Question[questions.size()]);
     }
+
 }

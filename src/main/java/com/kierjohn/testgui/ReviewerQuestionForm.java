@@ -4,22 +4,46 @@
  */
 package com.kierjohn.testgui;
 
-import java.awt.CardLayout;
-import java.awt.Color;
+import java.awt.*;
 
 /**
  *
  * @author LENOVO
  */
-public class QuizQuestionForm extends javax.swing.JPanel {
+public class ReviewerQuestionForm extends javax.swing.JPanel {
     private final java.awt.Container parent;
     /**
      * Creates new form QuizQuestionForm
-     * @param parentContainer
+     * @param parent
      */
-    public QuizQuestionForm(java.awt.Container parentContainer) {
+    public ReviewerQuestionForm(Container parent) {
         initComponents();
-        parent = parentContainer;
+        this.parent = parent;
+    }
+    
+    public ReviewerQuestionForm(Container parent, Question q) {
+        this(parent);
+        questionTextField.setText(q.getQuestion());
+        int index = 0;
+        switch (q.getType()) {
+            case "multiple" -> {
+                multipleCorrectAnswer.setText(q.getAnswer());
+                wrongChoiceTextField1.setText(q.getWrongChoiceAtIndex(0));
+                wrongChoiceTextField2.setText(q.getWrongChoiceAtIndex(1));
+                wrongChoiceTextField3.setText(q.getWrongChoiceAtIndex(2));
+                index = 0;
+            }
+            case "boolean" -> {
+                (q.getAnswer().equals("true") ? trueToggleBtn : falseToggleBtn).setSelected(true);
+                index = 1;
+            } case "identification" -> {
+                identificationAnswerTxtField.setText(q.getAnswer());
+                index = 2;
+            }
+        }
+        qTypeInput.setSelectedIndex(index);
+        CardLayout card = (CardLayout) bottonFormPanelContainer.getLayout();
+        card.show(bottonFormPanelContainer, q.getType());
     }
 
     /**
@@ -65,7 +89,7 @@ public class QuizQuestionForm extends javax.swing.JPanel {
         upperFormPanel.setBackground(new java.awt.Color(106, 49, 144));
 
         qTypeInput.setBackground(new Color(255, 255, 255));
-        qTypeInput.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        qTypeInput.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
         qTypeInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Multiple Choice", "True or False", "Identification" }));
         qTypeInput.setToolTipText("");
         qTypeInput.setName("qDiff"); // NOI18N
@@ -76,12 +100,12 @@ public class QuizQuestionForm extends javax.swing.JPanel {
         });
 
         questionTextField.setBackground(new java.awt.Color(204, 204, 204));
-        questionTextField.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        questionTextField.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
         questionTextField.setForeground(new java.awt.Color(51, 51, 51));
         questionTextField.setText("Question");
 
         deleteBtn.setBackground(new Color(255, 255, 255));
-        deleteBtn.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        deleteBtn.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
         deleteBtn.setText("Delete");
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,7 +113,7 @@ public class QuizQuestionForm extends javax.swing.JPanel {
             }
         });
 
-        titleLabel.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
+        titleLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 20));
         titleLabel.setForeground(new java.awt.Color(255, 255, 255));
         titleLabel.setText("Question #");
 
@@ -143,19 +167,27 @@ public class QuizQuestionForm extends javax.swing.JPanel {
         multipleChoiceFormPanel.setBackground(new java.awt.Color(106, 49, 144));
         multipleChoiceFormPanel.setPreferredSize(new java.awt.Dimension(600, 218));
 
-        multipleCorrectAnswer.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        multipleCorrectAnswer.setBackground(QuizPanel.CORRECT_COLOR);
+        multipleCorrectAnswer.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
+        multipleCorrectAnswer.setForeground(new java.awt.Color(51, 0, 102));
         multipleCorrectAnswer.setText("Correct Answer");
         multipleCorrectAnswer.setPreferredSize(new java.awt.Dimension(64, 32));
 
-        wrongChoiceTextField1.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        wrongChoiceTextField1.setBackground(QuizPanel.WRONG_COLOR);
+        wrongChoiceTextField1.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
+        wrongChoiceTextField1.setForeground(new java.awt.Color(255, 255, 153));
         wrongChoiceTextField1.setText("Wrong Choice #1");
         wrongChoiceTextField1.setPreferredSize(new java.awt.Dimension(64, 32));
 
-        wrongChoiceTextField2.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        wrongChoiceTextField2.setBackground(QuizPanel.WRONG_COLOR);
+        wrongChoiceTextField2.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
+        wrongChoiceTextField2.setForeground(new java.awt.Color(255, 255, 153));
         wrongChoiceTextField2.setText("Wrong Choice #2");
         wrongChoiceTextField2.setPreferredSize(new java.awt.Dimension(64, 32));
 
-        wrongChoiceTextField3.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        wrongChoiceTextField3.setBackground(QuizPanel.WRONG_COLOR);
+        wrongChoiceTextField3.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
+        wrongChoiceTextField3.setForeground(new java.awt.Color(255, 255, 153));
         wrongChoiceTextField3.setText("Wrong Choice #3");
         wrongChoiceTextField3.setPreferredSize(new java.awt.Dimension(64, 32));
 

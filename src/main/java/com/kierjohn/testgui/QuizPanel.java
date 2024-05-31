@@ -4,21 +4,12 @@
  */
 package com.kierjohn.testgui;
 
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Container;
+import java.awt.*;
 import java.util.Random;
-import javax.swing.JButton;
-import javax.swing.Timer;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JComponent;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
+import javax.swing.*;
+import javax.swing.text.*;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -37,18 +28,18 @@ public class QuizPanel extends javax.swing.JPanel {
      */
     public QuizPanel() {
         initComponents();
-        QuizPanel a = this;
-        timer = new Timer(1500, new ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (isFinished = index == currentQuiz.getQCount()) {
-                    displayCard(a, "quiz finished card");
-                } else {
-                    currentQuestion = currentQuiz.getQuestionAtIndex(index);
-                    displayCurrentQuestion();
+        timer = new Timer(1500, (java.awt.event.ActionEvent evt) -> {
+            if (isFinished = index == currentQuiz.getQCount()) {
+                displayFinish();
+            } else {
+                if (choiceIsCorrect()) {
+                    currentScore += 10;
+                    correctAnswerCount++;
                 }
-                resetInputComponents();
+                currentQuestion = currentQuiz.getQuestionAtIndex(index);
+                displayCurrentQuestion();
             }
+            resetInputComponents();
         });
         timer.setRepeats(false);
     }
@@ -67,6 +58,15 @@ public class QuizPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         quizGamePanel = new javax.swing.JPanel();
+        qPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        questionText = new javax.swing.JTextPane();
+        categoryLabel = new javax.swing.JLabel();
+        difficultyLabel = new javax.swing.JLabel();
+        scoreLiteralLabel = new javax.swing.JLabel();
+        scoreLabel = new javax.swing.JLabel();
+        questionsLiteralLabel = new javax.swing.JLabel();
+        questionCounterLabel = new javax.swing.JLabel();
         inputPanel = new javax.swing.JPanel();
         multipleChoicePanel = new javax.swing.JPanel();
         choiceBtn1 = new javax.swing.JButton();
@@ -78,22 +78,14 @@ public class QuizPanel extends javax.swing.JPanel {
         falseBtn = new javax.swing.JButton();
         identificationPanel = new javax.swing.JPanel();
         identificationInputTxtFld = new javax.swing.JTextField();
-        qPanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        questionText = new javax.swing.JTextPane();
-        categoryLabel = new javax.swing.JLabel();
-        difficultyLabel = new javax.swing.JLabel();
-        scoreLiteralLabel = new javax.swing.JLabel();
-        scoreLabel = new javax.swing.JLabel();
-        questionsLiteralLabel = new javax.swing.JLabel();
-        questionCounterLabel = new javax.swing.JLabel();
         quizFinishedPanel = new javax.swing.JPanel();
-        questionLabel1 = new javax.swing.JLabel();
-        resultScoreCountLabel = new javax.swing.JLabel();
+        quizResultLabel = new javax.swing.JLabel();
         jLabel111 = new javax.swing.JLabel();
         jLabel112 = new javax.swing.JLabel();
+        resultScoreCountLabel = new javax.swing.JLabel();
         resultCorrectAnswersLabel = new javax.swing.JLabel();
         playGameBtn1 = new javax.swing.JButton();
+        saveAsReviewerBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(106, 49, 144));
         setPreferredSize(new java.awt.Dimension(1280, 620));
@@ -101,6 +93,118 @@ public class QuizPanel extends javax.swing.JPanel {
 
         quizGamePanel.setBackground(new java.awt.Color(106, 49, 144));
         quizGamePanel.setPreferredSize(new java.awt.Dimension(1280, 620));
+
+        qPanel.setBackground(new java.awt.Color(29, 20, 101));
+
+        jScrollPane2.setBorder(null);
+        jScrollPane2.setFocusable(false);
+        jScrollPane2.setRequestFocusEnabled(false);
+        jScrollPane2.setVerifyInputWhenFocusTarget(false);
+
+        questionText.setEditable(false);
+        questionText.setBackground(new java.awt.Color(29, 20, 101));
+        questionText.setBorder(null);
+        questionText.setFont(GlobalUtils.getFont(1, 32)
+        );
+        questionText.setForeground(new java.awt.Color(249, 193, 5));
+        questionText.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        questionText.setFocusCycleRoot(false);
+        questionText.setFocusable(false);
+        questionText.setRequestFocusEnabled(false);
+        questionText.setVerifyInputWhenFocusTarget(false);
+        StyledDocument doc = questionText.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, doc.getLength(), center, false);
+        jScrollPane2.setViewportView(questionText);
+
+        categoryLabel.setBackground(new java.awt.Color(0, 51, 51));
+        categoryLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 16)
+        );
+        categoryLabel.setForeground(new java.awt.Color(255, 255, 255));
+        categoryLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        categoryLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        categoryLabel.setPreferredSize(new java.awt.Dimension(1, 16));
+
+        difficultyLabel.setBackground(new java.awt.Color(0, 51, 51));
+        difficultyLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 16)
+        );
+        difficultyLabel.setForeground(new java.awt.Color(255, 255, 255));
+        difficultyLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        difficultyLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        difficultyLabel.setPreferredSize(new java.awt.Dimension(1, 16));
+
+        scoreLiteralLabel.setBackground(new java.awt.Color(0, 51, 51));
+        scoreLiteralLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 20)
+        );
+        scoreLiteralLabel.setForeground(new java.awt.Color(255, 255, 255));
+        scoreLiteralLabel.setText("Score");
+
+        scoreLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 20)
+        );
+        scoreLabel.setForeground(new java.awt.Color(255, 255, 255));
+        scoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        scoreLabel.setText("0");
+
+        questionsLiteralLabel.setBackground(new java.awt.Color(0, 51, 51));
+        questionsLiteralLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 20)
+        );
+        questionsLiteralLabel.setForeground(new java.awt.Color(255, 255, 255));
+        questionsLiteralLabel.setText("Questions");
+        questionsLiteralLabel.setFocusable(false);
+
+        questionCounterLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 20)
+        );
+        questionCounterLabel.setForeground(new java.awt.Color(255, 255, 255));
+        questionCounterLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+
+        addQPanelButtonActionPerformed();
+
+        javax.swing.GroupLayout qPanelLayout = new javax.swing.GroupLayout(qPanel);
+        qPanel.setLayout(qPanelLayout);
+        qPanelLayout.setHorizontalGroup(
+            qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(qPanelLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(qPanelLayout.createSequentialGroup()
+                        .addGroup(qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(categoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(difficultyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(966, 966, 966)
+                        .addGroup(qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(questionCounterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(questionsLiteralLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(qPanelLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(scoreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(scoreLiteralLabel))))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        qPanelLayout.setVerticalGroup(
+            qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(qPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(qPanelLayout.createSequentialGroup()
+                        .addComponent(categoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(difficultyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(qPanelLayout.createSequentialGroup()
+                        .addGroup(qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(questionsLiteralLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(scoreLiteralLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addGroup(qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(scoreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                            .addComponent(questionCounterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
 
         inputPanel.setBackground(new java.awt.Color(51, 51, 51));
         inputPanel.setForeground(new java.awt.Color(255, 255, 255));
@@ -116,8 +220,9 @@ public class QuizPanel extends javax.swing.JPanel {
         multipleChoicePanel.setPreferredSize(new java.awt.Dimension(964, 300));
         multipleChoicePanel.setLayout(new java.awt.GridLayout(2, 2, 10, 10));
 
-        choiceBtn1.setBackground(colorDefault);
-        choiceBtn1.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 25)); // NOI18N
+        choiceBtn1.setBackground(DEFAULT_COLOR);
+        choiceBtn1.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        );
         choiceBtn1.setForeground(new java.awt.Color(29, 20, 101));
         choiceBtn1.setBorder(null);
         choiceBtn1.setBorderPainted(false);
@@ -131,8 +236,9 @@ public class QuizPanel extends javax.swing.JPanel {
         choiceBtn1.setVerifyInputWhenFocusTarget(false);
         multipleChoicePanel.add(choiceBtn1);
 
-        choiceBtn2.setBackground(colorDefault);
-        choiceBtn2.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 25)); // NOI18N
+        choiceBtn2.setBackground(DEFAULT_COLOR);
+        choiceBtn2.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        );
         choiceBtn2.setForeground(new java.awt.Color(29, 20, 101));
         choiceBtn2.setBorder(null);
         choiceBtn2.setBorderPainted(false);
@@ -146,8 +252,9 @@ public class QuizPanel extends javax.swing.JPanel {
         choiceBtn2.setVerifyInputWhenFocusTarget(false);
         multipleChoicePanel.add(choiceBtn2);
 
-        choiceBtn3.setBackground(colorDefault);
-        choiceBtn3.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 25)); // NOI18N
+        choiceBtn3.setBackground(DEFAULT_COLOR);
+        choiceBtn3.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        );
         choiceBtn3.setForeground(new java.awt.Color(29, 20, 101));
         choiceBtn3.setBorder(null);
         choiceBtn3.setBorderPainted(false);
@@ -162,8 +269,9 @@ public class QuizPanel extends javax.swing.JPanel {
         choiceBtn3.setVerifyInputWhenFocusTarget(false);
         multipleChoicePanel.add(choiceBtn3);
 
-        choiceBtn4.setBackground(colorDefault);
-        choiceBtn4.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 25)); // NOI18N
+        choiceBtn4.setBackground(DEFAULT_COLOR);
+        choiceBtn4.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        );
         choiceBtn4.setForeground(new java.awt.Color(29, 20, 101));
         choiceBtn4.setBorder(null);
         choiceBtn4.setBorderPainted(false);
@@ -186,8 +294,9 @@ public class QuizPanel extends javax.swing.JPanel {
         trueOrFalsePanel.setPreferredSize(new java.awt.Dimension(1280, 720));
         trueOrFalsePanel.setLayout(new java.awt.GridLayout(0, 2, 5, 0));
 
-        trueBtn.setBackground(colorDefault);
-        trueBtn.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 50)); // NOI18N
+        trueBtn.setBackground(DEFAULT_COLOR);
+        trueBtn.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 50)
+        );
         trueBtn.setForeground(new java.awt.Color(29, 20, 101));
         trueBtn.setText("true");
         trueBtn.setBorder(null);
@@ -201,8 +310,9 @@ public class QuizPanel extends javax.swing.JPanel {
         trueBtn.setVerifyInputWhenFocusTarget(false);
         trueOrFalsePanel.add(trueBtn);
 
-        falseBtn.setBackground(colorDefault);
-        falseBtn.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 50)); // NOI18N
+        falseBtn.setBackground(DEFAULT_COLOR);
+        falseBtn.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 50)
+        );
         falseBtn.setForeground(new java.awt.Color(29, 20, 101));
         falseBtn.setText("false");
         falseBtn.setBorder(null);
@@ -223,7 +333,8 @@ public class QuizPanel extends javax.swing.JPanel {
         identificationPanel.setForeground(new java.awt.Color(255, 255, 255));
         identificationPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        identificationInputTxtFld.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 32)); // NOI18N
+        identificationInputTxtFld.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 32)
+        );
         identificationInputTxtFld.setForeground(new java.awt.Color(29, 20, 101));
         identificationInputTxtFld.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
@@ -246,112 +357,6 @@ public class QuizPanel extends javax.swing.JPanel {
 
         inputPanel.add(identificationPanel, "identification");
 
-        qPanel.setBackground(new java.awt.Color(29, 20, 101));
-
-        jScrollPane2.setBorder(null);
-        jScrollPane2.setFocusable(false);
-        jScrollPane2.setRequestFocusEnabled(false);
-        jScrollPane2.setVerifyInputWhenFocusTarget(false);
-
-        questionText.setEditable(false);
-        questionText.setBackground(new java.awt.Color(29, 20, 101));
-        questionText.setBorder(null);
-        questionText.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 32)); // NOI18N
-        questionText.setForeground(new java.awt.Color(249, 193, 5));
-        questionText.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        questionText.setFocusCycleRoot(false);
-        questionText.setFocusable(false);
-        questionText.setRequestFocusEnabled(false);
-        questionText.setVerifyInputWhenFocusTarget(false);
-        StyledDocument doc = questionText.getStyledDocument();
-        SimpleAttributeSet center = new SimpleAttributeSet();
-        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-        doc.setParagraphAttributes(0, doc.getLength(), center, false);
-        jScrollPane2.setViewportView(questionText);
-
-        categoryLabel.setBackground(new java.awt.Color(0, 51, 51));
-        categoryLabel.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 12)); // NOI18N
-        categoryLabel.setForeground(new java.awt.Color(255, 255, 255));
-        categoryLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        categoryLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        categoryLabel.setPreferredSize(new java.awt.Dimension(1, 16));
-
-        difficultyLabel.setBackground(new java.awt.Color(0, 51, 51));
-        difficultyLabel.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 12)); // NOI18N
-        difficultyLabel.setForeground(new java.awt.Color(255, 255, 255));
-        difficultyLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        difficultyLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        difficultyLabel.setPreferredSize(new java.awt.Dimension(1, 16));
-
-        scoreLiteralLabel.setBackground(new java.awt.Color(0, 51, 51));
-        scoreLiteralLabel.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
-        scoreLiteralLabel.setForeground(new java.awt.Color(255, 255, 255));
-        scoreLiteralLabel.setText("Score");
-
-        scoreLabel.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
-        scoreLabel.setForeground(new java.awt.Color(255, 255, 255));
-        scoreLabel.setText("0");
-
-        questionsLiteralLabel.setBackground(new java.awt.Color(0, 51, 51));
-        questionsLiteralLabel.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
-        questionsLiteralLabel.setForeground(new java.awt.Color(255, 255, 255));
-        questionsLiteralLabel.setText("Questions");
-        questionsLiteralLabel.setFocusable(false);
-
-        questionCounterLabel.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
-        questionCounterLabel.setForeground(new java.awt.Color(255, 255, 255));
-
-        addQPanelButtonActionPerformed();
-
-        javax.swing.GroupLayout qPanelLayout = new javax.swing.GroupLayout(qPanel);
-        qPanel.setLayout(qPanelLayout);
-        qPanelLayout.setHorizontalGroup(
-            qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(qPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(qPanelLayout.createSequentialGroup()
-                        .addGroup(qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(categoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(difficultyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(966, 966, 966)
-                        .addGroup(qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(scoreLabel)
-                            .addGroup(qPanelLayout.createSequentialGroup()
-                                .addGroup(qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(questionCounterLabel)
-                                    .addComponent(questionsLiteralLabel))
-                                .addGap(18, 18, 18)
-                                .addComponent(scoreLiteralLabel)))))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-        qPanelLayout.setVerticalGroup(
-            qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(qPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(qPanelLayout.createSequentialGroup()
-                        .addComponent(categoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(difficultyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))
-                    .addGroup(qPanelLayout.createSequentialGroup()
-                        .addGroup(qPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(qPanelLayout.createSequentialGroup()
-                                .addComponent(questionsLiteralLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(qPanelLayout.createSequentialGroup()
-                                .addComponent(scoreLiteralLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(6, 6, 6)))
-                        .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(questionCounterLabel)
-                        .addGap(38, 38, 38)))
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout quizGamePanelLayout = new javax.swing.GroupLayout(quizGamePanel);
         quizGamePanel.setLayout(quizGamePanelLayout);
         quizGamePanelLayout.setHorizontalGroup(
@@ -366,21 +371,20 @@ public class QuizPanel extends javax.swing.JPanel {
                 .addGroup(quizGamePanelLayout.createSequentialGroup()
                     .addGap(33, 33, 33)
                     .addComponent(qPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(33, Short.MAX_VALUE)))
         );
         quizGamePanelLayout.setVerticalGroup(
             quizGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 620, Short.MAX_VALUE)
             .addGroup(quizGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(quizGamePanelLayout.createSequentialGroup()
-                    .addGap(330, 330, 330)
-                    .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(15, Short.MAX_VALUE)))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, quizGamePanelLayout.createSequentialGroup()
+                    .addContainerGap(323, Short.MAX_VALUE)
+                    .addComponent(inputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(14, 14, 14)))
             .addGroup(quizGamePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(quizGamePanelLayout.createSequentialGroup()
-                    .addContainerGap()
                     .addComponent(qPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(305, Short.MAX_VALUE)))
+                    .addGap(0, 313, Short.MAX_VALUE)))
         );
 
         add(quizGamePanel, "quiz game card");
@@ -388,29 +392,39 @@ public class QuizPanel extends javax.swing.JPanel {
         quizFinishedPanel.setBackground(new java.awt.Color(106, 49, 144));
         quizFinishedPanel.setPreferredSize(new java.awt.Dimension(1280, 645));
 
-        questionLabel1.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 50)); // NOI18N
-        questionLabel1.setForeground(new java.awt.Color(240, 240, 240));
-        questionLabel1.setText("Quiz Result:");
-
-        resultScoreCountLabel.setBackground(new java.awt.Color(0, 51, 51));
-        resultScoreCountLabel.setFont(new java.awt.Font("Atkinson Hyperlegible", 1, 24)); // NOI18N
-        resultScoreCountLabel.setForeground(new java.awt.Color(255, 255, 255));
+        quizResultLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 50)
+        );
+        quizResultLabel.setForeground(new java.awt.Color(240, 240, 240));
+        quizResultLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        quizResultLabel.setText("Result:");
 
         jLabel111.setBackground(new java.awt.Color(0, 51, 51));
-        jLabel111.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 25)); // NOI18N
+        jLabel111.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        );
         jLabel111.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel111.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel111.setText("Total Score:");
 
         jLabel112.setBackground(new java.awt.Color(0, 51, 51));
-        jLabel112.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 25)); // NOI18N
+        jLabel112.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        );
         jLabel112.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel112.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel112.setText("Correct Answers:");
 
+        resultScoreCountLabel.setBackground(new java.awt.Color(0, 51, 51));
+        resultScoreCountLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        );
+        resultScoreCountLabel.setForeground(new java.awt.Color(255, 255, 255));
+
         resultCorrectAnswersLabel.setBackground(new java.awt.Color(0, 51, 51));
-        resultCorrectAnswersLabel.setFont(new java.awt.Font("Atkinson Hyperlegible", 1, 24)); // NOI18N
+        resultCorrectAnswersLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        );
         resultCorrectAnswersLabel.setForeground(new java.awt.Color(255, 255, 255));
 
-        playGameBtn1.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 25)); // NOI18N
+        playGameBtn1.setBackground(GlobalUtils.DEFAULT_BUTTON_COLOR);
+        playGameBtn1.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        );
         playGameBtn1.setText("New Game");
         playGameBtn1.setName("playQuizBtn"); // NOI18N
         playGameBtn1.setPreferredSize(new java.awt.Dimension(128, 32));
@@ -420,41 +434,48 @@ public class QuizPanel extends javax.swing.JPanel {
             }
         });
 
+        saveAsReviewerBtn.setBackground(GlobalUtils.DEFAULT_BUTTON_COLOR);
+        saveAsReviewerBtn.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 16));
+        saveAsReviewerBtn.setText("Save As Reviewer");
+        saveAsReviewerBtn.setName("playQuizBtn"); // NOI18N
+        saveAsReviewerBtn.setPreferredSize(new java.awt.Dimension(128, 32));
+        saveAsReviewerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveAsReviewerBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout quizFinishedPanelLayout = new javax.swing.GroupLayout(quizFinishedPanel);
         quizFinishedPanel.setLayout(quizFinishedPanelLayout);
         quizFinishedPanelLayout.setHorizontalGroup(
             quizFinishedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(quizFinishedPanelLayout.createSequentialGroup()
-                .addGroup(quizFinishedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(quizFinishedPanelLayout.createSequentialGroup()
-                        .addGap(346, 346, 346)
-                        .addGroup(quizFinishedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(quizFinishedPanelLayout.createSequentialGroup()
-                                .addGroup(quizFinishedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, quizFinishedPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel112)
-                                        .addGap(18, 18, 18))
-                                    .addGroup(quizFinishedPanelLayout.createSequentialGroup()
-                                        .addGap(55, 55, 55)
-                                        .addComponent(jLabel111)
-                                        .addGap(28, 28, 28)))
-                                .addGroup(quizFinishedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(resultCorrectAnswersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(resultScoreCountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(quizFinishedPanelLayout.createSequentialGroup()
-                                .addGap(130, 130, 130)
-                                .addComponent(questionLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(quizFinishedPanelLayout.createSequentialGroup()
-                        .addGap(541, 541, 541)
-                        .addComponent(playGameBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(476, 476, 476)
+                .addComponent(quizResultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(478, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, quizFinishedPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(quizFinishedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(saveAsReviewerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(playGameBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(543, 543, 543))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, quizFinishedPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(quizFinishedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel112)
+                    .addComponent(jLabel111))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(quizFinishedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(resultScoreCountLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(resultCorrectAnswersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(429, 429, 429))
         );
         quizFinishedPanelLayout.setVerticalGroup(
             quizFinishedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(quizFinishedPanelLayout.createSequentialGroup()
                 .addGap(89, 89, 89)
-                .addComponent(questionLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
+                .addComponent(quizResultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
                 .addGroup(quizFinishedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(resultCorrectAnswersLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel112, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -462,9 +483,11 @@ public class QuizPanel extends javax.swing.JPanel {
                 .addGroup(quizFinishedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel111)
                     .addComponent(resultScoreCountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(80, 80, 80)
+                .addGap(77, 77, 77)
                 .addComponent(playGameBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(saveAsReviewerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         add(quizFinishedPanel, "quiz finished card");
@@ -474,6 +497,13 @@ public class QuizPanel extends javax.swing.JPanel {
     private void playGameBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playGameBtn1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_playGameBtn1ActionPerformed
+
+    private void saveAsReviewerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsReviewerBtnActionPerformed
+        String fileName = "Reviewer " + DateTimeFormatter.ofPattern("uuuu-MM-dd HH-mm-ss").format(LocalDateTime.now());
+        currentQuiz.setName(fileName);
+        GlobalUtils.writeQuizToFile(currentQuiz, fileName);
+        GlobalUtils.addElementToModel(fileName);
+    }//GEN-LAST:event_saveAsReviewerBtnActionPerformed
 
 //    // adding custom button event handler should be ran BEFORE adding own event handlers
 //    protected void addActionListenerToInput(java.awt.event.ActionListener evtl) {
@@ -494,21 +524,24 @@ public class QuizPanel extends javax.swing.JPanel {
         });
     }
 
-    protected void startQuiz(Quiz quiz) {
+    protected void startQuiz(Quiz quiz, String type) {
         displayCard(this, "quiz game card");
+        saveAsReviewerBtn.setVisible(type.equals("api"));
         currentQuiz = quiz;
-        index = 0;
+        index = currentScore = 0;
         isFinished = false;
         questionCounterLabel.setText(index + 1 + "/" + currentQuiz.getQCount());
         currentQuestion = currentQuiz.getQuestionAtIndex(index);
         displayCurrentQuestion();
     }
 
+    private void displayFinish() {
+        resultCorrectAnswersLabel.setText(correctAnswerCount + " / " + currentQuiz.getQCount());
+        resultScoreCountLabel.setText(currentScore + "");
+        displayCard(this, "quiz finished card");
+    }
+
     private void choiceButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        if (choiceIsCorrect()) {
-            currentScore += 10;
-            correctAnswerCount++;
-        }
         inputComponent = (JComponent) evt.getSource();
         if (currentQuestion.getType().equals("identification")) {
             currentChoice = identificationInputTxtFld.getText();
@@ -521,11 +554,11 @@ public class QuizPanel extends javax.swing.JPanel {
                 correctChoiceBtn = (currentQuestion.isCorrect("true")) ? trueBtn : falseBtn;
             }
             currentChoice = ((JButton) inputComponent).getText();
-            correctChoiceBtn.setBackground(colorCorrect);
+            correctChoiceBtn.setBackground(CORRECT_COLOR);
         }
-        inputComponent.setBackground((choiceIsCorrect()) ? colorCorrect : colorWrong);
-        index++;
         startTimer();
+        inputComponent.setBackground((choiceIsCorrect()) ? CORRECT_COLOR : WRONG_COLOR);
+        index++;
         scoreLabel.setText(currentScore + "");
     }
 
@@ -538,7 +571,7 @@ public class QuizPanel extends javax.swing.JPanel {
         identificationInputTxtFld.setEnabled(true);
         for (JButton button : getAllButtons()) {
             button.setEnabled(true);
-            button.setBackground(colorDefault);
+            button.setBackground(DEFAULT_COLOR);
         }
     }
 
@@ -608,13 +641,14 @@ public class QuizPanel extends javax.swing.JPanel {
     protected javax.swing.JButton playGameBtn1;
     private javax.swing.JPanel qPanel;
     protected javax.swing.JLabel questionCounterLabel;
-    private javax.swing.JLabel questionLabel1;
     private javax.swing.JTextPane questionText;
     private javax.swing.JLabel questionsLiteralLabel;
     private javax.swing.JPanel quizFinishedPanel;
     private javax.swing.JPanel quizGamePanel;
+    private javax.swing.JLabel quizResultLabel;
     private javax.swing.JLabel resultCorrectAnswersLabel;
     private javax.swing.JLabel resultScoreCountLabel;
+    protected javax.swing.JButton saveAsReviewerBtn;
     protected javax.swing.JLabel scoreLabel;
     private javax.swing.JLabel scoreLiteralLabel;
     private javax.swing.JButton trueBtn;
@@ -622,14 +656,15 @@ public class QuizPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     private JButton correctChoiceBtn;
     private JButton[] inputBtns;
-    private static java.awt.Color colorDefault = new Color(255, 255, 255);
-    private static java.awt.Color colorCorrect = new Color(164, 252, 88);
-    private static java.awt.Color colorWrong = new Color(253, 26, 26);
+    protected static final java.awt.Color DEFAULT_COLOR = new Color(255, 255, 255);
+    protected static final java.awt.Color CORRECT_COLOR = new Color(164, 252, 88);
+    protected static final java.awt.Color WRONG_COLOR = new Color(253, 26, 26);
     private JComponent inputComponent;
     private int currentScore;
     private int correctAnswerCount;
     private Quiz currentQuiz;
     private int index;
     private boolean isFinished = true;
+    private String type;
 
 }

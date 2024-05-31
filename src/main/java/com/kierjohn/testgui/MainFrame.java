@@ -4,17 +4,13 @@
  */
 package com.kierjohn.testgui;
 
-import com.kierjohn.testgui.APIHandler;
 import java.awt.*;
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.*;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.*;
 
 /**
  *
@@ -45,7 +41,6 @@ public class MainFrame extends javax.swing.JFrame {
         gotoQuizGame = new javax.swing.JButton();
         gotoReviewerCreation = new javax.swing.JButton();
         gotoGameSaves = new javax.swing.JButton();
-        gotoReviewers = new javax.swing.JButton();
         gotoExport = new javax.swing.JButton();
         gotoSettings = new javax.swing.JButton();
         gotoAbout = new javax.swing.JButton();
@@ -106,12 +101,15 @@ public class MainFrame extends javax.swing.JFrame {
         mainMenuPanel.setMinimumSize(new java.awt.Dimension(100, 100));
         mainMenuPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        jLabel9.setFont(new java.awt.Font("DejaVu Sans", 1, 75)); // NOI18N
+        jLabel9.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1,75)
+        );
         jLabel9.setForeground(new java.awt.Color(250, 242, 249));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("QUIZZARD");
 
         gotoQuizGame.setBackground(new java.awt.Color(255, 255, 51));
-        gotoQuizGame.setFont(new java.awt.Font("Inter", 1, 32)); // NOI18N
+        gotoQuizGame.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 32)
+        );
         gotoQuizGame.setForeground(new java.awt.Color(102, 0, 102));
         gotoQuizGame.setText("New Game");
         gotoQuizGame.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.gray));
@@ -131,9 +129,10 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         gotoReviewerCreation.setBackground(new java.awt.Color(255, 255, 51));
-        gotoReviewerCreation.setFont(new java.awt.Font("Inter", 1, 32)); // NOI18N
+        gotoReviewerCreation.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 32)
+        );
         gotoReviewerCreation.setForeground(new java.awt.Color(102, 0, 102));
-        gotoReviewerCreation.setText("Create Reviewer");
+        gotoReviewerCreation.setText("Reviewers");
         gotoReviewerCreation.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.gray));
         gotoReviewerCreation.setDefaultCapable(false);
         gotoReviewerCreation.setFocusPainted(false);
@@ -151,7 +150,8 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         gotoGameSaves.setBackground(new java.awt.Color(255, 255, 51));
-        gotoGameSaves.setFont(new java.awt.Font("Inter", 1, 32)); // NOI18N
+        gotoGameSaves.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 32)
+        );
         gotoGameSaves.setForeground(new java.awt.Color(102, 0, 102));
         gotoGameSaves.setText("Game Saves");
         gotoGameSaves.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.gray));
@@ -170,28 +170,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        gotoReviewers.setBackground(new java.awt.Color(255, 255, 51));
-        gotoReviewers.setFont(new java.awt.Font("Inter", 1, 32)); // NOI18N
-        gotoReviewers.setForeground(new java.awt.Color(102, 0, 102));
-        gotoReviewers.setText("View Reviewers");
-        gotoReviewers.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.gray));
-        gotoReviewers.setDefaultCapable(false);
-        gotoReviewers.setFocusPainted(false);
-        gotoReviewers.setFocusable(false);
-        gotoReviewers.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        gotoReviewers.setName("playQuizBtn"); // NOI18N
-        gotoReviewers.setPreferredSize(new java.awt.Dimension(300, 75));
-        gotoReviewers.setRequestFocusEnabled(false);
-        gotoReviewers.setRolloverEnabled(false);
-        gotoReviewers.setVerifyInputWhenFocusTarget(false);
-        gotoReviewers.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gotoReviewersActionPerformed(evt);
-            }
-        });
-
         gotoExport.setBackground(new java.awt.Color(255, 255, 51));
-        gotoExport.setFont(new java.awt.Font("Inter", 1, 32)); // NOI18N
+        gotoExport.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 32)
+        );
         gotoExport.setForeground(new java.awt.Color(102, 0, 102));
         gotoExport.setText("Export Save");
         gotoExport.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.gray));
@@ -211,7 +192,8 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         gotoSettings.setBackground(new java.awt.Color(255, 255, 51));
-        gotoSettings.setFont(new java.awt.Font("Inter", 1, 32)); // NOI18N
+        gotoSettings.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 32)
+        );
         gotoSettings.setForeground(new java.awt.Color(102, 0, 102));
         gotoSettings.setText("Settings");
         gotoSettings.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.gray));
@@ -231,7 +213,8 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         gotoAbout.setBackground(new java.awt.Color(255, 255, 51));
-        gotoAbout.setFont(new java.awt.Font("Inter", 1, 32)); // NOI18N
+        gotoAbout.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 32)
+        );
         gotoAbout.setForeground(new java.awt.Color(102, 0, 102));
         gotoAbout.setText("About the Game");
         gotoAbout.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.gray));
@@ -259,7 +242,13 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(mainMenuPanelLayout.createSequentialGroup()
                 .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainMenuPanelLayout.createSequentialGroup()
-                        .addGap(309, 309, 309)
+                        .addGap(568, 568, 568)
+                        .addComponent(jLabel3))
+                    .addGroup(mainMenuPanelLayout.createSequentialGroup()
+                        .addGap(366, 366, 366)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(mainMenuPanelLayout.createSequentialGroup()
+                        .addGap(306, 306, 306)
                         .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainMenuPanelLayout.createSequentialGroup()
                                 .addComponent(gotoQuizGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -270,19 +259,10 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addComponent(gotoExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(gotoGameSaves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(52, 52, 52)
-                                .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(gotoReviewers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(gotoSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(mainMenuPanelLayout.createSequentialGroup()
-                        .addGap(568, 568, 568)
-                        .addComponent(jLabel3))
-                    .addGroup(mainMenuPanelLayout.createSequentialGroup()
-                        .addGap(415, 415, 415)
-                        .addComponent(jLabel9))
-                    .addGroup(mainMenuPanelLayout.createSequentialGroup()
-                        .addGap(483, 483, 483)
-                        .addComponent(gotoAbout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(319, Short.MAX_VALUE))
+                                .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(gotoSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(gotoAbout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(322, Short.MAX_VALUE))
         );
         mainMenuPanelLayout.setVerticalGroup(
             mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,22 +270,20 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addGap(37, 37, 37)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
                 .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(gotoQuizGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(gotoReviewerCreation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(gotoGameSaves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gotoReviewers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(gotoSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(gotoExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gotoSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(gotoAbout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                    .addComponent(gotoAbout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         mainPanel.add(mainMenuPanel, "main menu");
@@ -315,7 +293,8 @@ public class MainFrame extends javax.swing.JFrame {
         headerPanel.setBackground(new java.awt.Color(106, 49, 144));
         headerPanel.setPreferredSize(new java.awt.Dimension(1280, 75));
 
-        gotoMain.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 25)); // NOI18N
+        gotoMain.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        );
         gotoMain.setForeground(new java.awt.Color(255, 255, 255));
         gotoMain.setText("Main Menu");
         gotoMain.setBorder(null);
@@ -331,7 +310,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        featureTitleLabel.setFont(new java.awt.Font("DejaVu Sans", 1, 50)); // NOI18N
+        featureTitleLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 50)
+        );
         featureTitleLabel.setForeground(new java.awt.Color(250, 242, 249));
         featureTitleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         featureTitleLabel.setText("Quizzer");
@@ -373,7 +353,8 @@ public class MainFrame extends javax.swing.JFrame {
         quizSetupPanel.setPreferredSize(new java.awt.Dimension(1280, 645));
 
         playGameBtn.setBackground(new java.awt.Color(164,252,88));
-        playGameBtn.setFont(new java.awt.Font("Inter", 1, 25)); // NOI18N
+        playGameBtn.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 16)
+        );
         playGameBtn.setText("Play Game");
         playGameBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 255, 255)));
         playGameBtn.setDefaultCapable(false);
@@ -393,12 +374,15 @@ public class MainFrame extends javax.swing.JFrame {
 
         autoGeneratedQuizPanel.setBackground(new java.awt.Color(106, 49, 144));
 
-        jLabel1.setFont(new java.awt.Font("Inter", 1, 25)); // NOI18N
+        jLabel1.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        );
         jLabel1.setForeground(new java.awt.Color(250, 242, 249));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Number of Questions");
 
         qDiffInput.setBackground(new java.awt.Color(255, 255, 255));
-        qDiffInput.setFont(new java.awt.Font("Inter", 1, 16)); // NOI18N
+        qDiffInput.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 16)
+        );
         qDiffInput.setForeground(new java.awt.Color(0, 0, 153));
         qDiffInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Easy", "Medium", "Hard" }));
         qDiffInput.setToolTipText("");
@@ -414,7 +398,8 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         qCatInput.setBackground(new java.awt.Color(255, 255, 255));
-        qCatInput.setFont(new java.awt.Font("Inter", 1, 16)); // NOI18N
+        qCatInput.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 16)
+        );
         qCatInput.setForeground(new java.awt.Color(0, 0, 153));
         qCatInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General Knowledge", "Entertainment: Books", "Entertainment: Film", "Entertainment: Music", "Entertainment: Musicals & Theatres", "Entertainment: Television", "Entertainment: Video Games", "Entertainment: Board Games", "Science & Nature", "Science: Computers", "Science: Mathematics", "Mythology", "Sports", "Geography", "History", "Politics", "Art", "Celebrities", "Animals", "Vehicles", "Entertainment: Comics", "Science: Gadgets", "Entertainment: Japanese Anime & Manga", "Entertainment: Cartoon & Animations" }));
         qCatInput.setToolTipText("");
@@ -424,15 +409,20 @@ public class MainFrame extends javax.swing.JFrame {
         qCatInput.setPreferredSize(new java.awt.Dimension(500, 50));
         qCatInput.setRequestFocusEnabled(false);
 
-        jLabel5.setFont(new java.awt.Font("Inter", 1, 25)); // NOI18N
+        jLabel5.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        );
         jLabel5.setForeground(new java.awt.Color(250, 242, 249));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Question Type");
 
-        jLabel6.setFont(new java.awt.Font("Inter", 1, 25)); // NOI18N
+        jLabel6.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        );
         jLabel6.setForeground(new java.awt.Color(250, 242, 249));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Difficulty");
 
-        qAmountInput.setFont(new java.awt.Font("Inter", 1, 16)); // NOI18N
+        qAmountInput.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 16)
+        );
         qAmountInput.setModel(new javax.swing.SpinnerNumberModel(10, 1, null, 1));
         qAmountInput.setToolTipText("");
         qAmountInput.setBorder(null);
@@ -447,12 +437,15 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel16.setFont(new java.awt.Font("Inter", 1, 25)); // NOI18N
+        jLabel16.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        );
         jLabel16.setForeground(new java.awt.Color(250, 242, 249));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Category");
 
         qTypeInput.setBackground(new java.awt.Color(255, 255, 255));
-        qTypeInput.setFont(new java.awt.Font("Inter", 1, 16)); // NOI18N
+        qTypeInput.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 16)
+        );
         qTypeInput.setForeground(new java.awt.Color(0, 0, 153));
         qTypeInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Multiple Choice", "True or False" }));
         qTypeInput.setToolTipText("");
@@ -513,7 +506,8 @@ public class MainFrame extends javax.swing.JFrame {
         reviewerQuiz.setBackground(new java.awt.Color(106, 49, 144));
 
         quizReviewerComboBox.setBackground(new java.awt.Color(255, 255, 255));
-        quizReviewerComboBox.setFont(new java.awt.Font("Inter", 1, 50)); // NOI18N
+        quizReviewerComboBox.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 50)
+        );
         quizReviewerComboBox.setForeground(new java.awt.Color(0, 0, 153));
         quizReviewerComboBox.setToolTipText("");
         quizReviewerComboBox.setBorder(null);
@@ -527,7 +521,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Inter", 1, 32)); // NOI18N
+        jLabel8.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 32)
+        );
         jLabel8.setForeground(new java.awt.Color(250, 242, 249));
         jLabel8.setText("Select Reviewer:");
 
@@ -549,13 +544,14 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addComponent(quizReviewerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         quizModePanel.add(reviewerQuiz, "reviewer quiz");
 
         playReviewerToggle.setBackground(new java.awt.Color(164,252,88));
-        playReviewerToggle.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 12)); // NOI18N
+        playReviewerToggle.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 16)
+        );
         playReviewerToggle.setForeground(new java.awt.Color(51, 51, 51));
         playReviewerToggle.setText("Reviewers");
         playReviewerToggle.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -577,16 +573,16 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(quizSetupPanelLayout.createSequentialGroup()
                 .addGroup(quizSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(quizSetupPanelLayout.createSequentialGroup()
-                        .addGap(544, 544, 544)
-                        .addComponent(playGameBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(quizSetupPanelLayout.createSequentialGroup()
                         .addGap(211, 211, 211)
                         .addGroup(quizSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(playReviewerToggle, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(quizModePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(quizSetupPanelLayout.createSequentialGroup()
                         .addGap(177, 177, 177)
-                        .addComponent(notificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 937, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(notificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 937, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(quizSetupPanelLayout.createSequentialGroup()
+                        .addGap(517, 517, 517)
+                        .addComponent(playGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(166, Short.MAX_VALUE))
         );
         quizSetupPanelLayout.setVerticalGroup(
@@ -626,15 +622,17 @@ public class MainFrame extends javax.swing.JFrame {
         confirmPanel.setBackground(new java.awt.Color(106, 49, 144));
 
         jLabel15.setBackground(new java.awt.Color(0, 51, 51));
-        jLabel15.setFont(new java.awt.Font("Atkinson Hyperlegible", 1, 32)); // NOI18N
+        jLabel15.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 32));
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Are you sure you want to quit?");
 
-        quizGotoMainConfirmNoBtn.setBackground(new java.awt.Color(100, 100, 100));
-        quizGotoMainConfirmNoBtn.setFont(new java.awt.Font("JetBrains Mono", 1, 16)); // NOI18N
-        quizGotoMainConfirmNoBtn.setForeground(new java.awt.Color(255, 255, 255));
+        quizGotoMainConfirmNoBtn.setBackground(GlobalUtils.DEFAULT_BUTTON_COLOR);
+        quizGotoMainConfirmNoBtn.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        );
+        quizGotoMainConfirmNoBtn.setForeground(new java.awt.Color(102, 102, 102));
         quizGotoMainConfirmNoBtn.setText("No");
-        quizGotoMainConfirmNoBtn.setBorder(null);
+        quizGotoMainConfirmNoBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         quizGotoMainConfirmNoBtn.setName("playQuizBtn"); // NOI18N
         quizGotoMainConfirmNoBtn.setPreferredSize(new java.awt.Dimension(128, 32));
         quizGotoMainConfirmNoBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -643,11 +641,12 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        quizGotoMainConfirmYesBtn.setBackground(new java.awt.Color(100, 100, 100));
-        quizGotoMainConfirmYesBtn.setFont(new java.awt.Font("JetBrains Mono", 1, 16)); // NOI18N
-        quizGotoMainConfirmYesBtn.setForeground(new java.awt.Color(255, 255, 255));
+        quizGotoMainConfirmYesBtn.setBackground(GlobalUtils.DEFAULT_BUTTON_COLOR);
+        quizGotoMainConfirmYesBtn.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        );
+        quizGotoMainConfirmYesBtn.setForeground(new java.awt.Color(102, 102, 102));
         quizGotoMainConfirmYesBtn.setText("Yes");
-        quizGotoMainConfirmYesBtn.setBorder(null);
+        quizGotoMainConfirmYesBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         quizGotoMainConfirmYesBtn.setName("playQuizBtn"); // NOI18N
         quizGotoMainConfirmYesBtn.setPreferredSize(new java.awt.Dimension(128, 32));
         quizGotoMainConfirmYesBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -661,25 +660,25 @@ public class MainFrame extends javax.swing.JFrame {
         confirmPanelLayout.setHorizontalGroup(
             confirmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, confirmPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 441, Short.MAX_VALUE)
                 .addGroup(confirmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(confirmPanelLayout.createSequentialGroup()
                         .addComponent(quizGotoMainConfirmYesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(107, 107, 107)
                         .addComponent(quizGotoMainConfirmNoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(401, 401, 401))
+                .addGap(432, 432, 432))
         );
         confirmPanelLayout.setVerticalGroup(
             confirmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(confirmPanelLayout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(jLabel15)
-                .addGap(95, 95, 95)
+                .addGap(129, 129, 129)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(117, 117, 117)
                 .addGroup(confirmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(quizGotoMainConfirmNoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(quizGotoMainConfirmYesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(300, Short.MAX_VALUE))
         );
 
         quizMainPanel.add(confirmPanel, "confirmQuit");
@@ -690,7 +689,10 @@ public class MainFrame extends javax.swing.JFrame {
         settingsPanel.setBackground(new java.awt.Color(106, 49, 144));
         settingsPanel.setPreferredSize(new java.awt.Dimension(1280, 645));
 
-        saveSettingsBtn.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        saveSettingsBtn.setBackground(new java.awt.Color(255, 255, 51));
+        saveSettingsBtn.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16)
+        );
+        saveSettingsBtn.setForeground(new java.awt.Color(102, 0, 102));
         saveSettingsBtn.setText("Save Settings");
         saveSettingsBtn.setName("playQuizBtn"); // NOI18N
         saveSettingsBtn.setPreferredSize(new java.awt.Dimension(128, 32));
@@ -700,7 +702,10 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        restoreDefaultSettingsBtn.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        restoreDefaultSettingsBtn.setBackground(new java.awt.Color(255, 255, 51));
+        restoreDefaultSettingsBtn.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16)
+        );
+        restoreDefaultSettingsBtn.setForeground(new java.awt.Color(102, 0, 102));
         restoreDefaultSettingsBtn.setText("Restore Defaults");
         restoreDefaultSettingsBtn.setName("playQuizBtn"); // NOI18N
         restoreDefaultSettingsBtn.setPreferredSize(new java.awt.Dimension(128, 32));
@@ -719,19 +724,27 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        jLabel2.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16)
+        );
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Reviewer Saves Destination");
 
-        reviewerSavesDirLabel.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        reviewerSavesDirLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16)
+        );
         reviewerSavesDirLabel.setForeground(new java.awt.Color(255, 255, 255));
+        reviewerSavesDirLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
-        jLabel7.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        jLabel7.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16)
+        );
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("Game Saves Destination");
 
-        gameSavesDirLabel.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 16)); // NOI18N
+        gameSavesDirLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16)
+        );
         gameSavesDirLabel.setForeground(new java.awt.Color(255, 255, 255));
+        gameSavesDirLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         setGameSavesDirBtn.setBackground(new java.awt.Color(106,49,144));
         setGameSavesDirBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/path1.png"))); // NOI18N
@@ -749,40 +762,41 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(settingsPanelLayout.createSequentialGroup()
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addGap(264, 264, 264)
+                        .addGap(417, 417, 417)
                         .addComponent(saveSettingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(284, 284, 284)
+                        .addGap(111, 111, 111)
                         .addComponent(restoreDefaultSettingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, settingsPanelLayout.createSequentialGroup()
-                        .addGap(239, 239, 239)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(reviewerSavesDirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(setReviewerSavesDirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addGap(239, 239, 239)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(gameSavesDirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(setGameSavesDirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(369, Short.MAX_VALUE))
+                        .addGap(291, 291, 291)
+                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, settingsPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(reviewerSavesDirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(setReviewerSavesDirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(settingsPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(gameSavesDirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(setGameSavesDirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(317, Short.MAX_VALUE))
         );
         settingsPanelLayout.setVerticalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, settingsPanelLayout.createSequentialGroup()
-                .addGap(106, 106, 106)
+                .addGap(110, 110, 110)
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(setReviewerSavesDirBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(reviewerSavesDirLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(reviewerSavesDirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(setGameSavesDirBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(gameSavesDirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(200, 200, 200)
+                .addGap(196, 196, 196)
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveSettingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(restoreDefaultSettingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -818,13 +832,13 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -858,7 +872,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_gotoQuizGameActionPerformed
 
     private void gotoReviewerCreationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoReviewerCreationActionPerformed
-        featureTitleLabel.setText("Reviewer Creator");
+        featureTitleLabel.setText("Reviewer Editor");
         displayCard(mainPanel, "features");
         displayCard(contentPanel, "quizCreationCard");
         mode = "reviewer";
@@ -871,10 +885,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void gotoAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoAboutActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_gotoAboutActionPerformed
-
-    private void gotoReviewersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoReviewersActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_gotoReviewersActionPerformed
 
     private void gotoExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoExportActionPerformed
         // TODO add your handling code here:
@@ -889,12 +899,15 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_gotoSettingsActionPerformed
 
     private void saveSettingsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSettingsBtnActionPerformed
-        System.out.println("Successfully set the reviewer path to " + reviewerSavesDirLabel.getText());
         reviewerSavesDir = folderChooser.getSelectedFile();
+        setReviewersModel();
+        System.out.println("Successfully set the reviewer path to " + reviewerSavesDirLabel.getText());
     }//GEN-LAST:event_saveSettingsBtnActionPerformed
 
     private void restoreDefaultSettingsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restoreDefaultSettingsBtnActionPerformed
-        reviewerSavesDirLabel.setText(reviewerSavesDir.getAbsolutePath());
+        reviewerSavesDirLabel.setText(defaultDir.getAbsolutePath());
+        gameSavesDirLabel.setText(defaultDir.getAbsolutePath());
+        System.out.println("Successfully reset settings to default.");
     }//GEN-LAST:event_restoreDefaultSettingsBtnActionPerformed
 
     private void setReviewerSavesDirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setReviewerSavesDirBtnActionPerformed
@@ -917,29 +930,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_setGameSavesDirBtnActionPerformed
 
     private void playReviewerToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playReviewerToggleActionPerformed
-        File[] jsonFiles = reviewerSavesDir.listFiles(new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return name.toLowerCase().endsWith(".json");
-            }
-        });
-
-
         if (playReviewerToggle.isSelected()) {
-            System.out.println("Number of reviewers in " + reviewerSavesDir.toString() + ": " + jsonFiles.length);
-            if (jsonFiles.length > 0) {
-                String[] names = new String[jsonFiles.length];
-                try {
-                    for (int i = 0; i < jsonFiles.length; i++) {
-                        File jsonFile = jsonFiles[i];
-                        names[i] = jsonFile.getName();
-                        String content = new String(Files.readAllBytes(jsonFile.toPath()));
-                        reviewers.add(APIHandler.jsonObjectToQuiz(new JSONObject(content)));
-                    }
-                } catch (IOException | JSONException e) {
-                    e.printStackTrace();
-                }
-                quizReviewerComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(names));
+            if (GlobalUtils.reviewersComboBoxModel.getSize() > 0) {
                 displayCard(quizModePanel, "reviewer quiz");
             } else {
                 playReviewerToggle.setSelected(false);
@@ -949,24 +941,6 @@ public class MainFrame extends javax.swing.JFrame {
             notificationLabel.setText("");
             displayCard(quizModePanel, "api quiz");
         }
-//        int reviewersCount = reviewerCreationPanel1.quizzes.size();
-//        if (playReviewerToggle.isSelected()) {
-//            if (reviewersCount > 0) {
-//                displayCard(quizModePanel, "reviewer quiz");
-//                String[] names = new String[reviewersCount];
-//                for (int i = 0; i < reviewersCount; i++) {
-//                    Quiz quiz = reviewerCreationPanel1.quizzes.get(i);
-//                    names[i] = quiz.getName();
-//                }
-//                quizReviewerComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(names));
-//            } else {
-//                playReviewerToggle.setSelected(false);
-//                notificationLabel.setText("You have no reviewers. Create one or load from files.");
-//            }
-//        } else {
-//            notificationLabel.setText("");
-//            displayCard(quizModePanel, "api quiz");
-//        }
     }//GEN-LAST:event_playReviewerToggleActionPerformed
 
     private void quizReviewerComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quizReviewerComboBoxActionPerformed
@@ -987,10 +961,16 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void playGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playGameBtnActionPerformed
         if (playReviewerToggle.isSelected()) {
-            quizPanel.startQuiz(reviewers.get(quizReviewerComboBox.getSelectedIndex()));
+            try {
+                File selectedReviewer = new File(reviewerSavesDir, (String) quizReviewerComboBox.getSelectedItem());
+                quizPanel.startQuiz(GlobalUtils.fileToQuiz(selectedReviewer), "reviewer");
+            } catch (IOException e) {
+                e.printStackTrace();
+                notificationLabel.setText("Something went wrong.");
+            }
         } else {
             try {
-                quizPanel.startQuiz(generateQuiz());
+                quizPanel.startQuiz(generateQuiz(), "api");
             } catch (APIHandler.APIException ex) {
                 notificationLabel.setText(ex.getMessage());
             } catch (ParseException ex) {
@@ -999,7 +979,6 @@ public class MainFrame extends javax.swing.JFrame {
         }
         mode = "quiz";
         displayCard(contentPanel, "quizMainPanel");
-        displayCard(quizMainPanel, "quizItem");
     }//GEN-LAST:event_playGameBtnActionPerformed
 
     private void quizPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_quizPanelComponentShown
@@ -1033,6 +1012,20 @@ public class MainFrame extends javax.swing.JFrame {
             } catch (APIHandler.APIMaxAttemptsException e) {
                 throw e;
             }
+        }
+    }
+
+    private void setReviewersModel() {
+        File[] jsonFiles = reviewerSavesDir.listFiles((File dir, String name1) -> name1.toLowerCase().endsWith(".json"));
+
+        if (jsonFiles.length > 0) {
+            String[] names = new String[jsonFiles.length];
+            for (int i = 0; i < jsonFiles.length; i++) {
+                File jsonFile = jsonFiles[i];
+                names[i] = jsonFile.getName();
+            }
+            GlobalUtils.setReviewersModel(names);
+            quizReviewerComboBox.setModel(GlobalUtils.reviewersComboBoxModel);
         }
     }
 
@@ -1075,16 +1068,13 @@ public class MainFrame extends javax.swing.JFrame {
                 frame.setVisible(true);
                 frame.setLocationRelativeTo(null);
                 folderChooser = new JFileChooser();
-                File defaultDir = folderChooser.getFileSystemView().getDefaultDirectory();
+                defaultDir = folderChooser.getFileSystemView().getDefaultDirectory();
                 reviewerSavesDir = defaultDir;
+                frame.setReviewersModel();
                 gameSavesDir = defaultDir;
                 folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             }
         });
-    }
-
-    private ArrayList<Quiz> getReviewerQuiz() {
-        return reviewerCreationPanel1.quizzes;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1100,7 +1090,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton gotoMain;
     private javax.swing.JButton gotoQuizGame;
     private javax.swing.JButton gotoReviewerCreation;
-    private javax.swing.JButton gotoReviewers;
     private javax.swing.JButton gotoSettings;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel jLabel1;
@@ -1143,5 +1132,5 @@ public class MainFrame extends javax.swing.JFrame {
     protected ArrayList<Quiz> reviewers;
     private String mode = "main menu";
     static private JFileChooser folderChooser;
-    static protected File reviewerSavesDir, gameSavesDir;
+    static protected File reviewerSavesDir, gameSavesDir, defaultDir;
 }

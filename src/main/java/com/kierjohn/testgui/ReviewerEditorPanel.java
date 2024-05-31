@@ -5,16 +5,11 @@
 package com.kierjohn.testgui;
 
 import java.awt.Component;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import org.json.JSONObject;
 
 /**
  *
@@ -27,10 +22,6 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
      */
     public ReviewerEditorPanel() {
         initComponents();
-        quizzes = new ArrayList<Quiz>();
-        fileChooser.setFileFilter(new FileNameExtensionFilter("JSON file", "json"));
-        fileChooser.setDialogTitle("Save reviewer to JSON");
-        fileChooser.setAcceptAllFileFilterUsed(false);
     }
 
     /**
@@ -46,19 +37,23 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         saveReviewerBtn = new javax.swing.JButton();
         questionFormCount = new javax.swing.JLabel();
         clearFormBtn = new javax.swing.JButton();
-        addQuestionForm1 = new javax.swing.JButton();
+        addQuestionFormBtn = new javax.swing.JButton();
         qCountLiteralLabel = new javax.swing.JLabel();
         jScrollPane = new javax.swing.JScrollPane();
         questionFormContainerPanel = new javax.swing.JPanel();
         reviewerTitleTextField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        reviewersList = new javax.swing.JList<>();
 
         setBackground(new java.awt.Color(106, 49, 144));
         setPreferredSize(new java.awt.Dimension(1280, 645));
 
         controlsPanel.setBackground(new java.awt.Color(106, 49, 144));
+        controlsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 51)));
 
         saveReviewerBtn.setBackground(new java.awt.Color(204,255,204));
-        saveReviewerBtn.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
+        saveReviewerBtn.setFont(GlobalUtils.getFont(1, 16)
+        );
         saveReviewerBtn.setText("Save Quiz");
         saveReviewerBtn.setBorder(null);
         saveReviewerBtn.setBorderPainted(false);
@@ -76,12 +71,14 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
             }
         });
 
-        questionFormCount.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
+        questionFormCount.setFont(GlobalUtils.getFont(1, 16)
+        );
         questionFormCount.setForeground(new java.awt.Color(250, 242, 249));
         questionFormCount.setText("0");
 
         clearFormBtn.setBackground(new java.awt.Color(204,255,204));
-        clearFormBtn.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
+        clearFormBtn.setFont(GlobalUtils.getFont(1, 16)
+        );
         clearFormBtn.setText("Clear Form");
         clearFormBtn.setBorder(null);
         clearFormBtn.setBorderPainted(false);
@@ -99,26 +96,28 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
             }
         });
 
-        addQuestionForm1.setBackground(new java.awt.Color(204,255,204));
-        addQuestionForm1.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
-        addQuestionForm1.setText("Add Question");
-        addQuestionForm1.setBorder(null);
-        addQuestionForm1.setBorderPainted(false);
-        addQuestionForm1.setDefaultCapable(false);
-        addQuestionForm1.setFocusPainted(false);
-        addQuestionForm1.setFocusable(false);
-        addQuestionForm1.setName("playQuizBtn"); // NOI18N
-        addQuestionForm1.setPreferredSize(new java.awt.Dimension(128, 32));
-        addQuestionForm1.setRequestFocusEnabled(false);
-        addQuestionForm1.setRolloverEnabled(false);
-        addQuestionForm1.setVerifyInputWhenFocusTarget(false);
-        addQuestionForm1.addActionListener(new java.awt.event.ActionListener() {
+        addQuestionFormBtn.setBackground(new java.awt.Color(204,255,204));
+        addQuestionFormBtn.setFont(GlobalUtils.getFont(1, 16)
+        );
+        addQuestionFormBtn.setText("Add Question");
+        addQuestionFormBtn.setBorder(null);
+        addQuestionFormBtn.setBorderPainted(false);
+        addQuestionFormBtn.setDefaultCapable(false);
+        addQuestionFormBtn.setFocusPainted(false);
+        addQuestionFormBtn.setFocusable(false);
+        addQuestionFormBtn.setName("playQuizBtn"); // NOI18N
+        addQuestionFormBtn.setPreferredSize(new java.awt.Dimension(128, 32));
+        addQuestionFormBtn.setRequestFocusEnabled(false);
+        addQuestionFormBtn.setRolloverEnabled(false);
+        addQuestionFormBtn.setVerifyInputWhenFocusTarget(false);
+        addQuestionFormBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addQuestionForm1ActionPerformed(evt);
+                addQuestionFormBtnActionPerformed(evt);
             }
         });
 
-        qCountLiteralLabel.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
+        qCountLiteralLabel.setFont(GlobalUtils.getFont(1, 16)
+        );
         qCountLiteralLabel.setForeground(new java.awt.Color(250, 242, 249));
         qCountLiteralLabel.setText("Question Count:");
 
@@ -130,7 +129,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(controlsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(saveReviewerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addQuestionForm1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addQuestionFormBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(clearFormBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(qCountLiteralLabel)
                     .addComponent(questionFormCount))
@@ -140,7 +139,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
             controlsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(controlsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(addQuestionForm1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addQuestionFormBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addComponent(clearFormBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -160,6 +159,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         jScrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
         questionFormContainerPanel.setBackground(new java.awt.Color(106, 49, 144));
+        questionFormContainerPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 51)));
         questionFormContainerPanel.setFocusable(false);
         questionFormContainerPanel.setRequestFocusEnabled(false);
         questionFormContainerPanel.setVerifyInputWhenFocusTarget(false);
@@ -172,42 +172,55 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         jScrollPane.setViewportView(questionFormContainerPanel);
 
         reviewerTitleTextField.setBackground(new java.awt.Color(106, 49, 144));
-        reviewerTitleTextField.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 25)); // NOI18N
+        reviewerTitleTextField.setFont(GlobalUtils.getFont(0, 25)
+        );
         reviewerTitleTextField.setForeground(new java.awt.Color(204, 204, 204));
         reviewerTitleTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         reviewerTitleTextField.setText("Reviewer Name");
         reviewerTitleTextField.setBorder(null);
 
+        reviewersList.setBackground(new java.awt.Color(106, 49, 144));
+        reviewersList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 51)));
+        reviewersList.setFont(GlobalUtils.getFont(0, 25)
+        );
+        reviewersList.setForeground(new java.awt.Color(255, 255, 0));
+        reviewersList.setModel(com.kierjohn.testgui.GlobalUtils.reviewersListModel);
+        reviewersList.setCellRenderer(new com.kierjohn.testgui.GlobalUtils.ReviewerItemCellRenderer());
+        reviewersList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                reviewersListValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(reviewersList);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(913, Short.MAX_VALUE)
-                .addComponent(controlsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(205, 205, 205))
             .addGroup(layout.createSequentialGroup()
-                .addGap(476, 476, 476)
-                .addComponent(reviewerTitleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(292, 292, 292)
-                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(387, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(controlsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(339, 339, 339)
+                        .addComponent(reviewerTitleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(205, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(reviewerTitleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addComponent(reviewerTitleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(controlsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(350, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 50, Short.MAX_VALUE)
-                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(controlsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -218,9 +231,27 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         questionFormCount.setText("0");
     }//GEN-LAST:event_clearFormBtnActionPerformed
 
-    private void addQuestionForm1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addQuestionForm1ActionPerformed
+    private void addQuestionFormBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addQuestionFormBtnActionPerformed
+        addQuestionForm(new ReviewerQuestionForm(questionFormContainerPanel));
+    }//GEN-LAST:event_addQuestionFormBtnActionPerformed
+
+    private int formCount() {
+        return questionFormContainerPanel.getComponentCount();
+    }
+
+    private void saveReviewerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveReviewerBtnActionPerformed
+        if (questionFormContainerPanel.getComponentCount() != 0) {
+            Quiz quiz = new Quiz(reviewerTitleTextField.getText());
+            for (Component comp : questionFormContainerPanel.getComponents()) {
+                ReviewerQuestionForm qForm = (ReviewerQuestionForm) comp;
+                quiz.addQuestion(qForm.getQuestion());
+            }
+            GlobalUtils.writeQuizToFile(quiz);
+        }
+    }//GEN-LAST:event_saveReviewerBtnActionPerformed
+
+    private void addQuestionForm(ReviewerQuestionForm qForm) {
         int index = formCount();
-        QuizQuestionForm qForm = new QuizQuestionForm(questionFormContainerPanel);
 
         qForm.deleteBtn.addActionListener((java.awt.event.ActionEvent evt1) -> {
             deletedFormActionPerformed(evt1);
@@ -231,63 +262,60 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         questionFormContainerPanel.revalidate();
         questionFormContainerPanel.repaint();
         questionFormCount.setText(index + 1 + "");
-    }//GEN-LAST:event_addQuestionForm1ActionPerformed
-
-    private int formCount() {
-        return questionFormContainerPanel.getComponentCount();
     }
-
-    private void saveReviewerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveReviewerBtnActionPerformed
-        fileChooser.setCurrentDirectory(MainFrame.reviewerSavesDir);
-        if (questionFormContainerPanel.getComponentCount() != 0) {
-            Quiz quiz = new Quiz(reviewerTitleTextField.getText());
-            File file = new File(reviewerTitleTextField.getText() + ".json");
-            fileChooser.setSelectedFile(file);
-            for (Component comp : questionFormContainerPanel.getComponents()) {
-                QuizQuestionForm qForm = (QuizQuestionForm) comp;
-                quiz.addQuestion(qForm.getQuestion());
-            }
-            if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-                try {
-                    file = fileChooser.getSelectedFile();
-                    file.createNewFile();
-                    FileWriter f = new FileWriter(file);
-                    f.write(APIHandler.quizToJson(quiz).toString());
-                    f.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(ReviewerEditorPanel.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            quizzes.add(quiz);
+    
+    private void loadReviewer(Quiz quiz) {
+        questionFormContainerPanel.removeAll();
+        reviewerTitleTextField.setText(quiz.getName());
+        for (Question question : quiz.getQuestions()) {
+            addQuestionForm(new ReviewerQuestionForm(questionFormContainerPanel, question));
         }
-    }//GEN-LAST:event_saveReviewerBtnActionPerformed
+        questionFormCount.setText(quiz.getQCount() + "");
+        questionFormContainerPanel.revalidate();
+        questionFormContainerPanel.repaint();
+    }
 
     protected void deletedFormActionPerformed(java.awt.event.ActionEvent evt) {
         JButton deletedBtn = (JButton) evt.getSource();
-        QuizQuestionForm deletedForm = (QuizQuestionForm) deletedBtn.getParent().getParent().getParent();
+        ReviewerQuestionForm deletedForm = (ReviewerQuestionForm) deletedBtn.getParent().getParent().getParent();
         int delIndex = deletedForm.getIndex();
         for (int i = delIndex; i < formCount(); i++) {
-            QuizQuestionForm qForm = (QuizQuestionForm) questionFormContainerPanel.getComponent(i);
+            ReviewerQuestionForm qForm = (ReviewerQuestionForm) questionFormContainerPanel.getComponent(i);
             qForm.setIndex(i - 1);
         }
+    }
+
+    protected JTextField getReviewerTitleTextField() {
+        return reviewerTitleTextField;
     }
 
     private void questionFormContainerPanelComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_questionFormContainerPanelComponentRemoved
 
     }//GEN-LAST:event_questionFormContainerPanelComponentRemoved
 
+    private void reviewersListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_reviewersListValueChanged
+        if (!evt.getValueIsAdjusting()) {
+            try {
+                File selectedQuizFile = new File(MainFrame.reviewerSavesDir, reviewersList.getSelectedValue());
+                loadReviewer(GlobalUtils.fileToQuiz(selectedQuizFile));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_reviewersListValueChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addQuestionForm1;
+    private javax.swing.JButton addQuestionFormBtn;
     private javax.swing.JButton clearFormBtn;
     private javax.swing.JPanel controlsPanel;
     private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel qCountLiteralLabel;
     private javax.swing.JPanel questionFormContainerPanel;
     private javax.swing.JLabel questionFormCount;
-    private javax.swing.JTextField reviewerTitleTextField;
+    protected javax.swing.JTextField reviewerTitleTextField;
+    private javax.swing.JList<String> reviewersList;
     private javax.swing.JButton saveReviewerBtn;
     // End of variables declaration//GEN-END:variables
-    protected ArrayList<Quiz> quizzes;
-    private JFileChooser fileChooser = new JFileChooser();
 }

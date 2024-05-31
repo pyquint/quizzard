@@ -4,15 +4,9 @@
  */
 package com.kierjohn.testgui;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLDecoder;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import java.io.*;
+import java.net.*;
+import org.json.*;
 
 /**
  *
@@ -20,7 +14,6 @@ import org.json.JSONObject;
  */
 public class APIHandler {
 
-    private int qCount;
     private JSONArray resultsJsonArray;
     private int callReconnectAttempts;
     protected static int maxCallReconnectAttempts = 25;
@@ -40,7 +33,8 @@ public class APIHandler {
                 amount=\{qCount}\
                 &category=\{qCatID}\
                 &difficulty=\{qDiff}\
-                &type=\{(qType.equals("identification") ? "multiple" : qType)}\
+                &type=\{(qType.equals("identification") ? "multiple" : qType)
+        }\
                 &encode=url3986""";
         System.out.println("Calling API URL: " + urlString);
         try {
@@ -61,7 +55,6 @@ public class APIHandler {
                 throw new APIConnectionException("Something is wrong with your internet connectivity. Please try again later.");
             }
             resultsJsonArray = response.getJSONArray("results");
-            this.qCount = qCount;
             System.out.println("Successful API call. Result:" + resultsJsonArray.toString(1));
         } catch (IOException e) {
             System.out.println(callReconnectAttempts + " / " + maxCallReconnectAttempts);
@@ -71,19 +64,19 @@ public class APIHandler {
     }
 
     private Quiz getResultToQuiz() {
-        return jsonArrayToQuiz(resultsJsonArray, new Quiz("API Quiz"));
+        return jsonArrayToQuiz(resultsJsonArray, new Quiz());
     }
-    
+
     protected static Quiz jsonObjectToQuiz(JSONObject jsonObj) {
         return jsonArrayToQuiz(jsonObj.getJSONArray("results"), new Quiz(jsonObj.getString("name")));
     }
-    
+
     private static Quiz jsonArrayToQuiz(JSONArray jsonArr, Quiz quiz) {
         JSONObject qJsonObj;
         JSONArray providedIncorrectAnswers;
         String question, answer, qType; // , category, difficulty;
 
-        System.out.println("Initializing quiz...");
+//        System.out.println("Reading JSON File...");
         for (int i = 0; i < jsonArr.length(); i++) {
             qJsonObj = jsonArr.getJSONObject(i);
             question = decodeURL3986(qJsonObj.getString("question"));
@@ -105,9 +98,9 @@ public class APIHandler {
                     quiz.addQuestion(new Question(question, answer, incorrectAnswers)); //, category, difficulty));
                 }
                 case "boolean" ->
-                    quiz.addQuestion(new Question(question, answer.equals("True"))); //, category, difficulty));
+                    quiz.addQuestion(new Question(question, answer.equals("true"))); //, category, difficulty));
             }
-            System.out.println("Successfully added question: #" + i + ": \"" + decodeURL3986(qJsonObj.getString("question")) + "\".");
+//            System.out.println("Successfully loaded question #" + i + ": \"" + decodeURL3986(qJsonObj.getString("question")) + "\".");
         }
         return quiz;
     }
@@ -153,7 +146,7 @@ public class APIHandler {
             qJObj.put("question", question.getQuestion());
             qJObj.put("correct_answer", question.getAnswer());
             if (question.getType().equals("multiple")) {
-               qJObj.put("incorrect_answers", new JSONArray(question.getWrongChoices()));
+                qJObj.put("incorrect_answers", new JSONArray(question.getWrongChoices()));
             }
             qJObj.put("type", question.getType());
             questionsJArr.put(qJObj);
