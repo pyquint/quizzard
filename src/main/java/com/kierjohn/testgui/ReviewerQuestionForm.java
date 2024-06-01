@@ -92,6 +92,7 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         qTypeInput.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
         qTypeInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Multiple Choice", "True or False", "Identification" }));
         qTypeInput.setToolTipText("");
+        qTypeInput.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         qTypeInput.setName("qDiff"); // NOI18N
         qTypeInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,6 +108,7 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         deleteBtn.setBackground(new Color(255, 255, 255));
         deleteBtn.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
         deleteBtn.setText("Delete");
+        deleteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteBtnActionPerformed(evt);
@@ -230,11 +232,23 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         trueToggleBtn.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
         trueToggleBtn.setSelected(true);
         trueToggleBtn.setText("True");
+        trueToggleBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        trueToggleBtn.setFocusPainted(false);
+        trueToggleBtn.setFocusable(false);
+        trueToggleBtn.setRequestFocusEnabled(false);
+        trueToggleBtn.setRolloverEnabled(false);
+        trueToggleBtn.setVerifyInputWhenFocusTarget(false);
 
         falseToggleBtn.setBackground(new Color(255, 255, 255));
         buttonGroup1.add(falseToggleBtn);
         falseToggleBtn.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
         falseToggleBtn.setText("False");
+        falseToggleBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        falseToggleBtn.setFocusPainted(false);
+        falseToggleBtn.setFocusable(false);
+        falseToggleBtn.setRequestFocusEnabled(false);
+        falseToggleBtn.setRolloverEnabled(false);
+        falseToggleBtn.setVerifyInputWhenFocusTarget(false);
 
         javax.swing.GroupLayout defaultBooleanLabel1Layout = new javax.swing.GroupLayout(defaultBooleanLabel1);
         defaultBooleanLabel1.setLayout(defaultBooleanLabel1Layout);
@@ -267,7 +281,7 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
             trueOrFalseFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(trueOrFalseFormPanelLayout.createSequentialGroup()
                 .addComponent(defaultBooleanLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 245, Short.MAX_VALUE))
+                .addGap(0, 225, Short.MAX_VALUE))
             .addGroup(trueOrFalseFormPanelLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(correctAnswerLabe2)
@@ -280,7 +294,7 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
                 .addComponent(correctAnswerLabe2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(defaultBooleanLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         bottonFormPanelContainer.add(trueOrFalseFormPanel, "boolean");
@@ -303,7 +317,7 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         identificationFormPanelLayout.setHorizontalGroup(
             identificationFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, identificationFormPanelLayout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addComponent(identificationAnswerTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62))
         );

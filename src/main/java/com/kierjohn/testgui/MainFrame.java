@@ -40,8 +40,6 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         gotoQuizGame = new javax.swing.JButton();
         gotoReviewerCreation = new javax.swing.JButton();
-        gotoGameSaves = new javax.swing.JButton();
-        gotoExport = new javax.swing.JButton();
         gotoSettings = new javax.swing.JButton();
         gotoAbout = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -83,6 +81,14 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         gameSavesDirLabel = new javax.swing.JLabel();
         setGameSavesDirBtn = new javax.swing.JButton();
+        aboutPanel = new javax.swing.JPanel();
+        featureTitleLabel2 = new javax.swing.JLabel();
+        jLabel04 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizzard");
@@ -94,6 +100,7 @@ public class MainFrame extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(1280, 720));
 
+        mainPanel.setBackground(new java.awt.Color(106, 49, 144));
         mainPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
         mainPanel.setLayout(new java.awt.CardLayout());
 
@@ -101,7 +108,7 @@ public class MainFrame extends javax.swing.JFrame {
         mainMenuPanel.setMinimumSize(new java.awt.Dimension(100, 100));
         mainMenuPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        jLabel9.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1,75)
+        jLabel9.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1,100)
         );
         jLabel9.setForeground(new java.awt.Color(250, 242, 249));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -113,6 +120,7 @@ public class MainFrame extends javax.swing.JFrame {
         gotoQuizGame.setForeground(new java.awt.Color(102, 0, 102));
         gotoQuizGame.setText("New Game");
         gotoQuizGame.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.gray));
+        gotoQuizGame.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gotoQuizGame.setDefaultCapable(false);
         gotoQuizGame.setFocusPainted(false);
         gotoQuizGame.setFocusable(false);
@@ -134,6 +142,7 @@ public class MainFrame extends javax.swing.JFrame {
         gotoReviewerCreation.setForeground(new java.awt.Color(102, 0, 102));
         gotoReviewerCreation.setText("Reviewers");
         gotoReviewerCreation.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.gray));
+        gotoReviewerCreation.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gotoReviewerCreation.setDefaultCapable(false);
         gotoReviewerCreation.setFocusPainted(false);
         gotoReviewerCreation.setFocusable(false);
@@ -149,54 +158,13 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        gotoGameSaves.setBackground(new java.awt.Color(255, 255, 51));
-        gotoGameSaves.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 32)
-        );
-        gotoGameSaves.setForeground(new java.awt.Color(102, 0, 102));
-        gotoGameSaves.setText("Game Saves");
-        gotoGameSaves.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.gray));
-        gotoGameSaves.setDefaultCapable(false);
-        gotoGameSaves.setFocusPainted(false);
-        gotoGameSaves.setFocusable(false);
-        gotoGameSaves.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        gotoGameSaves.setName("playQuizBtn"); // NOI18N
-        gotoGameSaves.setPreferredSize(new java.awt.Dimension(300, 75));
-        gotoGameSaves.setRequestFocusEnabled(false);
-        gotoGameSaves.setRolloverEnabled(false);
-        gotoGameSaves.setVerifyInputWhenFocusTarget(false);
-        gotoGameSaves.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gotoGameSavesActionPerformed(evt);
-            }
-        });
-
-        gotoExport.setBackground(new java.awt.Color(255, 255, 51));
-        gotoExport.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 32)
-        );
-        gotoExport.setForeground(new java.awt.Color(102, 0, 102));
-        gotoExport.setText("Export Save");
-        gotoExport.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.gray));
-        gotoExport.setDefaultCapable(false);
-        gotoExport.setFocusPainted(false);
-        gotoExport.setFocusable(false);
-        gotoExport.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        gotoExport.setName("playQuizBtn"); // NOI18N
-        gotoExport.setPreferredSize(new java.awt.Dimension(300, 75));
-        gotoExport.setRequestFocusEnabled(false);
-        gotoExport.setRolloverEnabled(false);
-        gotoExport.setVerifyInputWhenFocusTarget(false);
-        gotoExport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gotoExportActionPerformed(evt);
-            }
-        });
-
         gotoSettings.setBackground(new java.awt.Color(255, 255, 51));
         gotoSettings.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 32)
         );
         gotoSettings.setForeground(new java.awt.Color(102, 0, 102));
         gotoSettings.setText("Settings");
         gotoSettings.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.gray));
+        gotoSettings.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gotoSettings.setDefaultCapable(false);
         gotoSettings.setFocusPainted(false);
         gotoSettings.setFocusable(false);
@@ -216,8 +184,9 @@ public class MainFrame extends javax.swing.JFrame {
         gotoAbout.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 32)
         );
         gotoAbout.setForeground(new java.awt.Color(102, 0, 102));
-        gotoAbout.setText("About the Game");
+        gotoAbout.setText("About the App");
         gotoAbout.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.gray));
+        gotoAbout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gotoAbout.setDefaultCapable(false);
         gotoAbout.setFocusPainted(false);
         gotoAbout.setFocusable(false);
@@ -245,49 +214,42 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(568, 568, 568)
                         .addComponent(jLabel3))
                     .addGroup(mainMenuPanelLayout.createSequentialGroup()
-                        .addGap(366, 366, 366)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(mainMenuPanelLayout.createSequentialGroup()
-                        .addGap(306, 306, 306)
+                        .addGap(309, 309, 309)
                         .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainMenuPanelLayout.createSequentialGroup()
                                 .addComponent(gotoQuizGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(52, 52, 52)
                                 .addComponent(gotoReviewerCreation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(mainMenuPanelLayout.createSequentialGroup()
-                                .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(gotoExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(gotoGameSaves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(gotoAbout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(52, 52, 52)
-                                .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(gotoSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(gotoAbout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(322, Short.MAX_VALUE))
+                                .addComponent(gotoSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(mainMenuPanelLayout.createSequentialGroup()
+                        .addGap(282, 282, 282)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(302, Short.MAX_VALUE))
         );
         mainMenuPanelLayout.setVerticalGroup(
             mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainMenuPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(44, 44, 44)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addGap(68, 68, 68)
                 .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(gotoQuizGame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(gotoReviewerCreation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gotoGameSaves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gotoSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(mainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gotoExport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(gotoSettings, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(gotoAbout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         mainPanel.add(mainMenuPanel, "main menu");
 
+        featuresPanel.setBackground(new java.awt.Color(106, 49, 144));
         featuresPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
 
         headerPanel.setBackground(new java.awt.Color(106, 49, 144));
@@ -332,19 +294,19 @@ public class MainFrame extends javax.swing.JFrame {
         headerPanelLayout.setVerticalGroup(
             headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(headerPanelLayout.createSequentialGroup()
-                .addGroup(headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(headerPanelLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(gotoMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(headerPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(featureTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addGap(19, 19, 19)
+                .addComponent(gotoMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(headerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(featureTitleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         contentPanel.setBackground(new java.awt.Color(106, 49, 144));
         contentPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         contentPanel.setMaximumSize(new java.awt.Dimension(1280, 720));
+        contentPanel.setMinimumSize(new java.awt.Dimension(1280, 645));
         contentPanel.setPreferredSize(new java.awt.Dimension(1280, 645));
         contentPanel.setLayout(new java.awt.CardLayout());
 
@@ -357,11 +319,14 @@ public class MainFrame extends javax.swing.JFrame {
         );
         playGameBtn.setText("Play Game");
         playGameBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 255, 255)));
+        playGameBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         playGameBtn.setDefaultCapable(false);
         playGameBtn.setFocusPainted(false);
+        playGameBtn.setFocusable(false);
         playGameBtn.setName("playQuizBtn"); // NOI18N
         playGameBtn.setPreferredSize(new java.awt.Dimension(175, 75));
         playGameBtn.setRequestFocusEnabled(false);
+        playGameBtn.setRolloverEnabled(false);
         playGameBtn.setVerifyInputWhenFocusTarget(false);
         playGameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -387,6 +352,7 @@ public class MainFrame extends javax.swing.JFrame {
         qDiffInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Easy", "Medium", "Hard" }));
         qDiffInput.setToolTipText("");
         qDiffInput.setBorder(null);
+        qDiffInput.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         qDiffInput.setFocusable(false);
         qDiffInput.setName("qDiff"); // NOI18N
         qDiffInput.setPreferredSize(new java.awt.Dimension(500, 50));
@@ -404,6 +370,7 @@ public class MainFrame extends javax.swing.JFrame {
         qCatInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General Knowledge", "Entertainment: Books", "Entertainment: Film", "Entertainment: Music", "Entertainment: Musicals & Theatres", "Entertainment: Television", "Entertainment: Video Games", "Entertainment: Board Games", "Science & Nature", "Science: Computers", "Science: Mathematics", "Mythology", "Sports", "Geography", "History", "Politics", "Art", "Celebrities", "Animals", "Vehicles", "Entertainment: Comics", "Science: Gadgets", "Entertainment: Japanese Anime & Manga", "Entertainment: Cartoon & Animations" }));
         qCatInput.setToolTipText("");
         qCatInput.setBorder(null);
+        qCatInput.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         qCatInput.setFocusable(false);
         qCatInput.setName("qCat"); // NOI18N
         qCatInput.setPreferredSize(new java.awt.Dimension(500, 50));
@@ -426,7 +393,7 @@ public class MainFrame extends javax.swing.JFrame {
         qAmountInput.setModel(new javax.swing.SpinnerNumberModel(10, 1, null, 1));
         qAmountInput.setToolTipText("");
         qAmountInput.setBorder(null);
-        qAmountInput.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        qAmountInput.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         qAmountInput.setFocusable(false);
         qAmountInput.setName("qAmount"); // NOI18N
         qAmountInput.setPreferredSize(new java.awt.Dimension(500, 50));
@@ -450,6 +417,7 @@ public class MainFrame extends javax.swing.JFrame {
         qTypeInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Multiple Choice", "True or False" }));
         qTypeInput.setToolTipText("");
         qTypeInput.setBorder(null);
+        qTypeInput.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         qTypeInput.setFocusable(false);
         qTypeInput.setName("qDiff"); // NOI18N
         qTypeInput.setPreferredSize(new java.awt.Dimension(500, 50));
@@ -498,7 +466,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(autoGeneratedQuizPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(qCatInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         quizModePanel.add(autoGeneratedQuizPanel, "api quiz");
@@ -511,6 +479,7 @@ public class MainFrame extends javax.swing.JFrame {
         quizReviewerComboBox.setForeground(new java.awt.Color(0, 0, 153));
         quizReviewerComboBox.setToolTipText("");
         quizReviewerComboBox.setBorder(null);
+        quizReviewerComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         quizReviewerComboBox.setFocusable(false);
         quizReviewerComboBox.setName("qDiff"); // NOI18N
         quizReviewerComboBox.setPreferredSize(new java.awt.Dimension(500, 50));
@@ -535,7 +504,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(reviewerQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(quizReviewerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(103, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         reviewerQuizLayout.setVerticalGroup(
             reviewerQuizLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -544,7 +513,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addComponent(quizReviewerComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         quizModePanel.add(reviewerQuiz, "reviewer quiz");
@@ -555,6 +524,11 @@ public class MainFrame extends javax.swing.JFrame {
         playReviewerToggle.setForeground(new java.awt.Color(51, 51, 51));
         playReviewerToggle.setText("Reviewers");
         playReviewerToggle.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        playReviewerToggle.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        playReviewerToggle.setFocusable(false);
+        playReviewerToggle.setRequestFocusEnabled(false);
+        playReviewerToggle.setRolloverEnabled(false);
+        playReviewerToggle.setVerifyInputWhenFocusTarget(false);
         playReviewerToggle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playReviewerToggleActionPerformed(evt);
@@ -583,7 +557,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(quizSetupPanelLayout.createSequentialGroup()
                         .addGap(517, 517, 517)
                         .addComponent(playGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         quizSetupPanelLayout.setVerticalGroup(
             quizSetupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -596,12 +570,13 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(notificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(playGameBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         contentPanel.add(quizSetupPanel, "quizSetupCard");
 
         quizMainPanel.setBackground(new java.awt.Color(106, 49, 144));
+        quizMainPanel.setMinimumSize(new java.awt.Dimension(1280, 620));
         quizMainPanel.setPreferredSize(new java.awt.Dimension(1280, 620));
         quizMainPanel.setRequestFocusEnabled(false);
         quizMainPanel.setLayout(new java.awt.CardLayout());
@@ -633,8 +608,12 @@ public class MainFrame extends javax.swing.JFrame {
         quizGotoMainConfirmNoBtn.setForeground(new java.awt.Color(102, 102, 102));
         quizGotoMainConfirmNoBtn.setText("No");
         quizGotoMainConfirmNoBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        quizGotoMainConfirmNoBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         quizGotoMainConfirmNoBtn.setName("playQuizBtn"); // NOI18N
         quizGotoMainConfirmNoBtn.setPreferredSize(new java.awt.Dimension(128, 32));
+        quizGotoMainConfirmNoBtn.setRequestFocusEnabled(false);
+        quizGotoMainConfirmNoBtn.setRolloverEnabled(false);
+        quizGotoMainConfirmNoBtn.setVerifyInputWhenFocusTarget(false);
         quizGotoMainConfirmNoBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quizGotoMainConfirmNoBtnActionPerformed(evt);
@@ -647,8 +626,12 @@ public class MainFrame extends javax.swing.JFrame {
         quizGotoMainConfirmYesBtn.setForeground(new java.awt.Color(102, 102, 102));
         quizGotoMainConfirmYesBtn.setText("Yes");
         quizGotoMainConfirmYesBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        quizGotoMainConfirmYesBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         quizGotoMainConfirmYesBtn.setName("playQuizBtn"); // NOI18N
         quizGotoMainConfirmYesBtn.setPreferredSize(new java.awt.Dimension(128, 32));
+        quizGotoMainConfirmYesBtn.setRequestFocusEnabled(false);
+        quizGotoMainConfirmYesBtn.setRolloverEnabled(false);
+        quizGotoMainConfirmYesBtn.setVerifyInputWhenFocusTarget(false);
         quizGotoMainConfirmYesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 quizGotoMainConfirmYesBtnActionPerformed(evt);
@@ -660,7 +643,7 @@ public class MainFrame extends javax.swing.JFrame {
         confirmPanelLayout.setHorizontalGroup(
             confirmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, confirmPanelLayout.createSequentialGroup()
-                .addGap(0, 441, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(confirmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(confirmPanelLayout.createSequentialGroup()
@@ -678,7 +661,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(confirmPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(quizGotoMainConfirmNoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(quizGotoMainConfirmYesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(300, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         quizMainPanel.add(confirmPanel, "confirmQuit");
@@ -687,15 +670,19 @@ public class MainFrame extends javax.swing.JFrame {
         contentPanel.add(reviewerCreationPanel1, "quizCreationCard");
 
         settingsPanel.setBackground(new java.awt.Color(106, 49, 144));
-        settingsPanel.setPreferredSize(new java.awt.Dimension(1280, 645));
+        settingsPanel.setPreferredSize(new java.awt.Dimension(1280, 620));
 
         saveSettingsBtn.setBackground(new java.awt.Color(255, 255, 51));
         saveSettingsBtn.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16)
         );
         saveSettingsBtn.setForeground(new java.awt.Color(102, 0, 102));
         saveSettingsBtn.setText("Save Settings");
+        saveSettingsBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         saveSettingsBtn.setName("playQuizBtn"); // NOI18N
         saveSettingsBtn.setPreferredSize(new java.awt.Dimension(128, 32));
+        saveSettingsBtn.setRequestFocusEnabled(false);
+        saveSettingsBtn.setRolloverEnabled(false);
+        saveSettingsBtn.setVerifyInputWhenFocusTarget(false);
         saveSettingsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveSettingsBtnActionPerformed(evt);
@@ -707,8 +694,12 @@ public class MainFrame extends javax.swing.JFrame {
         );
         restoreDefaultSettingsBtn.setForeground(new java.awt.Color(102, 0, 102));
         restoreDefaultSettingsBtn.setText("Restore Defaults");
+        restoreDefaultSettingsBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         restoreDefaultSettingsBtn.setName("playQuizBtn"); // NOI18N
         restoreDefaultSettingsBtn.setPreferredSize(new java.awt.Dimension(128, 32));
+        restoreDefaultSettingsBtn.setRequestFocusEnabled(false);
+        restoreDefaultSettingsBtn.setRolloverEnabled(false);
+        restoreDefaultSettingsBtn.setVerifyInputWhenFocusTarget(false);
         restoreDefaultSettingsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 restoreDefaultSettingsBtnActionPerformed(evt);
@@ -717,21 +708,25 @@ public class MainFrame extends javax.swing.JFrame {
 
         setReviewerSavesDirBtn.setBackground(new java.awt.Color(106,49,144));
         setReviewerSavesDirBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/path1.png"))); // NOI18N
+        setReviewerSavesDirBtn.setBorder(null);
+        setReviewerSavesDirBtn.setContentAreaFilled(false);
+        setReviewerSavesDirBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setReviewerSavesDirBtn.setPreferredSize(new java.awt.Dimension(32, 32));
+        setReviewerSavesDirBtn.setRequestFocusEnabled(false);
+        setReviewerSavesDirBtn.setRolloverEnabled(false);
+        setReviewerSavesDirBtn.setVerifyInputWhenFocusTarget(false);
         setReviewerSavesDirBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 setReviewerSavesDirBtnActionPerformed(evt);
             }
         });
 
-        jLabel2.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16)
-        );
+        jLabel2.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 25));
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Reviewer Saves Destination");
 
-        reviewerSavesDirLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16)
-        );
+        reviewerSavesDirLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 25));
         reviewerSavesDirLabel.setForeground(new java.awt.Color(255, 255, 255));
         reviewerSavesDirLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
@@ -767,21 +762,21 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(111, 111, 111)
                         .addComponent(restoreDefaultSettingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addGap(300, 300, 300)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(gameSavesDirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(setGameSavesDirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
                         .addGap(291, 291, 291)
-                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, settingsPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(reviewerSavesDirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(setReviewerSavesDirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(reviewerSavesDirLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(settingsPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(gameSavesDirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(setGameSavesDirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(317, Short.MAX_VALUE))
+                                .addComponent(setReviewerSavesDirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(308, Short.MAX_VALUE))
         );
         settingsPanelLayout.setVerticalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -789,14 +784,15 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(110, 110, 110)
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(setReviewerSavesDirBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(reviewerSavesDirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
+                .addComponent(reviewerSavesDirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92)
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(setGameSavesDirBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(gameSavesDirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(196, 196, 196)
+                .addGap(72, 72, 72)
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveSettingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(restoreDefaultSettingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -805,19 +801,120 @@ public class MainFrame extends javax.swing.JFrame {
 
         contentPanel.add(settingsPanel, "settings");
 
+        aboutPanel.setBackground(new java.awt.Color(106, 49, 144));
+        aboutPanel.setMinimumSize(new java.awt.Dimension(1280, 620));
+        aboutPanel.setPreferredSize(new java.awt.Dimension(1280, 620));
+
+        featureTitleLabel2.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 32));
+        featureTitleLabel2.setForeground(new java.awt.Color(250, 242, 249));
+        featureTitleLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        featureTitleLabel2.setText("Quizzard");
+        featureTitleLabel2.setFocusable(false);
+        featureTitleLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel04.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 25));
+        jLabel04.setForeground(new java.awt.Color(250, 242, 249));
+        jLabel04.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel04.setText("Team Name");
+        jLabel04.setFocusable(false);
+        jLabel04.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel10.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 25));
+        jLabel10.setForeground(new java.awt.Color(250, 242, 249));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("Developer");
+        jLabel10.setFocusable(false);
+        jLabel10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel11.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 25));
+        jLabel11.setForeground(new java.awt.Color(250, 242, 249));
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel11.setText("https://github.com/pyquint/quizzard");
+        jLabel11.setFocusable(false);
+        jLabel11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel12.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 25));
+        jLabel12.setForeground(new java.awt.Color(250, 242, 249));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel12.setText("GitHub Repository");
+        jLabel12.setFocusable(false);
+        jLabel12.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel13.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 25));
+        jLabel13.setForeground(new java.awt.Color(250, 242, 249));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel13.setText("SyntaxError");
+        jLabel13.setFocusable(false);
+        jLabel13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel14.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 25));
+        jLabel14.setForeground(new java.awt.Color(250, 242, 249));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel14.setText("quint");
+        jLabel14.setFocusable(false);
+        jLabel14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout aboutPanelLayout = new javax.swing.GroupLayout(aboutPanel);
+        aboutPanel.setLayout(aboutPanelLayout);
+        aboutPanelLayout.setHorizontalGroup(
+            aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aboutPanelLayout.createSequentialGroup()
+                .addGap(381, 381, 381)
+                .addComponent(featureTitleLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(389, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, aboutPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(aboutPanelLayout.createSequentialGroup()
+                        .addGroup(aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
+                            .addComponent(jLabel04, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE))
+                .addGap(18, 56, Short.MAX_VALUE)
+                .addGroup(aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        aboutPanelLayout.setVerticalGroup(
+            aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(aboutPanelLayout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(featureTitleLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(126, 126, 126)
+                .addGroup(aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel04, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(aboutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(252, Short.MAX_VALUE))
+        );
+
+        contentPanel.add(aboutPanel, "about");
+
         javax.swing.GroupLayout featuresPanelLayout = new javax.swing.GroupLayout(featuresPanel);
         featuresPanel.setLayout(featuresPanelLayout);
         featuresPanelLayout.setHorizontalGroup(
             featuresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(headerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(featuresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(contentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(featuresPanelLayout.createSequentialGroup()
+                    .addComponent(contentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         featuresPanelLayout.setVerticalGroup(
             featuresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(featuresPanelLayout.createSequentialGroup()
-                .addComponent(headerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                .addGap(0, 621, Short.MAX_VALUE))
+                .addComponent(headerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 647, Short.MAX_VALUE))
             .addGroup(featuresPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, featuresPanelLayout.createSequentialGroup()
                     .addGap(0, 75, Short.MAX_VALUE)
@@ -830,9 +927,7 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -878,20 +973,16 @@ public class MainFrame extends javax.swing.JFrame {
         mode = "reviewer";
     }//GEN-LAST:event_gotoReviewerCreationActionPerformed
 
-    private void gotoGameSavesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoGameSavesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_gotoGameSavesActionPerformed
-
     private void gotoAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoAboutActionPerformed
-        // TODO add your handling code here:
+        mode = "about";
+        featureTitleLabel.setText("About");
+        displayCard(mainPanel, "features");
+        displayCard(contentPanel, mode);
     }//GEN-LAST:event_gotoAboutActionPerformed
-
-    private void gotoExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoExportActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_gotoExportActionPerformed
 
     private void gotoSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoSettingsActionPerformed
         mode = "settings";
+        featureTitleLabel.setText("Settings");
         reviewerSavesDirLabel.setText(reviewerSavesDir.getAbsolutePath());
         gameSavesDirLabel.setText(gameSavesDir.getAbsolutePath());
         displayCard(mainPanel, "features");
@@ -1073,26 +1164,35 @@ public class MainFrame extends javax.swing.JFrame {
                 frame.setReviewersModel();
                 gameSavesDir = defaultDir;
                 folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                frame.jLabel7.setVisible(false);
+                frame.gameSavesDirLabel.setVisible(false);
+                frame.setGameSavesDirBtn.setVisible(false);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel aboutPanel;
     private javax.swing.JPanel autoGeneratedQuizPanel;
     private javax.swing.JPanel confirmPanel;
     private javax.swing.JPanel contentPanel;
     private javax.swing.JLabel featureTitleLabel;
+    private javax.swing.JLabel featureTitleLabel2;
     private javax.swing.JPanel featuresPanel;
     private javax.swing.JLabel gameSavesDirLabel;
     private javax.swing.JButton gotoAbout;
-    private javax.swing.JButton gotoExport;
-    private javax.swing.JButton gotoGameSaves;
     private javax.swing.JButton gotoMain;
     private javax.swing.JButton gotoQuizGame;
     private javax.swing.JButton gotoReviewerCreation;
     private javax.swing.JButton gotoSettings;
     private javax.swing.JPanel headerPanel;
+    private javax.swing.JLabel jLabel04;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;

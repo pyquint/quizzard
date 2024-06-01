@@ -49,7 +49,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1280, 645));
 
         controlsPanel.setBackground(new java.awt.Color(106, 49, 144));
-        controlsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 51)));
+        controlsPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 51, 255), 1, true));
 
         saveReviewerBtn.setBackground(new java.awt.Color(204,255,204));
         saveReviewerBtn.setFont(GlobalUtils.getFont(1, 16)
@@ -57,6 +57,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         saveReviewerBtn.setText("Save Quiz");
         saveReviewerBtn.setBorder(null);
         saveReviewerBtn.setBorderPainted(false);
+        saveReviewerBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         saveReviewerBtn.setDefaultCapable(false);
         saveReviewerBtn.setFocusPainted(false);
         saveReviewerBtn.setFocusable(false);
@@ -82,6 +83,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         clearFormBtn.setText("Clear Form");
         clearFormBtn.setBorder(null);
         clearFormBtn.setBorderPainted(false);
+        clearFormBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         clearFormBtn.setDefaultCapable(false);
         clearFormBtn.setFocusPainted(false);
         clearFormBtn.setFocusable(false);
@@ -102,6 +104,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         addQuestionFormBtn.setText("Add Question");
         addQuestionFormBtn.setBorder(null);
         addQuestionFormBtn.setBorderPainted(false);
+        addQuestionFormBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addQuestionFormBtn.setDefaultCapable(false);
         addQuestionFormBtn.setFocusPainted(false);
         addQuestionFormBtn.setFocusable(false);
@@ -159,7 +162,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         jScrollPane.getVerticalScrollBar().setUnitIncrement(16);
 
         questionFormContainerPanel.setBackground(new java.awt.Color(106, 49, 144));
-        questionFormContainerPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 51)));
+        questionFormContainerPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 51, 255), 1, true));
         questionFormContainerPanel.setFocusable(false);
         questionFormContainerPanel.setRequestFocusEnabled(false);
         questionFormContainerPanel.setVerifyInputWhenFocusTarget(false);
@@ -180,7 +183,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         reviewerTitleTextField.setBorder(null);
 
         reviewersList.setBackground(new java.awt.Color(106, 49, 144));
-        reviewersList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 51)));
+        reviewersList.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 51, 255), 1, true));
         reviewersList.setFont(GlobalUtils.getFont(0, 25)
         );
         reviewersList.setForeground(new java.awt.Color(255, 255, 0));
