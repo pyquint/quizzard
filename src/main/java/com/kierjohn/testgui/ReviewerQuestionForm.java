@@ -5,6 +5,7 @@
 package com.kierjohn.testgui;
 
 import java.awt.*;
+import javax.swing.*;
 
 /**
  *
@@ -100,10 +101,11 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
             }
         });
 
-        questionTextField.setBackground(new java.awt.Color(204, 204, 204));
-        questionTextField.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
+        questionTextField.setBackground(new java.awt.Color(255, 255, 255));
+        questionTextField.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25));
         questionTextField.setForeground(new java.awt.Color(51, 51, 51));
         questionTextField.setText("Question");
+        questionTextField.setMargin(new java.awt.Insets(2, 16, 2, 6));
 
         deleteBtn.setBackground(new Color(255, 255, 255));
         deleteBtn.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
@@ -173,24 +175,28 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         multipleCorrectAnswer.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
         multipleCorrectAnswer.setForeground(new java.awt.Color(51, 0, 102));
         multipleCorrectAnswer.setText("Correct Answer");
+        multipleCorrectAnswer.setMargin(new java.awt.Insets(2, 16, 2, 6));
         multipleCorrectAnswer.setPreferredSize(new java.awt.Dimension(64, 32));
 
         wrongChoiceTextField1.setBackground(QuizPanel.WRONG_COLOR);
         wrongChoiceTextField1.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
         wrongChoiceTextField1.setForeground(new java.awt.Color(255, 255, 153));
         wrongChoiceTextField1.setText("Wrong Choice #1");
+        wrongChoiceTextField1.setMargin(new java.awt.Insets(2, 16, 2, 6));
         wrongChoiceTextField1.setPreferredSize(new java.awt.Dimension(64, 32));
 
         wrongChoiceTextField2.setBackground(QuizPanel.WRONG_COLOR);
         wrongChoiceTextField2.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
         wrongChoiceTextField2.setForeground(new java.awt.Color(255, 255, 153));
         wrongChoiceTextField2.setText("Wrong Choice #2");
+        wrongChoiceTextField2.setMargin(new java.awt.Insets(2, 16, 2, 6));
         wrongChoiceTextField2.setPreferredSize(new java.awt.Dimension(64, 32));
 
         wrongChoiceTextField3.setBackground(QuizPanel.WRONG_COLOR);
         wrongChoiceTextField3.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
         wrongChoiceTextField3.setForeground(new java.awt.Color(255, 255, 153));
         wrongChoiceTextField3.setText("Wrong Choice #3");
+        wrongChoiceTextField3.setMargin(new java.awt.Insets(2, 16, 2, 6));
         wrongChoiceTextField3.setPreferredSize(new java.awt.Dimension(64, 32));
 
         javax.swing.GroupLayout multipleChoiceFormPanelLayout = new javax.swing.GroupLayout(multipleChoiceFormPanel);
@@ -302,10 +308,11 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         identificationFormPanel.setBackground(new java.awt.Color(106, 49, 144));
         identificationFormPanel.setPreferredSize(new java.awt.Dimension(600, 218));
 
-        identificationAnswerTxtField.setBackground(new java.awt.Color(153, 153, 153));
-        identificationAnswerTxtField.setFont(new java.awt.Font("DejaVu Sans Condensed", 0, 25)); // NOI18N
-        identificationAnswerTxtField.setForeground(new java.awt.Color(255, 255, 255));
+        identificationAnswerTxtField.setBackground(QuizPanel.CORRECT_COLOR);
+        identificationAnswerTxtField.setFont(new java.awt.Font("Josefin Sans", 0, 25)); // NOI18N
+        identificationAnswerTxtField.setForeground(new java.awt.Color(51, 0, 102));
         identificationAnswerTxtField.setText("Correct Answer");
+        identificationAnswerTxtField.setMargin(new java.awt.Insets(2, 16, 2, 6));
         identificationAnswerTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 identificationAnswerTxtFieldActionPerformed(evt);
@@ -316,10 +323,10 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         identificationFormPanel.setLayout(identificationFormPanelLayout);
         identificationFormPanelLayout.setHorizontalGroup(
             identificationFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, identificationFormPanelLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+            .addGroup(identificationFormPanelLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addComponent(identificationAnswerTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         identificationFormPanelLayout.setVerticalGroup(
             identificationFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,7 +397,7 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
     private void identificationAnswerTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_identificationAnswerTxtFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_identificationAnswerTxtFieldActionPerformed
-
+    
     protected String getType() {
         String qType = "identification";
         switch (((String) qTypeInput.getSelectedItem()).toLowerCase()) {
@@ -416,7 +423,7 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
                 String[] wrongChoices = {
                     wrongChoiceTextField1.getText(),
                     wrongChoiceTextField2.getText(),
-                    wrongChoiceTextField1.getText()
+                    wrongChoiceTextField3.getText()
                 };
                 return new Question(question, multipleCorrectAnswer.getText(), wrongChoices);
             } case "boolean" -> {
@@ -425,6 +432,10 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
                 return new Question(question, identificationAnswerTxtField.getText());
             }
         }
+    }
+    
+    protected JTextField getQuestionTextField() {
+        return questionTextField;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

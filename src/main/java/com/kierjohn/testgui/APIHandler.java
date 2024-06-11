@@ -34,47 +34,49 @@ public class APIHandler {
                 &category=\{qCatID}\
                 &difficulty=\{qDiff}\
                 &type=\{(qType.equals("identification") ? "multiple" : qType)
+    
         }\
                 &encode=url3986""";
         System.out.println("Calling API URL: " + urlString);
         try {
             response = new JSONObject(APIHandler.callURL(urlString));
-            switch ((Integer) response.get("response_code") + "") {
-                case "1" ->
+            switch (response.getInt("response_code")) {
+                case 1 ->
                     throw new APIQuestionCountException("Not enough questions for selected category and difficulty.");
-                case "2" ->
+                case 2 ->
                     throw new APIInvalidParametersException("Invalid parameters.");
-                case "3" ->
+                case 3 ->
                     throw new APISessionInvalidTokenException("Invalid session token.");
-                case "4" ->
+                case 4 ->
                     throw new APISessionEmptyTokenException("Resetting session token is required.");
-                case "5" ->
+                case 5 ->
                     throw new APIMaxAttemptsException("Too many requests. Try again later.");
             }
-            if (callReconnectAttempts++ == maxCallReconnectAttempts) {
-                throw new APIConnectionException("Something is wrong with your internet connectivity. Please try again later.");
-            }
             resultsJsonArray = response.getJSONArray("results");
-            System.out.println("Successful API call. Result:" + resultsJsonArray.toString(1));
+            System.out.println("Successful API call.");
         } catch (IOException e) {
             System.out.println(callReconnectAttempts + " / " + maxCallReconnectAttempts);
+            if (callReconnectAttempts++ == maxCallReconnectAttempts) {
+                throw new APIConnectionException("Check your internet connection. Please try again later.");
+            }
             throw new IOException("Something went wrong.");
         }
-        return getResultToQuiz();
+        return getAPIResultToQuiz();
     }
 
-    private Quiz getResultToQuiz() {
-        return jsonArrayToQuiz(resultsJsonArray, new Quiz());
+    private Quiz getAPIResultToQuiz() {
+        return jsonArrayToQuiz(resultsJsonArray, new Quiz(), "api");
     }
 
-    protected static Quiz jsonObjectToQuiz(JSONObject jsonObj) {
-        return jsonArrayToQuiz(jsonObj.getJSONArray("results"), new Quiz(jsonObj.getString("name")));
+    protected static Quiz jsonObjectToQuiz(JSONObject jsonObj, String mode) {
+        return jsonArrayToQuiz(jsonObj.getJSONArray("results"), new Quiz(jsonObj.getString("name")), mode);
     }
 
-    private static Quiz jsonArrayToQuiz(JSONArray jsonArr, Quiz quiz) {
+    private static Quiz jsonArrayToQuiz(JSONArray jsonArr, Quiz quiz, String mode) {
         JSONObject qJsonObj;
         JSONArray providedIncorrectAnswers;
-        String question, answer, qType; // , category, difficulty;
+        String question, answer, qType, category, difficulty;
+        boolean isAPI = mode.equals("api");
 
 //        System.out.println("Reading JSON File...");
         for (int i = 0; i < jsonArr.length(); i++) {
@@ -82,12 +84,16 @@ public class APIHandler {
             question = decodeURL3986(qJsonObj.getString("question"));
             answer = decodeURL3986(qJsonObj.getString("correct_answer"));
             qType = qJsonObj.getString("type");
-//            category = decodeURL3986(qJsonObj.getString("category"));
-//            difficulty = qJsonObj.getString("difficulty");
+            if (isAPI) {
+                category = decodeURL3986(qJsonObj.getString("category"));
+                difficulty = qJsonObj.getString("difficulty");
+            } else {
+                category = difficulty = "";
+            }
 
             switch (qType) {
                 case "identification" ->
-                    quiz.addQuestion(new Question(question, answer)); //, category, difficulty));
+                    quiz.addQuestion(((isAPI) ? new Question(question, answer, category, difficulty) : new Question(question, answer)));
                 case "multiple" -> {
                     String[] incorrectAnswers;
                     providedIncorrectAnswers = qJsonObj.getJSONArray("incorrect_answers");
@@ -95,10 +101,10 @@ public class APIHandler {
                     for (int j = 0; j < 3; j++) {
                         incorrectAnswers[j] = decodeURL3986(providedIncorrectAnswers.getString(j));
                     }
-                    quiz.addQuestion(new Question(question, answer, incorrectAnswers)); //, category, difficulty));
+                    quiz.addQuestion(((isAPI) ? new Question(question, answer, incorrectAnswers, category, difficulty) : new Question(question, answer, incorrectAnswers)));
                 }
                 case "boolean" ->
-                    quiz.addQuestion(new Question(question, answer.equals("true"))); //, category, difficulty));
+                    quiz.addQuestion(((isAPI) ? new Question(question, answer.equals("true"), category, difficulty) : new Question(question, answer.equals("true"))));
             }
 //            System.out.println("Successfully loaded question #" + i + ": \"" + decodeURL3986(qJsonObj.getString("question")) + "\".");
         }
