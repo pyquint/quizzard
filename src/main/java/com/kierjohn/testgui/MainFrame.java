@@ -7,7 +7,6 @@ package com.kierjohn.testgui;
 import java.awt.*;
 import java.io.*;
 import java.text.ParseException;
-import java.util.ArrayList;
 import javax.swing.*;
 
 /**
@@ -21,7 +20,6 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-        reviewers = new ArrayList<>();
     }
 
     /**
@@ -79,6 +77,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         gameSavesDirLabel = new javax.swing.JLabel();
         setGameSavesDirBtn = new javax.swing.JButton();
+        settingsNotificationLabel = new javax.swing.JLabel();
         aboutPanel = new javax.swing.JPanel();
         featureTitleLabel2 = new javax.swing.JLabel();
         jLabel04 = new javax.swing.JLabel();
@@ -465,6 +464,7 @@ public class MainFrame extends javax.swing.JFrame {
         quizReviewerComboBox.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 50)
         );
         quizReviewerComboBox.setForeground(new java.awt.Color(0, 0, 153));
+        quizReviewerComboBox.setModel(GlobalUtils.reviewersComboBoxModel);
         quizReviewerComboBox.setToolTipText("");
         quizReviewerComboBox.setBorder(null);
         quizReviewerComboBox.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -724,6 +724,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        settingsNotificationLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 25));
+        settingsNotificationLabel.setForeground(new java.awt.Color(255, 255, 255));
+        settingsNotificationLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        settingsNotificationLabel.setText("Settings successfully saved!");
+        settingsNotificationLabel.setToolTipText("");
+        settingsNotificationLabel.setFocusable(false);
+        settingsNotificationLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
         settingsPanel.setLayout(settingsPanelLayout);
         settingsPanelLayout.setHorizontalGroup(
@@ -736,20 +744,23 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(111, 111, 111)
                         .addComponent(restoreDefaultSettingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(settingsPanelLayout.createSequentialGroup()
-                        .addGap(300, 300, 300)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(gameSavesDirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(setGameSavesDirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(settingsPanelLayout.createSequentialGroup()
                         .addGap(291, 291, 291)
                         .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(reviewerSavesDirLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(settingsPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(setReviewerSavesDirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(setReviewerSavesDirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(settingsPanelLayout.createSequentialGroup()
+                        .addGap(300, 300, 300)
+                        .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(settingsNotificationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(settingsPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(gameSavesDirLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(setGameSavesDirBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(308, Short.MAX_VALUE))
         );
         settingsPanelLayout.setVerticalGroup(
@@ -770,7 +781,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveSettingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(restoreDefaultSettingsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addComponent(settingsNotificationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         contentPanel.add(settingsPanel, "settings");
@@ -913,8 +926,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void quizGotoMainConfirmYesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quizGotoMainConfirmYesBtnActionPerformed
         quizPanel.isFinished = true;
-        mode = "main menu";
-        displayCard(mainPanel, mode);
+        MODE = "main menu";
+        displayCard(mainPanel, MODE);
     }//GEN-LAST:event_quizGotoMainConfirmYesBtnActionPerformed
 
     private void quizGotoMainConfirmNoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quizGotoMainConfirmNoBtnActionPerformed
@@ -925,77 +938,80 @@ public class MainFrame extends javax.swing.JFrame {
         if (!quizPanel.isFinished) {
             displayCard(quizMainPanel, "confirmQuit");
         } else {
-            mode = "main menu";
-            displayCard(mainPanel, mode);
+            MODE = "main menu";
+            displayCard(mainPanel, MODE);
         }
     }//GEN-LAST:event_gotoMainActionPerformed
 
-
     private void gotoQuizGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoQuizGameActionPerformed
+        gotoQuizGameSetupPanel();
+    }//GEN-LAST:event_gotoQuizGameActionPerformed
+
+    protected void gotoQuizGameSetupPanel() {
         notificationLabel.setText("");
         featureTitleLabel.setText("Quizzer");
         displayCard(mainPanel, "features");
         displayCard(contentPanel, "quizSetupCard");
-    }//GEN-LAST:event_gotoQuizGameActionPerformed
-
+    }
+    
     private void gotoReviewerCreationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoReviewerCreationActionPerformed
-        mode = "reviewer editor";
+        MODE = "reviewer editor";
         featureTitleLabel.setText("Reviewer Editor");
         displayCard(mainPanel, "features");
-        displayCard(contentPanel, mode);
+        displayCard(contentPanel, MODE);
     }//GEN-LAST:event_gotoReviewerCreationActionPerformed
 
     private void gotoAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoAboutActionPerformed
-        mode = "about";
+        MODE = "about";
         featureTitleLabel.setText("About");
         displayCard(mainPanel, "features");
-        displayCard(contentPanel, mode);
+        displayCard(contentPanel, MODE);
     }//GEN-LAST:event_gotoAboutActionPerformed
 
     private void gotoSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoSettingsActionPerformed
-        mode = "settings";
+        MODE = "settings";
         featureTitleLabel.setText("Settings");
         displayCard(mainPanel, "features");
-        displayCard(contentPanel, mode);
+        displayCard(contentPanel, MODE);
     }//GEN-LAST:event_gotoSettingsActionPerformed
 
     private void saveSettingsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSettingsBtnActionPerformed
-        File selectedPath = GlobalUtils.folderChooser.getSelectedFile();
-        if (selectedPath != null) {
-            GlobalUtils.reviewerSavesDir = selectedPath;
-            GlobalUtils.setReviewersModelFromReviewerSavesDir();
-            System.out.println("Successfully set reviewers directory to:\n" + selectedPath.getAbsolutePath());
+        if (!reviewerSavesDirLabel.getText().equals(GlobalUtils.getReviewerSavesPath())) {
+            GlobalUtils.setReviewerSavesDirFromSelectedDir();
+            GlobalUtils.repopulateReviewerModels();
+            System.out.println("Successfully set reviewers directory to:\n" + GlobalUtils.getReviewerSavesPath());
+            settingsNotificationLabel.setVisible(true);
+            Timer t = new Timer(3000, (java.awt.event.ActionEvent evt1) -> {
+                settingsNotificationLabel.setVisible(false);
+            });
+            t.setRepeats(false);
+            t.start();
         }
     }//GEN-LAST:event_saveSettingsBtnActionPerformed
 
     private void restoreDefaultSettingsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restoreDefaultSettingsBtnActionPerformed
-        reviewerSavesDirLabel.setText(GlobalUtils.defaultDir.getAbsolutePath());
-        gameSavesDirLabel.setText(GlobalUtils.defaultDir.getAbsolutePath());
+        reviewerSavesDirLabel.setText(GlobalUtils.getDefaultPath());
+        gameSavesDirLabel.setText(GlobalUtils.getDefaultPath());
+        GlobalUtils.resetReviewerSavesDirectory();
+        GlobalUtils.resetGameSavesDirectory();
         System.out.println("Successfully reset settings to default.");
     }//GEN-LAST:event_restoreDefaultSettingsBtnActionPerformed
 
     private void setReviewerSavesDirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setReviewerSavesDirBtnActionPerformed
-        if (GlobalUtils.folderChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            GlobalUtils.folderChooser.setDialogTitle("Select which folder to save reviewers");
-            reviewerSavesDirLabel.setText(GlobalUtils.folderChooser.getSelectedFile().getAbsolutePath());
-        } else {
-            System.out.println("Setting reviewer saves cancelled.");
+          if (GlobalUtils.openFolderChooserAndSelectDirectory("Select reviewer saves folder")) {
+            reviewerSavesDirLabel.setText(GlobalUtils.FOLDER_CHOOSER.getSelectedFile().getAbsolutePath());
         }
     }//GEN-LAST:event_setReviewerSavesDirBtnActionPerformed
 
     private void setGameSavesDirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setGameSavesDirBtnActionPerformed
-        if (GlobalUtils.folderChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            GlobalUtils.folderChooser.setDialogTitle("Select which folder to save game history");
-            GlobalUtils.gameSavesDir = GlobalUtils.folderChooser.getSelectedFile();
-            gameSavesDirLabel.setText(GlobalUtils.gameSavesDir.getAbsolutePath());
-        } else {
-            System.out.println("Setting game saves cancelled.");
+        if (GlobalUtils.openFolderChooserAndSelectDirectory("Select game history folder")) {
+            gameSavesDirLabel.setText(GlobalUtils.getGameSavesPath());
         }
     }//GEN-LAST:event_setGameSavesDirBtnActionPerformed
 
     private void playReviewerToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playReviewerToggleActionPerformed
         if (playReviewerToggle.isSelected()) {
-            if (GlobalUtils.reviewersComboBoxModel.getSize() > 0) {
+            if (GlobalUtils.hasReviewers()) {
                 displayCard(quizModePanel, "reviewer quiz");
             } else {
                 playReviewerToggle.setSelected(false);
@@ -1010,12 +1026,12 @@ public class MainFrame extends javax.swing.JFrame {
     private void playGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playGameBtnActionPerformed
         try {
             if (playReviewerToggle.isSelected()) {
-                File selectedReviewer = new File(GlobalUtils.reviewerSavesDir, (String) quizReviewerComboBox.getSelectedItem());
+                File selectedReviewer = new File(GlobalUtils.REVIEWERS_DIR, (String) quizReviewerComboBox.getSelectedItem());
                 quizPanel.startQuiz(GlobalUtils.fileToQuiz(selectedReviewer), "reviewer");
             } else {
                 quizPanel.startQuiz(generateQuiz(), "api");
             }
-            mode = "quiz";
+            MODE = "quiz";
             displayCard(contentPanel, "quizMainPanel");
             displayCard(quizMainPanel, "quizItem");
         } catch (IOException e) {
@@ -1099,22 +1115,21 @@ public class MainFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                frame = new MainFrame();
-                frame.setVisible(true);
-                frame.setLocationRelativeTo(null);
-
-                // Settings
-                GlobalUtils.initFileChoosers();
-                frame.reviewerSavesDirLabel.setText(GlobalUtils.defaultDir.getAbsolutePath());
-                frame.gameSavesDirLabel.setText(GlobalUtils.defaultDir.getAbsolutePath());
-                
-                // hide unimplemented Game Saves
-                frame.jLabel7.setVisible(false);
-                frame.gameSavesDirLabel.setVisible(false);
-                frame.setGameSavesDirBtn.setVisible(false);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            FRAME = new MainFrame();
+            FRAME.setVisible(true);
+            FRAME.setLocationRelativeTo(null);
+            
+            // Settings
+            GlobalUtils.initDirectories();
+            FRAME.settingsNotificationLabel.setVisible(false);
+            FRAME.reviewerSavesDirLabel.setText(GlobalUtils.DEFAULT_DIR.getAbsolutePath());
+            FRAME.gameSavesDirLabel.setText(GlobalUtils.DEFAULT_DIR.getAbsolutePath());
+            
+            // hide unimplemented Game Saves
+            FRAME.jLabel7.setVisible(false);
+            FRAME.gameSavesDirLabel.setVisible(false);
+            FRAME.setGameSavesDirBtn.setVisible(false);
         });
     }
 
@@ -1172,11 +1187,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton saveSettingsBtn;
     private javax.swing.JButton setGameSavesDirBtn;
     private javax.swing.JButton setReviewerSavesDirBtn;
+    private javax.swing.JLabel settingsNotificationLabel;
     private javax.swing.JPanel settingsPanel;
     // End of variables declaration//GEN-END:variables
 
     // custom code variables  
-    protected static MainFrame frame;
-    protected ArrayList<Quiz> reviewers;
-    private String mode = "main menu";
+    protected static MainFrame FRAME;
+    private String MODE = "main menu";
 }

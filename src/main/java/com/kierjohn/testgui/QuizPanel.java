@@ -530,7 +530,7 @@ public class QuizPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void playGameBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playGameBtn1ActionPerformed
-        // TODO add your handling code here:
+        MainFrame.FRAME.gotoQuizGameSetupPanel();
     }//GEN-LAST:event_playGameBtn1ActionPerformed
 
     private void saveAsReviewerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsReviewerBtnActionPerformed
