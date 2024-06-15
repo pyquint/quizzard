@@ -5,21 +5,21 @@
 package com.kierjohn.testgui;
 
 /**
- *
  * @author LENOVO
  */
 public class ReviewerItem extends javax.swing.JPanel {
     protected Quiz reviewer;
-    
+
     /**
      * Creates new form ReviewerItem
+     *
      * @param reviewer
      */
     public ReviewerItem(Quiz reviewer) {
         initComponents();
         this.reviewer = reviewer;
         reviewerNameLabel.setText(reviewer.getName());
-        reviewerCountLabel.setText(reviewer.getQCount() + "");
+        reviewerCountLabel.setText(reviewer.size() + "");
     }
 
     /**
@@ -69,7 +69,7 @@ public class ReviewerItem extends javax.swing.JPanel {
     protected Quiz getReviewer() {
         return reviewer;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel reviewerCountLabel;
     private javax.swing.JLabel reviewerNameLabel;

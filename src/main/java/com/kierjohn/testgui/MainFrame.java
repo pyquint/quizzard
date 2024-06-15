@@ -4,13 +4,13 @@
  */
 package com.kierjohn.testgui;
 
-import java.awt.*;
-import java.io.*;
-import java.text.ParseException;
 import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
 
 /**
- *
  * @author LENOVO
  */
 public class MainFrame extends javax.swing.JFrame {
@@ -953,7 +953,7 @@ public class MainFrame extends javax.swing.JFrame {
         displayCard(mainPanel, "features");
         displayCard(contentPanel, "quizSetupCard");
     }
-    
+
     private void gotoReviewerCreationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoReviewerCreationActionPerformed
         MODE = "reviewer editor";
         featureTitleLabel.setText("Reviewer Editor");
@@ -998,7 +998,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_restoreDefaultSettingsBtnActionPerformed
 
     private void setReviewerSavesDirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setReviewerSavesDirBtnActionPerformed
-          if (GlobalUtils.openFolderChooserAndSelectDirectory("Select reviewer saves folder")) {
+        if (GlobalUtils.openFolderChooserAndSelectDirectory("Select reviewer saves folder")) {
             reviewerSavesDirLabel.setText(GlobalUtils.FOLDER_CHOOSER.getSelectedFile().getAbsolutePath());
         }
     }//GEN-LAST:event_setReviewerSavesDirBtnActionPerformed
@@ -1044,38 +1044,18 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_playGameBtnActionPerformed
 
-    private void quizPanelComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_quizPanelComponentShown
-//        System.out.println(((JPanel) evt.getSource()).getAccessibleContext().getAccessibleName());
-    }//GEN-LAST:event_quizPanelComponentShown
+    private Quiz generateQuiz() throws APIHandler.APIException, ParseException, IOException {
+        String selectedQType = (String) qTypeInput.getSelectedItem();
+        String qType = (selectedQType.equals("True Or False")) ? "boolean" : "multiple";
 
-    private Quiz generateQuiz() throws APIHandler.APIException, ParseException {
-        String qTypeInputStr = ((String) qTypeInput.getSelectedItem()).toLowerCase();
-        String qType;
-        switch (qTypeInputStr) {
-            case "multiple choice" ->
-                qType = "multiple";
-            case "true or false" ->
-                qType = "boolean";
-            default ->
-                qType = qTypeInputStr;
-        }
         qAmountInput.commitEdit();
-        APIHandler apiHandler = new APIHandler();
         String difficulty = (String) qDiffInput.getSelectedItem();
-        while (true) {
-            try {
-                return apiHandler.callAPI(
-                        (Integer) qAmountInput.getValue(),
-                        qCatInput.getSelectedIndex() + 9,
-                        difficulty.toLowerCase(),
-                        qType
-                );
-            } catch (IOException e) {
-                System.out.println(e.getMessage() + "\nRe-initializing game...\n");
-            } catch (APIHandler.APIMaxAttemptsException e) {
-                throw e;
-            }
-        }
+
+        return APIHandler.callAPI(
+                (Integer) qAmountInput.getValue(),
+                qCatInput.getSelectedIndex() + 9,
+                difficulty.toLowerCase(),
+                qType);
     }
 
     protected void setQuizReviewersComboBoxModel(ComboBoxModel cbm) {
@@ -1094,7 +1074,7 @@ public class MainFrame extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
 //        try {
 //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -1119,13 +1099,13 @@ public class MainFrame extends javax.swing.JFrame {
             FRAME = new MainFrame();
             FRAME.setVisible(true);
             FRAME.setLocationRelativeTo(null);
-            
+
             // Settings
             GlobalUtils.initDirectories();
             FRAME.settingsNotificationLabel.setVisible(false);
             FRAME.reviewerSavesDirLabel.setText(GlobalUtils.DEFAULT_DIR.getAbsolutePath());
             FRAME.gameSavesDirLabel.setText(GlobalUtils.DEFAULT_DIR.getAbsolutePath());
-            
+
             // hide unimplemented Game Saves
             FRAME.jLabel7.setVisible(false);
             FRAME.gameSavesDirLabel.setVisible(false);

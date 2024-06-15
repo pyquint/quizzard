@@ -4,24 +4,25 @@
  */
 package com.kierjohn.testgui;
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 
 /**
- *
  * @author LENOVO
  */
 public class ReviewerQuestionForm extends javax.swing.JPanel {
     private final java.awt.Container parent;
+
     /**
      * Creates new form QuizQuestionForm
+     *
      * @param parent
      */
     public ReviewerQuestionForm(Container parent) {
         initComponents();
         this.parent = parent;
     }
-    
+
     public ReviewerQuestionForm(Container parent, Question q) {
         this(parent);
         questionTextField.setText(q.getQuestion());
@@ -29,15 +30,16 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         switch (q.getType()) {
             case "multiple" -> {
                 multipleCorrectAnswer.setText(q.getAnswer());
-                wrongChoiceTextField1.setText(q.getWrongChoiceAtIndex(0));
-                wrongChoiceTextField2.setText(q.getWrongChoiceAtIndex(1));
-                wrongChoiceTextField3.setText(q.getWrongChoiceAtIndex(2));
+                wrongChoiceTextField1.setText(q.getIncorrectAnswerAtIndex(0));
+                wrongChoiceTextField2.setText(q.getIncorrectAnswerAtIndex(1));
+                wrongChoiceTextField3.setText(q.getIncorrectAnswerAtIndex(2));
                 index = 0;
             }
             case "boolean" -> {
                 (q.getAnswer().equals("true") ? trueToggleBtn : falseToggleBtn).setSelected(true);
                 index = 1;
-            } case "identification" -> {
+            }
+            case "identification" -> {
                 identificationAnswerTxtField.setText(q.getAnswer());
                 index = 2;
             }
@@ -91,7 +93,7 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
 
         qTypeInput.setBackground(new Color(255, 255, 255));
         qTypeInput.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
-        qTypeInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Multiple Choice", "True or False", "Identification" }));
+        qTypeInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Multiple Choice", "True or False", "Identification"}));
         qTypeInput.setToolTipText("");
         qTypeInput.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         qTypeInput.setName("qDiff"); // NOI18N
@@ -127,33 +129,33 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         javax.swing.GroupLayout upperFormPanelLayout = new javax.swing.GroupLayout(upperFormPanel);
         upperFormPanel.setLayout(upperFormPanelLayout);
         upperFormPanelLayout.setHorizontalGroup(
-            upperFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(upperFormPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(upperFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(upperFormPanelLayout.createSequentialGroup()
-                        .addComponent(qTypeInput, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(titleLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(indexLabel)
-                        .addGap(95, 95, 95)
-                        .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(questionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                upperFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(upperFormPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(upperFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(upperFormPanelLayout.createSequentialGroup()
+                                                .addComponent(qTypeInput, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(40, 40, 40)
+                                                .addComponent(titleLabel)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(indexLabel)
+                                                .addGap(95, 95, 95)
+                                                .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(questionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(42, Short.MAX_VALUE))
         );
         upperFormPanelLayout.setVerticalGroup(
-            upperFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(upperFormPanelLayout.createSequentialGroup()
-                .addGap(0, 15, Short.MAX_VALUE)
-                .addGroup(upperFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(qTypeInput, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteBtn)
-                    .addComponent(titleLabel)
-                    .addComponent(indexLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(questionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                upperFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(upperFormPanelLayout.createSequentialGroup()
+                                .addGap(0, 15, Short.MAX_VALUE)
+                                .addGroup(upperFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(qTypeInput, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(deleteBtn)
+                                        .addComponent(titleLabel)
+                                        .addComponent(indexLabel))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(questionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -202,28 +204,28 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         javax.swing.GroupLayout multipleChoiceFormPanelLayout = new javax.swing.GroupLayout(multipleChoiceFormPanel);
         multipleChoiceFormPanel.setLayout(multipleChoiceFormPanelLayout);
         multipleChoiceFormPanelLayout.setHorizontalGroup(
-            multipleChoiceFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(multipleChoiceFormPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(multipleChoiceFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(wrongChoiceTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(wrongChoiceTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(wrongChoiceTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(multipleCorrectAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                multipleChoiceFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(multipleChoiceFormPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(multipleChoiceFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(wrongChoiceTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(wrongChoiceTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(wrongChoiceTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(multipleCorrectAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(41, Short.MAX_VALUE))
         );
         multipleChoiceFormPanelLayout.setVerticalGroup(
-            multipleChoiceFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(multipleChoiceFormPanelLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(multipleCorrectAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(wrongChoiceTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(wrongChoiceTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(wrongChoiceTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                multipleChoiceFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(multipleChoiceFormPanelLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(multipleCorrectAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(wrongChoiceTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(wrongChoiceTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(wrongChoiceTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         bottonFormPanelContainer.add(multipleChoiceFormPanel, "multiple");
@@ -259,22 +261,22 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         javax.swing.GroupLayout defaultBooleanLabel1Layout = new javax.swing.GroupLayout(defaultBooleanLabel1);
         defaultBooleanLabel1.setLayout(defaultBooleanLabel1Layout);
         defaultBooleanLabel1Layout.setHorizontalGroup(
-            defaultBooleanLabel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(defaultBooleanLabel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(trueToggleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(falseToggleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                defaultBooleanLabel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(defaultBooleanLabel1Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(trueToggleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                                .addComponent(falseToggleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
         );
         defaultBooleanLabel1Layout.setVerticalGroup(
-            defaultBooleanLabel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(defaultBooleanLabel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(defaultBooleanLabel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(trueToggleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(falseToggleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                defaultBooleanLabel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(defaultBooleanLabel1Layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addGroup(defaultBooleanLabel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(trueToggleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(falseToggleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         correctAnswerLabe2.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 16)); // NOI18N
@@ -284,23 +286,23 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         javax.swing.GroupLayout trueOrFalseFormPanelLayout = new javax.swing.GroupLayout(trueOrFalseFormPanel);
         trueOrFalseFormPanel.setLayout(trueOrFalseFormPanelLayout);
         trueOrFalseFormPanelLayout.setHorizontalGroup(
-            trueOrFalseFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(trueOrFalseFormPanelLayout.createSequentialGroup()
-                .addComponent(defaultBooleanLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 225, Short.MAX_VALUE))
-            .addGroup(trueOrFalseFormPanelLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(correctAnswerLabe2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                trueOrFalseFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(trueOrFalseFormPanelLayout.createSequentialGroup()
+                                .addComponent(defaultBooleanLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 225, Short.MAX_VALUE))
+                        .addGroup(trueOrFalseFormPanelLayout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(correctAnswerLabe2)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         trueOrFalseFormPanelLayout.setVerticalGroup(
-            trueOrFalseFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(trueOrFalseFormPanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(correctAnswerLabe2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(defaultBooleanLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                trueOrFalseFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(trueOrFalseFormPanelLayout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(correctAnswerLabe2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(defaultBooleanLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         bottonFormPanelContainer.add(trueOrFalseFormPanel, "boolean");
@@ -322,18 +324,18 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         javax.swing.GroupLayout identificationFormPanelLayout = new javax.swing.GroupLayout(identificationFormPanel);
         identificationFormPanel.setLayout(identificationFormPanelLayout);
         identificationFormPanelLayout.setHorizontalGroup(
-            identificationFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(identificationFormPanelLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(identificationAnswerTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+                identificationFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(identificationFormPanelLayout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(identificationAnswerTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(86, Short.MAX_VALUE))
         );
         identificationFormPanelLayout.setVerticalGroup(
-            identificationFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(identificationFormPanelLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(identificationAnswerTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                identificationFormPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(identificationFormPanelLayout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addComponent(identificationAnswerTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         bottonFormPanelContainer.add(identificationFormPanel, "identification");
@@ -353,12 +355,12 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         javax.swing.GroupLayout barrierLayout = new javax.swing.GroupLayout(barrier);
         barrier.setLayout(barrierLayout);
         barrierLayout.setHorizontalGroup(
-            barrierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+                barrierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
         );
         barrierLayout.setVerticalGroup(
-            barrierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+                barrierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -371,14 +373,14 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(formPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -397,7 +399,7 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
     private void identificationAnswerTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_identificationAnswerTxtFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_identificationAnswerTxtFieldActionPerformed
-    
+
     protected String getType() {
         String qType = "identification";
         switch (((String) qTypeInput.getSelectedItem()).toLowerCase()) {
@@ -406,38 +408,37 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         }
         return qType;
     }
-    
+
     protected void setIndex(int i) {
         index = i;
         indexLabel.setText(i + 1 + "");
     }
-    
+
     protected int getIndex() {
         return index;
     }
-    
+
     protected Question getQuestion() {
         String question = questionTextField.getText();
-        switch (getType()) {
-            case "multiple" -> {
-                String[] wrongChoices = {
-                    wrongChoiceTextField1.getText(),
-                    wrongChoiceTextField2.getText(),
-                    wrongChoiceTextField3.getText()
-                };
-                return new Question(question, multipleCorrectAnswer.getText(), wrongChoices);
-            } case "boolean" -> {
-                return new Question(question, trueToggleBtn.isSelected());
-            } default -> {
-                return new Question(question, identificationAnswerTxtField.getText());
-            }
-        }
+        String diff, cat;
+        diff = cat = "";
+
+        return switch (getType()) {
+            case "multiple" ->
+                    new Question(question, multipleCorrectAnswer.getText(), getIncorrectAnswers(), diff, cat);
+            case "boolean" -> new Question(question, trueToggleBtn.isSelected(), diff, cat);
+            default -> new Question(question, identificationAnswerTxtField.getText(), diff, cat);
+        };
     }
-    
+
+    protected String[] getIncorrectAnswers() {
+        return new String[]{wrongChoiceTextField1.getText(), wrongChoiceTextField2.getText(), wrongChoiceTextField3.getText()};
+    }
+
     protected JTextField getQuestionTextField() {
         return questionTextField;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     protected javax.swing.JPanel barrier;
     protected javax.swing.JPanel bottonFormPanelContainer;

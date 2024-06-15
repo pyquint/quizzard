@@ -12,44 +12,29 @@ public class Question {
     private final String type;
     private final String question;
     private final String answer;
-    private String[] wrongChoices;
+    private String[] incorrectAnswers;
     private String category;
     private String difficulty;
 
-    public Question(String question, String answer, String[] wrongChoices) {
+    public Question(String question, String answer, String[] incorrectAnswers, String category, String difficulty) {
         this.type = "multiple";
         this.question = question;
         this.answer = answer;
-        this.wrongChoices = wrongChoices;
-    }
-
-    public Question(String question, String answer, String[] wrongChoices, String category, String difficulty) {
-        this(question, answer, wrongChoices);
-        this.category = category;
-        this.difficulty = difficulty;
-    }
-    
-
-    public Question(String question, String answer) {
-        this.type = "identification";
-        this.question = question;
-        this.answer = answer;
-    }
-
-    public Question(String question, String answer, String category, String difficulty) {
-        this(question, answer);
+        this.incorrectAnswers = incorrectAnswers;
         this.category = category;
         this.difficulty = difficulty;
     }
 
-    public Question(String question, boolean answer) {
+    public Question(String question, boolean answer, String category, String difficulty) {
         this.type = "boolean";
         this.question = question;
         this.answer = (answer) ? "true" : "false";
     }
 
-    public Question(String question, boolean answer, String category, String difficulty) {
-        this(question, answer);
+    public Question(String question, String answer, String category, String difficulty) {
+        type = "identification";
+        this.question = question;
+        this.answer = answer;
         this.category = category;
         this.difficulty = difficulty;
     }
@@ -66,12 +51,12 @@ public class Question {
         return answer;
     }
 
-    protected String[] getWrongChoices() {
-        return wrongChoices;
+    protected String[] getIncorrectAnswers() {
+        return incorrectAnswers;
     }
 
-    protected String getWrongChoiceAtIndex(int index) {
-        return wrongChoices[index];
+    protected String getIncorrectAnswerAtIndex(int index) {
+        return incorrectAnswers[index];
     }
 
     protected String getCategory() {

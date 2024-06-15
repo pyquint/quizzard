@@ -4,40 +4,58 @@
  */
 package com.kierjohn.testgui;
 
-import java.awt.*;
-import java.io.*;
-import java.nio.file.Files;
-import javax.swing.*;
 import org.json.JSONObject;
-import java.util.Set;
-import java.util.HashSet;
-import javax.swing.filechooser.*;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+
+// TODO 1 : set default directory to app-specific folder
+// TODO 2 : reviewer editor button enable/disable logic
+// TODO 3 : json schema? #1 seem to provide alternative solution
+// TODO 4 : replace most loops to streams and lambdas
 
 /**
- *
  * @author LENOVO
  */
 public class GlobalUtils {
 
     public static Color DEFAULT_BUTTON_COLOR = new Color(255, 255, 51);
+    public static Color DEFAULT_BG_COLOR = new Color(106, 49, 144);
+
     public static JFileChooser FILE_CHOOSER;
     public static JFileChooser FOLDER_CHOOSER;
     static protected File REVIEWERS_DIR, SAVES_DIR, DEFAULT_DIR;
+    static private final String FILE_EXT = ".json";
 
     static public Set<String> reviewerNames = new HashSet<>();
     static public DefaultListModel<String> reviewersListModel = new DefaultListModel<>();
     static public DefaultComboBoxModel<String> reviewersComboBoxModel = new DefaultComboBoxModel<>();
 
-// update the reviewer models every 15 seconds seconds
-    private static final Timer updateTimer = new Timer(500, (java.awt.event.ActionEvent evt1) -> {
-//        SwingUtilities.invokeLater(() -> {
-        updateReviewerModels();
-//        });
-    });
+    // update the reviewer models every 15 seconds
+    private static final javax.swing.Timer updateTimer = new javax.swing.Timer(500, (java.awt.event.ActionEvent _) -> repopulateReviewerModels());
 
     public static void initDirectories() {
         FILE_CHOOSER = new JFileChooser();
-        FILE_CHOOSER.setFileFilter(new FileNameExtensionFilter("JSON file", "json"));
+
+        FILE_CHOOSER.setFileFilter(new FileFilter() {
+            @Override
+            public boolean accept(File f) {
+                return f.isDirectory() || f.getName().toLowerCase().endsWith(FILE_EXT);
+            }
+
+            @Override
+            public String getDescription() {
+                return "Quiz JSON Files (*" + FILE_EXT + ")";
+            }
+        });
+
         FILE_CHOOSER.setDialogTitle("Save reviewer to JSON");
         FILE_CHOOSER.setAcceptAllFileFilterUsed(false);
 
@@ -53,61 +71,22 @@ public class GlobalUtils {
         return new Font("Josefin Sans", style, size);
     }
 
-    public static File[] getReviewerFiles() {
-        return REVIEWERS_DIR.listFiles((File dir, String name)
-                -> name.toLowerCase().endsWith(".json"));
+    public static List<File> getReviewerFiles() {
+        File[] reviewers = REVIEWERS_DIR.listFiles((File file, String name) -> hasExtension(name));
+        return (reviewers != null) ? Arrays.asList(reviewers) : Collections.emptyList();
     }
 
-    public static Set<String> getReviewerFileNamesSet() {
-        Set<String> fileNames = new HashSet<>();
-        for (File f : getReviewerFiles()) {
-            fileNames.add(f.getName());
-        }
-        return (HashSet<String>) fileNames;
-    }
-
-    public static void updateReviewerModels() {
-        // TODO : fix : sets not quite correct...
-        Set<String> newFiles, newFilesTemp, removedFiles;
-
-        newFiles = getReviewerFileNamesSet();
-        newFilesTemp = new HashSet<>(newFiles);
-
-        System.out.println("old: " + reviewerNames.toString());
-        System.out.println("new: " + newFiles.toString());
-        System.out.println("the same? " + newFiles.toString().equalsIgnoreCase(reviewerNames.toString()));
-
-        if (!newFiles.toString().equalsIgnoreCase(reviewerNames.toString())) {
-            System.out.println("File changes found. Running updates...");
-            removedFiles = new HashSet<>(reviewerNames);
-            removedFiles.removeAll(newFiles);
-            newFiles.removeAll(new HashSet<>(reviewerNames));
-            
-            System.out.println("\tadded files: " + newFiles.toString());
-            System.out.println("\tdeled files: " + removedFiles.toString());
-
-            for (String deletedFile : removedFiles) {
-                removeFromReviewers(deletedFile);
-            }
-
-            for (String newFile : newFiles) {
-                addToReviewers(newFile);
-            }
-            System.out.println("new list: " + reviewerNames.toString());
-        } else {
-            System.out.println("No file changes found.");
-        }
+    public static Set<String> getReviewerFileNames() {
+        return getReviewerFiles()
+                .stream()
+                .map(File::getName)
+                .collect(Collectors.toSet());
     }
 
     public static void repopulateReviewerModels() {
-        // TODO : fix : when changing dir, list is updated instead of re-initialized
-        reviewerNames = getReviewerFileNamesSet();
-        if (!reviewerNames.isEmpty()) {
-            clearReviewers();
-            for (String reviewer : reviewerNames) {
-                addToReviewers(reviewer);
-            }
-        }
+        clearReviewerModels();
+        reviewerNames = getReviewerFileNames();
+        reviewerNames.forEach(GlobalUtils::addToReviewerModels);
     }
 
     public static String fileToString(File f) throws IOException {
@@ -149,6 +128,10 @@ public class GlobalUtils {
 
     public static void clearReviewers() {
         reviewerNames.clear();
+        clearReviewerModels();
+    }
+    
+    public static void clearReviewerModels() {
         SwingUtilities.invokeLater(() -> {
             reviewersComboBoxModel.removeAllElements();
             reviewersListModel.removeAllElements();
@@ -157,30 +140,36 @@ public class GlobalUtils {
 
     public static void writeQuizToChosenFile(Quiz quiz) {
         FILE_CHOOSER.setCurrentDirectory(REVIEWERS_DIR);
+
         if (FILE_CHOOSER.showSaveDialog(MainFrame.FRAME) == JFileChooser.APPROVE_OPTION) {
             String filePath = FILE_CHOOSER.getSelectedFile().getAbsolutePath();
-            if (!filePath.toLowerCase().endsWith(".json")) {
-                filePath += ".json";
-            }
-            writeQuizToFile(quiz, new File(filePath));
+            writeQuizToFile(quiz, new File(appendExtension(filePath)));
         }
     }
 
-    public static void writeQuizToFile(Quiz quiz) {
-        writeQuizToFile(quiz, new File(FILE_CHOOSER.getCurrentDirectory(), quiz.getName() + ".json"));
+    public static boolean writeQuizToFile(Quiz quiz) {
+        return writeQuizToFile(quiz, appendExtension(quiz.getName()));
     }
 
-    public static void writeQuizToFile(Quiz quiz, File file) {
+    public static boolean writeQuizToFile(Quiz quiz, String fileName) {
+        return writeQuizToFile(quiz, new File(FILE_CHOOSER.getCurrentDirectory(), appendExtension(fileName)));
+    }
+
+    private static boolean writeQuizToFile(Quiz quiz, File file) {
+        boolean isSaveOperationSuccessful = false;
+
         try {
             file.createNewFile();
-            try (FileWriter f = new FileWriter(file)) {
-                f.write(APIHandler.quizToJson(quiz).toString());
-            }
+            APIHandler.writeQuizToFile(quiz, file);
             addToReviewers(file.getName());
+            isSaveOperationSuccessful = true;
             System.out.println("Successfully saved reviewer to \"" + file.getAbsolutePath() + "\".");
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(MainFrame.FRAME, "Error saving quiz to file.", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
         }
+
+        return isSaveOperationSuccessful;
     }
 
     public static boolean deleteFile(String fileName) {
@@ -195,13 +184,28 @@ public class GlobalUtils {
     }
 
     public static boolean openFolderChooserAndSelectDirectory(String title) {
-        boolean isSuccessful;
-        if (isSuccessful = GlobalUtils.FOLDER_CHOOSER.showOpenDialog(MainFrame.FRAME) == JFileChooser.APPROVE_OPTION) {
+        boolean isApprovedOption = FOLDER_CHOOSER.showOpenDialog(MainFrame.FRAME) == JFileChooser.APPROVE_OPTION;
+
+        if (isApprovedOption) {
             GlobalUtils.FOLDER_CHOOSER.setDialogTitle(title);
         } else {
             System.out.println("Cancelled selecting directory.");
         }
-        return isSuccessful;
+
+        return isApprovedOption;
+    }
+
+    public static boolean hasExtension(String name) {
+        return name.toLowerCase().endsWith(FILE_EXT);
+    }
+
+    public static String getBaseName(String fileName) {
+        return (hasExtension(fileName)) ? fileName.replaceAll("(?i)^\\." + FILE_EXT, "") : fileName;
+    }
+
+    public static String appendExtension(String name) {
+        // Adds the file extension if and only if the String does not already have the suffix.
+        return (hasExtension(name)) ? name : name + FILE_EXT;
     }
 
     public static void setReviewerSavesDirFromSelectedDir() {
@@ -230,5 +234,9 @@ public class GlobalUtils {
 
     public static boolean hasReviewers() {
         return !reviewerNames.isEmpty();
+    }
+
+    public static String getFileExtension() {
+        return FILE_EXT;
     }
 }

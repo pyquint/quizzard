@@ -171,6 +171,7 @@
               <Color id="Hand Cursor"/>
             </Property>
             <Property name="defaultCapable" type="boolean" value="false"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="playQuizBtn" noResource="true"/>
@@ -339,7 +340,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jScrollPane.getVerticalScrollBar().setUnitIncrement(16);&#xd;&#xa;"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="JScrollBar verticalScrollBar = jScrollPane.getVerticalScrollBar();&#xd;verticalScrollBar.setUnitIncrement(16);&#xd;verticalScrollBar.setPreferredSize(new Dimension(10, 0));&#xd;&#xd;verticalScrollBar.setUI(new BasicScrollBarUI() {&#xd;    @Override&#xd;    protected void configureScrollBarColors() {&#xd;        this.thumbColor = Color.GRAY;&#xd;    }&#xd;});"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>

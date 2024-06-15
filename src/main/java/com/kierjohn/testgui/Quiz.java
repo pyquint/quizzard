@@ -5,21 +5,18 @@
 package com.kierjohn.testgui;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
 
 /**
- *
  * @author LENOVO
  */
 public class Quiz {
 
-    private ArrayList<Question> questions;
-    private ArrayList<String> categories;
+    private final ArrayList<Question> questions;
     private String name;
 
     protected Quiz() {
         questions = new ArrayList<>();
-        categories = new ArrayList<>();
     }
 
     protected Quiz(String name) {
@@ -27,21 +24,8 @@ public class Quiz {
         this.name = name;
     }
 
-    protected Quiz(String name, String category) {
-        this(name);
-        categories.add(category);
-    }
-
-    protected Quiz(String name, Collection<String> categories) {
-        this(name);
-        for (String cat : categories) {
-            if (this.categories.contains(cat)) {
-                System.out.println("Removed duplicate category \"" + cat + "\".");
-            } else {
-                this.categories.add(cat);
-                System.out.println("Successfully added \"" + cat + "\"");
-            }
-        }
+    protected void add(Question q) {
+        questions.add(q);
     }
 
     protected void setName(String name) {
@@ -52,20 +36,15 @@ public class Quiz {
         return name;
     }
 
-    protected void addQuestion(Question q) {
-        questions.add(q);
-    }
-
     protected Question getQuestionAtIndex(int index) {
         return questions.get(index);
     }
 
-    protected int getQCount() {
+    protected Iterable<Question> getQuestions() {
+        return Collections.unmodifiableCollection(questions);
+    }
+
+    protected int size() {
         return questions.size();
     }
-
-    protected Question[] getQuestions() {
-        return questions.toArray(new Question[questions.size()]);
-    }
-
 }
