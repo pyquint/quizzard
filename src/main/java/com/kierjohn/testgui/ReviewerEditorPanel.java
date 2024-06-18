@@ -66,7 +66,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         controlsPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 51, 255), 1, true));
         controlsPanel.setRequestFocusEnabled(false);
 
-        questionFormCount.setFont(GlobalUtils.getFont(1, 16)
+        questionFormCount.setFont(Config.getFont(1, 16)
         );
         questionFormCount.setForeground(new java.awt.Color(250, 242, 249));
         questionFormCount.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -75,7 +75,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         questionFormCount.setVerifyInputWhenFocusTarget(false);
 
         clearFormBtn.setBackground(new java.awt.Color(204, 255, 204));
-        clearFormBtn.setFont(GlobalUtils.getFont(1, 16)
+        clearFormBtn.setFont(Config.getFont(1, 16)
         );
         clearFormBtn.setText("Clear Reviewer");
         clearFormBtn.setBorder(null);
@@ -97,7 +97,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         });
 
         addQuestionFormBtn.setBackground(new java.awt.Color(204, 255, 204));
-        addQuestionFormBtn.setFont(GlobalUtils.getFont(1, 16)
+        addQuestionFormBtn.setFont(Config.getFont(1, 16)
         );
         addQuestionFormBtn.setText("Add Question");
         addQuestionFormBtn.setBorder(null);
@@ -117,13 +117,13 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
             }
         });
 
-        qCountLiteralLabel.setFont(GlobalUtils.getFont(1, 16)
+        qCountLiteralLabel.setFont(Config.getFont(1, 16)
         );
         qCountLiteralLabel.setForeground(new java.awt.Color(250, 242, 249));
         qCountLiteralLabel.setText("Question Count:");
 
         newReviewerBtn.setBackground(new java.awt.Color(204, 255, 204));
-        newReviewerBtn.setFont(GlobalUtils.getFont(1, 16)
+        newReviewerBtn.setFont(Config.getFont(1, 16)
         );
         newReviewerBtn.setText("New Reviewer");
         newReviewerBtn.setBorder(null);
@@ -144,7 +144,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         });
 
         deleteReviewerBtn.setBackground(new java.awt.Color(204, 255, 204));
-        deleteReviewerBtn.setFont(GlobalUtils.getFont(1, 16)
+        deleteReviewerBtn.setFont(Config.getFont(1, 16)
         );
         deleteReviewerBtn.setText("Delete Reviewer");
         deleteReviewerBtn.setBorder(null);
@@ -166,7 +166,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         });
 
         saveReviewerBtn.setBackground(new java.awt.Color(204, 255, 204));
-        saveReviewerBtn.setFont(GlobalUtils.getFont(1, 16)
+        saveReviewerBtn.setFont(Config.getFont(1, 16)
         );
         saveReviewerBtn.setText("Save Reviewer");
         saveReviewerBtn.setBorder(null);
@@ -234,7 +234,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         verticalScrollBar.setUnitIncrement(16);
         verticalScrollBar.setPreferredSize(new Dimension(8, 0));
 
-        verticalScrollBar.setBackground(GlobalUtils.DEFAULT_BG_COLOR);
+        verticalScrollBar.setBackground(Config.DEFAULT_BG_COLOR);
         verticalScrollBar.setUI(new BasicScrollBarUI() {
             @Override
             protected void configureScrollBarColors() {
@@ -260,7 +260,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         jScrollPane.setViewportView(questionFormContainerPanel);
 
         reviewerTitleTextField.setBackground(new java.awt.Color(106, 49, 144));
-        reviewerTitleTextField.setFont(GlobalUtils.getFont(0, 25)
+        reviewerTitleTextField.setFont(Config.getFont(0, 25)
         );
         reviewerTitleTextField.setForeground(new java.awt.Color(204, 204, 204));
         reviewerTitleTextField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -283,10 +283,10 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
 
         reviewersList.setBackground(new java.awt.Color(106, 49, 144));
         reviewersList.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 51, 255), 1, true));
-        reviewersList.setFont(GlobalUtils.getFont(0, 20)
+        reviewersList.setFont(Config.getFont(0, 20)
         );
         reviewersList.setForeground(new java.awt.Color(255, 255, 0));
-        reviewersList.setModel(com.kierjohn.testgui.GlobalUtils.reviewersListModel);
+        reviewersList.setModel(Config.reviewersListModel);
         reviewersList.setFocusable(false);
         reviewersList.setRequestFocusEnabled(false);
         reviewersList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -330,7 +330,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void clearFormBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFormBtnActionPerformed
-        if (hasQuestionForms() && isOptionPaneShowYes("Do you want to remove all questions?", "Clear Reviewer")) {
+        if (hasQuestionForms() && GlobalUtils.isOptionPaneShowYes("Do you want to remove all questions?", "Clear Reviewer")) {
             clearAllForms();
             System.out.println("Cleared the reviewer.");
         }
@@ -338,8 +338,6 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
 
     protected void clearAllForms() {
         questionFormContainerPanel.removeAll();
-        questionFormContainerPanel.revalidate();
-        questionFormContainerPanel.repaint();
     }
 
     private void addQuestionFormBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addQuestionFormBtnActionPerformed
@@ -358,25 +356,19 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
 
     private void saveReviewerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveReviewerBtnActionPerformed
         if (hasQuestionForms()) {
-            String reviewerName = reviewerTitleTextField.getText();
             Quiz toSaveQuiz = getQuizFromForm();
-            String fileName;
+
             try {
-                if (isSavedReviewerOpen()) {
-                    fileName = reviewersList.getSelectedValue();
-                    if (isReviewerChanged()) {
-                        GlobalUtils.writeQuizToFile(toSaveQuiz, fileName);
-                        isReviewerSaved = true;
-                    }
+                if (isSavedReviewerOpen() && isReviewerChanged()) {
+                    isReviewerSaved = GlobalUtils.writeQuizToReviewerDir(toSaveQuiz, reviewersList.getSelectedValue());
                 } else {
-                    fileName = reviewerName + GlobalUtils.getFileExtension();
-                    GlobalUtils.writeQuizToChosenFile(toSaveQuiz);
-                    setReviewerListSelectedValue(fileName);
-                    isReviewerSaved = true;
+                    isReviewerSaved = GlobalUtils.writeQuizToChosenFile(toSaveQuiz);
+                    setReviewerListSelectedValue(reviewerTitleTextField.getText() + Config.getFileExtension());
                 }
             } catch (InvalidPathException e) {
                 JOptionPane.showMessageDialog(MainFrame.FRAME, "Invalid reviewer file name!", "Error Saving", JOptionPane.ERROR_MESSAGE);
             }
+
             if (isReviewerSaved) {
                 saveReviewerBtn.setEnabled(false);
                 deleteReviewerBtn.setEnabled(true);
@@ -393,29 +385,25 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         questionFormContainerPanel.revalidate();
         questionFormCount.setText(index + 1 + "");
         saveReviewerBtn.setEnabled(true);
-
-        SwingUtilities.invokeLater(() -> {
-            JScrollBar vBar = jScrollPane.getVerticalScrollBar();
-            vBar.setValue(vBar.getMaximum());
-        });
+        scrollReviewerViewToBottom();
     }
 
-    private void loadReviewer() {
+    private void loadSelectedReviewer() {
         loadReviewer(getSelectedReviewer());
     }
 
     private void loadReviewer(String fileName) {
         try {
-            File selectedQuizFile = new File(GlobalUtils.REVIEWERS_DIR, fileName);
+            File selectedQuizFile = new File(Config.getReviewerSavesPath(), fileName);
             displayReviewer(GlobalUtils.fileToQuiz(selectedQuizFile));
             isTitleEdited = isReviewerSaved = true;
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(MainFrame.FRAME, "Error loading reviewer file!", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
+            JOptionPane.showMessageDialog(MainFrame.FRAME, "Error loading reviewer file!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
-    private void displayReviewer(Quiz quiz) {
+    public void displayReviewer(Quiz quiz) {
         questionFormContainerPanel.removeAll();
         reviewerTitleTextField.setText(quiz.getName());
         for (Question question : quiz.getQuestions()) {
@@ -423,9 +411,25 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         }
         questionFormCount.setText(quiz.size() + "");
         isReviewerSaved = true;
-        jScrollPane.getVerticalScrollBar().setValue(0);
-        questionFormContainerPanel.revalidate();
-        questionFormContainerPanel.repaint();
+        scrollReviewerViewToTop();
+    }
+
+    private void scrollReviewerViewToTop() {
+        SwingUtilities.invokeLater(() -> {
+            jScrollPane.getVerticalScrollBar().setValue(0);
+        });
+    }
+
+    private void scrollReviewerViewToBottom() {
+        SwingUtilities.invokeLater(() -> {
+            JScrollBar vBar = jScrollPane.getVerticalScrollBar();
+            vBar.setValue(vBar.getMaximum());
+        });
+    }
+
+    public void resetSelection() {
+        clearAllForms();
+        reviewersList.clearSelection();
     }
 
     private boolean isReviewerChanged() {
@@ -437,7 +441,7 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
             if (!isSavedReviewerOpen() || getSelectedReviewer() == null) {
                 return false;
             }
-            File selectedFile = new File(GlobalUtils.REVIEWERS_DIR, fileName);
+            File selectedFile = new File(Config.getReviewerSavesPath(), fileName);
             String orig = GlobalUtils.fileToString(selectedFile);
             return !orig.equalsIgnoreCase(APIHandler.quizToJson(getQuizFromForm()).toString());
         } catch (IOException ex) {
@@ -446,13 +450,8 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
         }
     }
 
-    private boolean isOptionPaneShowYes() {
-        return isOptionPaneShowYes("Discard unsaved reviewer?", "Warning");
-    }
-
-    private boolean isOptionPaneShowYes(String message, String windowTitle) {
-        return isReviewerSaved = JOptionPane.showConfirmDialog(MainFrame.FRAME, message, windowTitle,
-                JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION;
+    private static boolean isOptionPaneShowYes() {
+        return GlobalUtils.isOptionPaneShowYes("Discard unsaved reviewer?", "Warning");
     }
 
     private boolean hasQuestionForms() {
@@ -482,27 +481,34 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
     boolean invokeListValueChangeFlag = true;
 
     private void reviewersListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_reviewersListValueChanged
-        if (invokeListValueChangeFlag) {
-            if (evt.getValueIsAdjusting()) {
-                if (isSavedReviewerOpen() && isPreviousReviewerChanged) {
-                    String previousReviewer = reviewersList.getSelectedValue();
-                    isPreviousReviewerChanged = isReviewerChanged(previousReviewer);
-                    if (invokeListValueChangeFlag = isOverwriteOkayed = isOptionPaneShowYes()) {
-                        loadReviewer();
-                    } else {
-                        setReviewerListSelectedValue(previousReviewer);
-                    }
+        if (!invokeListValueChangeFlag) return;
+
+        if (evt.getValueIsAdjusting()) {
+
+            if (isSavedReviewerOpen() && isPreviousReviewerChanged) {
+
+                String previousReviewer = reviewersList.getSelectedValue();
+                isPreviousReviewerChanged = isReviewerChanged(previousReviewer);
+                isOverwriteOkayed = invokeListValueChangeFlag = isOptionPaneShowYes();
+
+                if (isOverwriteOkayed) {
+                    loadSelectedReviewer();
+                } else {
+                    setReviewerListSelectedValue(previousReviewer);
                 }
 
-            } else {
-                if (((isOverwriteOkayed)
-                        && ((isSavedReviewerOpen() && !isPreviousReviewerChanged)
-                        || (hasQuestionForms() && isReviewerSaved)
-                        || (!hasQuestionForms()))) && getSelectedReviewer() != null) {
-                    loadReviewer();
-                }
             }
 
+        } else {
+
+            if (((isSavedReviewerOpen() && !isPreviousReviewerChanged) ||
+                    (hasQuestionForms() && isReviewerSaved) ||
+                    (!hasQuestionForms())) &&
+                    getSelectedReviewer() != null &&
+                    isOverwriteOkayed) {
+
+                loadSelectedReviewer();
+            }
         }
 
         deleteReviewerBtn.setEnabled(true);
@@ -541,8 +547,8 @@ public class ReviewerEditorPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_reviewerTitleTextFieldKeyPressed
 
     private void deleteReviewerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteReviewerBtnActionPerformed
-        if (isSavedReviewerOpen()) {
-            GlobalUtils.deleteFile(reviewersList.getSelectedValue());
+        if (GlobalUtils.isOptionPaneShowYes("Are you sure you want to delete this reviewer?", "Delete reviewer")) {
+            Config.deleteReviewer(reviewersList.getSelectedValue());
             resetReviewerEditorView();
         }
     }//GEN-LAST:event_deleteReviewerBtnActionPerformed

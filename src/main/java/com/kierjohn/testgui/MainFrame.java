@@ -6,6 +6,8 @@ package com.kierjohn.testgui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -952,12 +954,15 @@ public class MainFrame extends javax.swing.JFrame {
         featureTitleLabel.setText("Quizzer");
         displayCard(mainPanel, "features");
         displayCard(contentPanel, "quizSetupCard");
+        displayCard(quizModePanel, "api quiz");
+        playReviewerToggle.setSelected(false);
     }
 
     private void gotoReviewerCreationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gotoReviewerCreationActionPerformed
         MODE = "reviewer editor";
         featureTitleLabel.setText("Reviewer Editor");
         displayCard(mainPanel, "features");
+        reviewerEditorPanel.resetSelection();
         displayCard(contentPanel, MODE);
     }//GEN-LAST:event_gotoReviewerCreationActionPerformed
 
@@ -976,10 +981,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_gotoSettingsActionPerformed
 
     private void saveSettingsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSettingsBtnActionPerformed
-        if (!reviewerSavesDirLabel.getText().equals(GlobalUtils.getReviewerSavesPath())) {
-            GlobalUtils.setReviewerSavesDirFromSelectedDir();
-            GlobalUtils.repopulateReviewerModels();
-            System.out.println("Successfully set reviewers directory to:\n" + GlobalUtils.getReviewerSavesPath());
+        if (!reviewerSavesDirLabel.getText().equals(Config.getReviewerSavesPath())) {
+            Config.setReviewerSavesDirFromSelectedDir();
+            Config.repopulateReviewerModels();
+            System.out.println("Successfully set reviewers directory to:\n" + Config.getReviewerSavesPath());
             settingsNotificationLabel.setVisible(true);
             Timer t = new Timer(3000, (java.awt.event.ActionEvent evt1) -> {
                 settingsNotificationLabel.setVisible(false);
@@ -990,28 +995,29 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_saveSettingsBtnActionPerformed
 
     private void restoreDefaultSettingsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_restoreDefaultSettingsBtnActionPerformed
-        reviewerSavesDirLabel.setText(GlobalUtils.getDefaultPath());
-        gameSavesDirLabel.setText(GlobalUtils.getDefaultPath());
-        GlobalUtils.resetReviewerSavesDirectory();
-        GlobalUtils.resetGameSavesDirectory();
+        reviewerSavesDirLabel.setText(Config.getDefaultPath());
+        gameSavesDirLabel.setText(Config.getDefaultPath());
+        Config.resetReviewerSavesDirectory();
+        Config.resetGameSavesDirectory();
         System.out.println("Successfully reset settings to default.");
     }//GEN-LAST:event_restoreDefaultSettingsBtnActionPerformed
 
     private void setReviewerSavesDirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setReviewerSavesDirBtnActionPerformed
+        Config.FOLDER_CHOOSER.setCurrentDirectory(Config.getReviewersDir());
         if (GlobalUtils.openFolderChooserAndSelectDirectory("Select reviewer saves folder")) {
-            reviewerSavesDirLabel.setText(GlobalUtils.FOLDER_CHOOSER.getSelectedFile().getAbsolutePath());
+            reviewerSavesDirLabel.setText(Config.FOLDER_CHOOSER.getSelectedFile().getAbsolutePath());
         }
     }//GEN-LAST:event_setReviewerSavesDirBtnActionPerformed
 
     private void setGameSavesDirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setGameSavesDirBtnActionPerformed
         if (GlobalUtils.openFolderChooserAndSelectDirectory("Select game history folder")) {
-            gameSavesDirLabel.setText(GlobalUtils.getGameSavesPath());
+            gameSavesDirLabel.setText(Config.getGameSavesPath());
         }
     }//GEN-LAST:event_setGameSavesDirBtnActionPerformed
 
     private void playReviewerToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playReviewerToggleActionPerformed
         if (playReviewerToggle.isSelected()) {
-            if (GlobalUtils.hasReviewers()) {
+            if (Config.hasReviewers()) {
                 displayCard(quizModePanel, "reviewer quiz");
             } else {
                 playReviewerToggle.setSelected(false);
@@ -1026,7 +1032,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void playGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playGameBtnActionPerformed
         try {
             if (playReviewerToggle.isSelected()) {
-                File selectedReviewer = new File(GlobalUtils.REVIEWERS_DIR, (String) quizReviewerComboBox.getSelectedItem());
+                File selectedReviewer = new File(Config.getReviewerSavesPath(), (String) quizReviewerComboBox.getSelectedItem());
                 quizPanel.startQuiz(GlobalUtils.fileToQuiz(selectedReviewer), "reviewer");
             } else {
                 quizPanel.startQuiz(generateQuiz(), "api");
@@ -1067,6 +1073,20 @@ public class MainFrame extends javax.swing.JFrame {
         card.show(container, cardName);
     }
 
+    protected void exit() {
+        dispatchEvent(new WindowEvent(FRAME, WindowEvent.WINDOW_CLOSING));
+    }
+
+    protected void abruptlyClose(String message) {
+        GlobalUtils.showErrorMessage(message);
+        abruptlyClose();
+    }
+
+    protected void abruptlyClose() {
+        FRAME.setVisible(false);
+        FRAME.dispose();
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -1101,12 +1121,19 @@ public class MainFrame extends javax.swing.JFrame {
             FRAME.setLocationRelativeTo(null);
 
             // Settings
-            GlobalUtils.initDirectories();
+            Config.initializeConfigurations();
             FRAME.settingsNotificationLabel.setVisible(false);
-            FRAME.reviewerSavesDirLabel.setText(GlobalUtils.DEFAULT_DIR.getAbsolutePath());
-            FRAME.gameSavesDirLabel.setText(GlobalUtils.DEFAULT_DIR.getAbsolutePath());
+            FRAME.reviewerSavesDirLabel.setText(Config.getReviewerSavesPath());
+
+            FRAME.addWindowListener(new WindowAdapter() {
+                public void windowClosing(WindowEvent ev) {
+                    Config.writeProperties();
+                    FRAME.dispose();
+                }
+            });
 
             // hide unimplemented Game Saves
+//            FRAME.gameSavesDirLabel.setText(Config.getGameSavesPath());
             FRAME.jLabel7.setVisible(false);
             FRAME.gameSavesDirLabel.setVisible(false);
             FRAME.setGameSavesDirBtn.setVisible(false);
@@ -1172,6 +1199,6 @@ public class MainFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     // custom code variables  
-    protected static MainFrame FRAME;
+    public static MainFrame FRAME;
     private String MODE = "main menu";
 }

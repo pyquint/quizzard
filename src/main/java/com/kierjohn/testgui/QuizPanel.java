@@ -105,7 +105,7 @@ public class QuizPanel extends javax.swing.JPanel {
         questionText.setEditable(false);
         questionText.setBackground(new java.awt.Color(29, 20, 101));
         questionText.setBorder(null);
-        questionText.setFont(GlobalUtils.getFont(1, 40)
+        questionText.setFont(Config.getFont(1, 40)
         );
         questionText.setForeground(new java.awt.Color(249, 193, 5));
         questionText.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -120,7 +120,7 @@ public class QuizPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(questionText);
 
         categoryLabel.setBackground(new java.awt.Color(0, 51, 51));
-        categoryLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 16)
+        categoryLabel.setFont(Config.getFont(1, 16)
         );
         categoryLabel.setForeground(new java.awt.Color(255, 255, 255));
         categoryLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -128,7 +128,7 @@ public class QuizPanel extends javax.swing.JPanel {
         categoryLabel.setPreferredSize(new java.awt.Dimension(1, 16));
 
         difficultyLabel.setBackground(new java.awt.Color(0, 51, 51));
-        difficultyLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 16)
+        difficultyLabel.setFont(Config.getFont(1, 16)
         );
         difficultyLabel.setForeground(new java.awt.Color(255, 255, 255));
         difficultyLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -136,32 +136,32 @@ public class QuizPanel extends javax.swing.JPanel {
         difficultyLabel.setPreferredSize(new java.awt.Dimension(1, 16));
 
         scoreLiteralLabel.setBackground(new java.awt.Color(0, 51, 51));
-        scoreLiteralLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 20)
+        scoreLiteralLabel.setFont(Config.getFont(1, 20)
         );
         scoreLiteralLabel.setForeground(new java.awt.Color(255, 255, 255));
         scoreLiteralLabel.setText("Score");
 
-        scoreLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 20)
+        scoreLabel.setFont(Config.getFont(1, 20)
         );
         scoreLabel.setForeground(new java.awt.Color(255, 255, 255));
         scoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         scoreLabel.setText("0");
 
         questionsLiteralLabel.setBackground(new java.awt.Color(0, 51, 51));
-        questionsLiteralLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 20)
+        questionsLiteralLabel.setFont(Config.getFont(1, 20)
         );
         questionsLiteralLabel.setForeground(new java.awt.Color(255, 255, 255));
         questionsLiteralLabel.setText("Questions");
         questionsLiteralLabel.setFocusable(false);
 
-        questionCounterLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 20)
+        questionCounterLabel.setFont(Config.getFont(1, 20)
         );
         questionCounterLabel.setForeground(new java.awt.Color(255, 255, 255));
         questionCounterLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         questionCounterLabel.setText(" ");
 
         quizInfoLabel.setBackground(new java.awt.Color(0, 51, 51));
-        quizInfoLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 20)
+        quizInfoLabel.setFont(Config.getFont(1, 20)
         );
         quizInfoLabel.setForeground(new java.awt.Color(255, 255, 255));
         quizInfoLabel.setText(" ");
@@ -236,7 +236,7 @@ public class QuizPanel extends javax.swing.JPanel {
         multipleChoicePanel.setLayout(new java.awt.GridLayout(2, 2, 10, 10));
 
         choiceBtn1.setBackground(DEFAULT_COLOR);
-        choiceBtn1.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        choiceBtn1.setFont(Config.getFont(1, 25)
         );
         choiceBtn1.setForeground(new java.awt.Color(29, 20, 101));
         choiceBtn1.setBorder(null);
@@ -253,7 +253,7 @@ public class QuizPanel extends javax.swing.JPanel {
         multipleChoicePanel.add(choiceBtn1);
 
         choiceBtn2.setBackground(DEFAULT_COLOR);
-        choiceBtn2.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        choiceBtn2.setFont(Config.getFont(1, 25)
         );
         choiceBtn2.setForeground(new java.awt.Color(29, 20, 101));
         choiceBtn2.setBorder(null);
@@ -270,7 +270,7 @@ public class QuizPanel extends javax.swing.JPanel {
         multipleChoicePanel.add(choiceBtn2);
 
         choiceBtn3.setBackground(DEFAULT_COLOR);
-        choiceBtn3.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        choiceBtn3.setFont(Config.getFont(1, 25)
         );
         choiceBtn3.setForeground(new java.awt.Color(29, 20, 101));
         choiceBtn3.setBorder(null);
@@ -288,7 +288,7 @@ public class QuizPanel extends javax.swing.JPanel {
         multipleChoicePanel.add(choiceBtn3);
 
         choiceBtn4.setBackground(DEFAULT_COLOR);
-        choiceBtn4.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        choiceBtn4.setFont(Config.getFont(1, 25)
         );
         choiceBtn4.setForeground(new java.awt.Color(29, 20, 101));
         choiceBtn4.setBorder(null);
@@ -314,7 +314,7 @@ public class QuizPanel extends javax.swing.JPanel {
         trueOrFalsePanel.setLayout(new java.awt.GridLayout(0, 2, 5, 0));
 
         trueBtn.setBackground(DEFAULT_COLOR);
-        trueBtn.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 50)
+        trueBtn.setFont(Config.getFont(1, 50)
         );
         trueBtn.setForeground(new java.awt.Color(29, 20, 101));
         trueBtn.setText("true");
@@ -331,7 +331,7 @@ public class QuizPanel extends javax.swing.JPanel {
         trueOrFalsePanel.add(trueBtn);
 
         falseBtn.setBackground(DEFAULT_COLOR);
-        falseBtn.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 50)
+        falseBtn.setFont(Config.getFont(1, 50)
         );
         falseBtn.setForeground(new java.awt.Color(29, 20, 101));
         falseBtn.setText("false");
@@ -354,7 +354,7 @@ public class QuizPanel extends javax.swing.JPanel {
         identificationPanel.setForeground(new java.awt.Color(255, 255, 255));
         identificationPanel.setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        identificationInputTxtFld.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 32)
+        identificationInputTxtFld.setFont(Config.getFont(1, 32)
         );
         identificationInputTxtFld.setForeground(new java.awt.Color(29, 20, 101));
         identificationInputTxtFld.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -413,38 +413,38 @@ public class QuizPanel extends javax.swing.JPanel {
         quizFinishedPanel.setBackground(new java.awt.Color(106, 49, 144));
         quizFinishedPanel.setPreferredSize(new java.awt.Dimension(1280, 645));
 
-        quizResultLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 50)
+        quizResultLabel.setFont(Config.getFont(1, 50)
         );
         quizResultLabel.setForeground(new java.awt.Color(240, 240, 240));
         quizResultLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         quizResultLabel.setText("Result:");
 
         jLabel111.setBackground(new java.awt.Color(0, 51, 51));
-        jLabel111.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        jLabel111.setFont(Config.getFont(1, 25)
         );
         jLabel111.setForeground(new java.awt.Color(255, 255, 255));
         jLabel111.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel111.setText("Total Score:");
 
         jLabel112.setBackground(new java.awt.Color(0, 51, 51));
-        jLabel112.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        jLabel112.setFont(Config.getFont(1, 25)
         );
         jLabel112.setForeground(new java.awt.Color(255, 255, 255));
         jLabel112.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel112.setText("Correct Answers:");
 
         resultScoreCountLabel.setBackground(new java.awt.Color(0, 51, 51));
-        resultScoreCountLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        resultScoreCountLabel.setFont(Config.getFont(1, 25)
         );
         resultScoreCountLabel.setForeground(new java.awt.Color(255, 255, 255));
 
         resultCorrectAnswersLabel.setBackground(new java.awt.Color(0, 51, 51));
-        resultCorrectAnswersLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        resultCorrectAnswersLabel.setFont(Config.getFont(1, 25)
         );
         resultCorrectAnswersLabel.setForeground(new java.awt.Color(255, 255, 255));
 
-        playGameBtn1.setBackground(GlobalUtils.DEFAULT_BUTTON_COLOR);
-        playGameBtn1.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25)
+        playGameBtn1.setBackground(Config.DEFAULT_BUTTON_COLOR);
+        playGameBtn1.setFont(Config.getFont(1, 25)
         );
         playGameBtn1.setText("New Game");
         playGameBtn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -461,8 +461,8 @@ public class QuizPanel extends javax.swing.JPanel {
             }
         });
 
-        saveAsReviewerBtn.setBackground(GlobalUtils.DEFAULT_BUTTON_COLOR);
-        saveAsReviewerBtn.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 16));
+        saveAsReviewerBtn.setBackground(Config.DEFAULT_BUTTON_COLOR);
+        saveAsReviewerBtn.setFont(Config.getFont(1, 16));
         saveAsReviewerBtn.setText("Save As Reviewer");
         saveAsReviewerBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         saveAsReviewerBtn.setDefaultCapable(false);

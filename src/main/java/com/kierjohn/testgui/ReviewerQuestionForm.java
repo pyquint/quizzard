@@ -92,7 +92,7 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         upperFormPanel.setBackground(new java.awt.Color(106, 49, 144));
 
         qTypeInput.setBackground(new Color(255, 255, 255));
-        qTypeInput.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
+        qTypeInput.setFont(Config.getFont(0, 16));
         qTypeInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Multiple Choice", "True or False", "Identification"}));
         qTypeInput.setToolTipText("");
         qTypeInput.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -104,13 +104,13 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         });
 
         questionTextField.setBackground(new java.awt.Color(255, 255, 255));
-        questionTextField.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 25));
+        questionTextField.setFont(Config.getFont(1, 25));
         questionTextField.setForeground(new java.awt.Color(51, 51, 51));
         questionTextField.setText("Question");
         questionTextField.setMargin(new java.awt.Insets(2, 16, 2, 6));
 
         deleteBtn.setBackground(new Color(255, 255, 255));
-        deleteBtn.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
+        deleteBtn.setFont(Config.getFont(0, 16));
         deleteBtn.setText("Delete");
         deleteBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +119,7 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
             }
         });
 
-        titleLabel.setFont(com.kierjohn.testgui.GlobalUtils.getFont(1, 20));
+        titleLabel.setFont(Config.getFont(1, 20));
         titleLabel.setForeground(new java.awt.Color(255, 255, 255));
         titleLabel.setText("Question #");
 
@@ -174,28 +174,28 @@ public class ReviewerQuestionForm extends javax.swing.JPanel {
         multipleChoiceFormPanel.setPreferredSize(new java.awt.Dimension(600, 218));
 
         multipleCorrectAnswer.setBackground(QuizPanel.CORRECT_COLOR);
-        multipleCorrectAnswer.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
+        multipleCorrectAnswer.setFont(Config.getFont(0, 16));
         multipleCorrectAnswer.setForeground(new java.awt.Color(51, 0, 102));
         multipleCorrectAnswer.setText("Correct Answer");
         multipleCorrectAnswer.setMargin(new java.awt.Insets(2, 16, 2, 6));
         multipleCorrectAnswer.setPreferredSize(new java.awt.Dimension(64, 32));
 
         wrongChoiceTextField1.setBackground(QuizPanel.WRONG_COLOR);
-        wrongChoiceTextField1.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
+        wrongChoiceTextField1.setFont(Config.getFont(0, 16));
         wrongChoiceTextField1.setForeground(new java.awt.Color(255, 255, 153));
         wrongChoiceTextField1.setText("Wrong Choice #1");
         wrongChoiceTextField1.setMargin(new java.awt.Insets(2, 16, 2, 6));
         wrongChoiceTextField1.setPreferredSize(new java.awt.Dimension(64, 32));
 
         wrongChoiceTextField2.setBackground(QuizPanel.WRONG_COLOR);
-        wrongChoiceTextField2.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
+        wrongChoiceTextField2.setFont(Config.getFont(0, 16));
         wrongChoiceTextField2.setForeground(new java.awt.Color(255, 255, 153));
         wrongChoiceTextField2.setText("Wrong Choice #2");
         wrongChoiceTextField2.setMargin(new java.awt.Insets(2, 16, 2, 6));
         wrongChoiceTextField2.setPreferredSize(new java.awt.Dimension(64, 32));
 
         wrongChoiceTextField3.setBackground(QuizPanel.WRONG_COLOR);
-        wrongChoiceTextField3.setFont(com.kierjohn.testgui.GlobalUtils.getFont(0, 16));
+        wrongChoiceTextField3.setFont(Config.getFont(0, 16));
         wrongChoiceTextField3.setForeground(new java.awt.Color(255, 255, 153));
         wrongChoiceTextField3.setText("Wrong Choice #3");
         wrongChoiceTextField3.setMargin(new java.awt.Insets(2, 16, 2, 6));
